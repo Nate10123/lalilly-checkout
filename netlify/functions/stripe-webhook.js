@@ -66,9 +66,9 @@ exports.handler = async (event) => {
       },
       items,
       // confirm: true places the order for production immediately.
-      // Set this to false while you're testing so orders sit as drafts
-      // in Printful for you to review and confirm by hand first.
-      confirm: true,
+      // Set to false while testing so orders sit as drafts in Printful
+      // for you to review before anything actually goes to print.
+      confirm: false,
       external_id: session.id, // ties the Printful order back to this Stripe payment
     };
 
