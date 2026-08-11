@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA LILLY — Official Merch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f7f3ec;
+    --ink: #14120f;
+    --hot: #ff2f7e;
+    --lime: #c8ff4d;
+    --lav: #b6a6ff;
+    --line: rgba(20,18,15,0.12);
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+
+  /* ---------- TOP UTILITY BAR ---------- */
+  .utility-bar {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .utility-bar span.dot { color: var(--lime); }
+
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 5vw;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    z-index: 100;
+    border-bottom: 3px solid var(--ink);
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    color: var(--hot);
+    letter-spacing: -0.01em;
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+  .nav-links { display: flex; gap: 34px; align-items: center; }
+  .nav-links a.nav-item {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    position: relative;
+    padding-bottom: 3px;
+  }
+  .nav-links a.nav-item::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0%; height: 2px;
+    background: var(--hot);
+    transition: width 0.2s ease;
+  }
+  .nav-links a.nav-item:hover::after { width: 100%; }
+
+  .nav-icons { display: flex; align-items: center; gap: 20px; }
+  .icon-btn {
+    background: none; border: none; color: var(--ink);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .cart-btn {
+    border: 2px solid var(--ink);
+    padding: 8px 14px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .cart-btn:hover { background: var(--ink); color: var(--paper); }
+  #cartCount {
+    background: var(--hot);
+    color: var(--paper);
+    border-radius: 50%;
+    width: 18px; height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee {
+    background: var(--hot);
+    color: var(--paper);
+    overflow: hidden;
+    padding: 10px 0;
+    border-bottom: 3px solid var(--ink);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: scrollLeft 22s linear infinite;
+  }
+  .marquee-item {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    padding: 0 26px;
+    white-space: nowrap;
+  }
+  @keyframes scrollLeft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 70px 5vw 90px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+  }
+  @media (max-width: 880px) { .hero { grid-template-columns: 1fr; padding: 50px 6vw; } }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    background: var(--lime);
+    display: inline-block;
+    padding: 5px 12px;
+    border: 2px solid var(--ink);
+    margin-bottom: 22px;
+    transform: rotate(-1deg);
+  }
+  h1.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+  }
+  h1.hero-title .accent { color: var(--hot); }
+  .hero-copy {
+    margin-top: 22px;
+    max-width: 46ch;
+    font-size: 1.08rem;
+    color: rgba(20,18,15,0.72);
+  }
+  .hero-actions { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-solid, .btn-outline {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.88rem;
+    padding: 15px 28px;
+    display: inline-block;
+    border: 2px solid var(--ink);
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .btn-solid { background: var(--ink); color: var(--paper); font-weight: 700; }
+  .btn-solid:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--hot); }
+  .btn-outline { background: transparent; color: var(--ink); }
+  .btn-outline:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--lav); }
+
+  /* Trading card — signature element */
+  .trading-card {
+    background: var(--ink);
+    border: 3px solid var(--ink);
+    padding: 18px;
+    position: relative;
+    transform: rotate(2deg);
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .trading-card::before {
+    content: 'LIMITED DROP';
+    position: absolute;
+    top: -14px;
+    left: 20px;
+    background: var(--lime);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border: 2px solid var(--ink);
+  }
+  .card-art {
+    background: linear-gradient(135deg, var(--lav), var(--hot));
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-art svg { width: 62%; height: 62%; }
+  .card-foot {
+    background: var(--paper);
+    margin-top: 14px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+  }
+  .card-foot .name { font-size: 0.95rem; font-weight: 700; }
+  .card-foot .price { color: var(--hot); font-weight: 700; }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 80px 5vw; }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 44px;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 18px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+  }
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--hot);
+  }
+
+  /* Categories */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 780px) { .cat-grid { grid-template-columns: 1fr; } }
+  .cat-card {
+    border: 3px solid var(--ink);
+    background: var(--paper);
+    padding: 30px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+  }
+  .cat-card:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 var(--ink); }
+  .cat-swatch {
+    width: 100%; aspect-ratio: 16/10;
+    margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--ink);
+  }
+  .cat-swatch svg { width: 40%; }
+  .cat-card h3 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 6px; }
+  .cat-card p { font-family: var(--font-mono); font-size: 0.8rem; color: rgba(20,18,15,0.6); margin-bottom: 16px; }
+  .cat-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--hot);
+  }
+
+  /* Product grid */
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .filter-chip {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border: 2px solid var(--ink);
+    padding: 8px 16px;
+    background: transparent;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .filter-chip.active, .filter-chip:hover { background: var(--ink); color: var(--paper); }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 1000px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .product-grid { grid-template-columns: 1fr; } }
+
+  .product-card {
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .product-card:hover { transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--ink); }
+
+  .product-art {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+  .product-art svg { width: 46%; height: 46%; }
+  .product-tag {
+    position: absolute;
+    top: 10px; left: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3px 8px;
+  }
+  .product-tag.new { background: var(--lime); color: var(--ink); }
+  .product-tag.low { background: var(--hot); color: var(--paper); }
+
+  .product-info { padding: 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .product-info h4 { font-size: 0.98rem; font-weight: 500; }
+  .product-info .cat { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(20,18,15,0.5); text-transform: uppercase; }
+  .product-bottom { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+  .price { font-family: var(--font-mono); font-weight: 700; }
+  .add-btn {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 9px 14px;
+    transition: background 0.15s ease;
+  }
+  .add-btn:hover { background: var(--hot); }
+  .add-btn.added { background: var(--lime); color: var(--ink); }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+  }
+  @media (max-width: 700px) { .trust-strip { grid-template-columns: 1fr; } }
+  .trust-item {
+    padding: 30px 5vw;
+    border-right: 2px solid var(--ink);
+    text-align: center;
+  }
+  .trust-item:last-child { border-right: none; }
+  .trust-item h4 { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 6px; }
+  .trust-item p { font-family: var(--font-mono); font-size: 0.78rem; color: rgba(20,18,15,0.55); }
+
+  /* ---------- NEWSLETTER ---------- */
+  .newsletter {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+  }
+  .newsletter h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    max-width: 16ch;
+    margin: 0 auto 16px;
+  }
+  .newsletter p { color: rgba(247,243,236,0.65); margin-bottom: 30px; font-family: var(--font-mono); font-size: 0.85rem; }
+  .newsletter-form { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .newsletter-form input {
+    background: transparent;
+    border: 2px solid var(--paper);
+    color: var(--paper);
+    padding: 14px 16px;
+    font-family: var(--font-mono);
+    min-width: 260px;
+  }
+  .newsletter-form input::placeholder { color: rgba(247,243,236,0.5); }
+  .newsletter-form button {
+    background: var(--hot);
+    color: var(--paper);
+    border: 2px solid var(--hot);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    padding: 14px 26px;
+  }
+  .newsletter-note { margin-top: 16px; font-family: var(--font-mono); font-size: 0.78rem; color: var(--lime); min-height: 1.2em; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 34px 5vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(20,18,15,0.5);
+  }
+
+  /* ---------- CART DRAWER ---------- */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(20,18,15,0.5);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 200;
+  }
+  .overlay.open { opacity: 1; pointer-events: auto; }
+
+  .cart-drawer {
+    position: fixed;
+    top: 0; right: 0;
+    width: min(400px, 92vw);
+    height: 100%;
+    background: var(--paper);
+    border-left: 3px solid var(--ink);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .cart-drawer.open { transform: translateX(0); }
+  .cart-head {
+    padding: 22px 24px;
+    border-bottom: 3px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cart-head h3 { font-family: var(--font-display); font-size: 1.3rem; }
+  .cart-close { background: none; border: none; font-size: 1.4rem; color: var(--ink); }
+  .cart-items { flex: 1; overflow-y: auto; padding: 12px 24px; }
+  .cart-line {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .cart-line-art {
+    width: 56px; height: 56px;
+    border: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cart-line-art svg { width: 60%; }
+  .cart-line-info { flex: 1; }
+  .cart-line-info h5 { font-size: 0.9rem; font-weight: 500; }
+  .cart-line-info span { font-family: var(--font-mono); font-size: 0.78rem; color: rgba(20,18,15,0.55); }
+  .cart-remove { background: none; border: none; font-family: var(--font-mono); font-size: 0.72rem; text-decoration: underline; color: var(--hot); }
+  .cart-empty { font-family: var(--font-mono); font-size: 0.85rem; color: rgba(20,18,15,0.5); padding: 40px 0; text-align: center; }
+  .cart-foot { border-top: 3px solid var(--ink); padding: 20px 24px; }
+  .cart-total-row { display: flex; justify-content: space-between; font-family: var(--font-mono); font-weight: 700; margin-bottom: 16px; font-size: 1.05rem; }
+  .checkout-btn {
+    width: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 16px;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    transition: background 0.15s ease;
+  }
+  .checkout-btn:hover { background: var(--hot); }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--hot);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="utility-bar">
+  <span><span class="dot">●</span> Free shipping over $40</span>
+  <span>Contact · Instagram · TikTok</span>
+</div>
+
+<nav>
+  <a href="#" class="logo">LA LILLY</a>
+  <div class="nav-links">
+    <a href="#" class="nav-item">Home</a>
+    <a href="#shop" class="nav-item">Shop</a>
+    <a href="#drops" class="nav-item">Drops</a>
+  </div>
+  <div class="nav-icons">
+    <button class="cart-btn" onclick="toggleCart(true)">
+      Cart <span id="cartCount">0</span> <span id="cartTotal">$0.00</span>
+    </button>
+  </div>
+</nav>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">★ NEW DROP: LILLY VERSE ★</span>
+    <span class="marquee-item">★ RESTOCK: L SNAPBACK ★</span>
+    <span class="marquee-item">★ FREE SHIPPING $40+ ★</span>
+    <span class="marquee-item">★ ONLY 12 LEFT: PUGGLER CAP ★</span>
+    <span class="marquee-item">★ NEW DROP: LILLY VERSE ★</span>
+    <span class="marquee-item">★ RESTOCK: L SNAPBACK ★</span>
+    <span class="marquee-item">★ FREE SHIPPING $40+ ★</span>
+    <span class="marquee-item">★ ONLY 12 LEFT: PUGGLER CAP ★</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div>
+    <span class="hero-eyebrow">Drop 004 — Live Now</span>
+    <h1 class="hero-title">Merch for<br>people who<br><span class="accent">love a pug</span><br>too much.</h1>
+    <p class="hero-copy">Small-batch streetwear built around one very good dog. Limited runs, no restocks promised, all designed in-house.</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn-solid">Shop the Drop</a>
+      <a href="#drops" class="btn-outline">See What's Coming</a>
+    </div>
+  </div>
+  <div class="trading-card">
+    <div class="card-art">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 20c-16 0-26 12-26 28 0 6 2 11 5 15-3 2-5 5-5 9 0 7 6 12 13 12h26c7 0 13-5 13-12 0-4-2-7-5-9 3-4 5-9 5-15 0-16-10-28-26-28z" fill="#14120f"/><ellipse cx="38" cy="52" rx="4" ry="5" fill="#f7f3ec"/><ellipse cx="62" cy="52" rx="4" ry="5" fill="#f7f3ec"/><path d="M42 66c2 4 14 4 16 0" stroke="#f7f3ec" stroke-width="2.5" stroke-linecap="round"/><path d="M24 34c-6-4-10-14-6-20 6 2 12 10 12 16M76 34c6-4 10-14 6-20-6 2-12 10-12 16" stroke="#14120f" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="card-foot">
+      <span class="name">Lilly Verse Tee</span>
+      <span class="price">$29.50</span>
+    </div>
+  </div>
+</header>
+
+<section id="drops">
+  <div class="section-head">
+    <span></span>
+    <div>
+      <span class="section-tag">Collections</span>
+      <h2 class="section-title">Top Categories</h2>
+    </div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <div class="cat-swatch" style="background:var(--lime);">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 20c-16 0-26 12-26 28 0 6 2 11 5 15-3 2-5 5-5 9 0 7 6 12 13 12h26c7 0 13-5 13-12 0-4-2-7-5-9 3-4 5-9 5-15 0-16-10-28-26-28z" fill="#14120f"/></svg>
+      </div>
+      <h3>Lilly Life</h3>
+      <p>Everyday basics, oversized fits</p>
+      <a href="#shop" class="cat-link">View Products →</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-swatch" style="background:var(--hot);">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 20c-16 0-26 12-26 28 0 6 2 11 5 15-3 2-5 5-5 9 0 7 6 12 13 12h26c7 0 13-5 13-12 0-4-2-7-5-9 3-4 5-9 5-15 0-16-10-28-26-28z" fill="#f7f3ec"/></svg>
+      </div>
+      <h3>LillYe West</h3>
+      <p>Bold graphics, statement pieces</p>
+      <a href="#shop" class="cat-link">View Products →</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-swatch" style="background:var(--lav);">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 20c-16 0-26 12-26 28 0 6 2 11 5 15-3 2-5 5-5 9 0 7 6 12 13 12h26c7 0 13-5 13-12 0-4-2-7-5-9 3-4 5-9 5-15 0-16-10-28-26-28z" fill="#14120f"/></svg>
+      </div>
+      <h3>Lilly Verse</h3>
+      <p>Cosmic prints, holographic finishes</p>
+      <a href="#shop" class="cat-link">View Products →</a>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="section-head">
+    <span></span>
+    <div>
+      <span class="section-tag">Full Catalog</span>
+      <h2 class="section-title">Shop All</h2>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-chip active" data-filter="all">All</button>
+    <button class="filter-chip" data-filter="apparel">Apparel</button>
+    <button class="filter-chip" data-filter="headwear">Headwear</button>
+    <button class="filter-chip" data-filter="accessories">Accessories</button>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<div class="trust-strip">
+  <div class="trust-item">
+    <h4>Secure Checkout</h4>
+    <p>Not getting leaked</p>
+  </div>
+  <div class="trust-item">
+    <h4>Fast Support</h4>
+    <p>Chronically online</p>
+  </div>
+  <div class="trust-item">
+    <h4>Fast Shipping</h4>
+    <p>Lilly moves different</p>
+  </div>
+</div>
+
+<section class="newsletter">
+  <h2>Get first pick on every drop.</h2>
+  <p>No spam, just restock alerts and new designs.</p>
+  <form class="newsletter-form" onsubmit="handleSignup(event)">
+    <input type="email" id="emailInput" placeholder="you@email.com" required aria-label="Email address">
+    <button type="submit">Join</button>
+  </form>
+  <div class="newsletter-note" id="signupNote"></div>
+</section>
+
+<footer>
+  <span>© 2026 LA LILLY — All rights reserved</span>
+  <span>Privacy · Terms · Shipping</span>
+</footer>
+
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="cart-head">
+    <h3>Your Cart</h3>
+    <button class="cart-close" onclick="toggleCart(false)" aria-label="Close cart">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total-row"><span>Total</span><span id="drawerTotal">$0.00</span></div>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+  </div>
+</aside>
+
+<script>
+  // ---- Icon set: consistent illustrated mark, recolored per product ----
+  function pugIcon(fill, bg) {
+    return `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" fill="${bg}"/>
+      <path d="M50 22c-15 0-24 11-24 26 0 5 2 10 5 14-3 2-5 5-5 8 0 6 5 11 12 11h24c7 0 12-5 12-11 0-3-2-6-5-8 3-4 5-9 5-14 0-15-9-26-24-26z" fill="${fill}"/>
+      <ellipse cx="39" cy="52" rx="3.5" ry="4.5" fill="${bg}"/>
+      <ellipse cx="61" cy="52" rx="3.5" ry="4.5" fill="${bg}"/>
+      <path d="M43 64c2 3.5 12 3.5 14 0" stroke="${bg}" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M27 36c-5-4-9-12-6-18 5 2 10 9 11 14M73 36c5-4 9-12 6-18-5 2-10 9-11 14" stroke="${fill}" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>`;
+  }
+
+  const PRODUCTS = [
+    { id: 1, name: 'L Snapback Hat', cat: 'headwear', catLabel: 'Headwear', price: 26.00, tag: 'low', fill:'#14120f', bg:'#c8ff4d' },
+    { id: 2, name: 'Lilly Pug Pillow Plush', cat: 'accessories', catLabel: 'Accessories', price: 18.50, tag: null, fill:'#f7f3ec', bg:'#ff2f7e' },
+    { id: 3, name: 'Lilly Verse Holographic Stickers', cat: 'accessories', catLabel: 'Accessories', price: 5.50, tag: 'new', fill:'#14120f', bg:'#b6a6ff' },
+    { id: 4, name: 'Metal Puggler Vintage Cap', cat: 'headwear', catLabel: 'Headwear', price: 29.50, tag: null, fill:'#f7f3ec', bg:'#14120f' },
+    { id: 5, name: 'FreakYe T-Shirt', cat: 'apparel', catLabel: 'Apparel', price: 29.50, tag: 'new', fill:'#14120f', bg:'#f7f3ec' },
+    { id: 6, name: 'I ♥ Lilly Pug T-Shirt', cat: 'apparel', catLabel: 'Apparel', price: 22.50, tag: null, fill:'#ff2f7e', bg:'#f7f3ec' },
+    { id: 7, name: 'Lilly Life Steel Water Bottle', cat: 'accessories', catLabel: 'Accessories', price: 28.00, tag: null, fill:'#f7f3ec', bg:'#c8ff4d' },
+    { id: 8, name: 'Lilly Logo Packable Jacket', cat: 'apparel', catLabel: 'Apparel', price: 55.50, tag: 'low', fill:'#f7f3ec', bg:'#b6a6ff' },
+  ];
+
+  let cart = [];
+
+  function renderProducts(filter = 'all') {
+    const grid = document.getElementById('productGrid');
+    const list = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === filter);
+    grid.innerHTML = list.map(p => `
+      <div class="product-card">
+        <div class="product-art" style="background:${p.bg}">
+          ${p.tag ? `<span class="product-tag ${p.tag}">${p.tag === 'new' ? 'New' : 'Low Stock'}</span>` : ''}
+          ${pugIcon(p.fill, p.bg)}
+        </div>
+        <div class="product-info">
+          <span class="cat">${p.catLabel}</span>
+          <h4>${p.name}</h4>
+          <div class="product-bottom">
+            <span class="price">$${p.price.toFixed(2)}</span>
+            <button class="add-btn" onclick="addToCart(${p.id}, this)">Add</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      renderProducts(chip.dataset.filter);
+    });
+  });
+
+  function addToCart(id, btn) {
+    const product = PRODUCTS.find(p => p.id === id);
+    const existing = cart.find(c => c.id === id);
+    if (existing) existing.qty += 1;
+    else cart.push({ ...product, qty: 1 });
+    updateCartUI();
+    if (btn) {
+      btn.textContent = 'Added';
+      btn.classList.add('added');
+      setTimeout(() => { btn.textContent = 'Add'; btn.classList.remove('added'); }, 900);
+    }
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(c => c.id !== id);
+    updateCartUI();
+  }
+
+  function updateCartUI() {
+    const count = cart.reduce((sum, c) => sum + c.qty, 0);
+    const total = cart.reduce((sum, c) => sum + c.qty * c.price, 0);
+    document.getElementById('cartCount').textContent = count;
+    document.getElementById('cartTotal').textContent = '$' + total.toFixed(2);
+    document.getElementById('drawerTotal').textContent = '$' + total.toFixed(2);
+
+    const itemsEl = document.getElementById('cartItems');
+    if (cart.length === 0) {
+      itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Go find something fragile.</div>';
+      return;
+    }
+    itemsEl.innerHTML = cart.map(c => `
+      <div class="cart-line">
+        <div class="cart-line-art" style="background:${c.bg}">${pugIcon(c.fill, c.bg)}</div>
+        <div class="cart-line-info">
+          <h5>${c.name}</h5>
+          <span>Qty ${c.qty} · $${(c.qty * c.price).toFixed(2)}</span>
+        </div>
+        <button class="cart-remove" onclick="removeFromCart(${c.id})">Remove</button>
+      </div>
+    `).join('');
+  }
+
+  function toggleCart(open) {
+    document.getElementById('cartDrawer').classList.toggle('open', open);
+    document.getElementById('overlay').classList.toggle('open', open);
+  }
+
+  async function checkout() {
+    if (cart.length === 0) return;
+    const btn = document.querySelector('.checkout-btn');
+    const originalText = btn.textContent;
+    btn.textContent = 'Loading…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('/.netlify/functions/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cart: cart.map(c => ({ id: c.id, qty: c.qty })),
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url; // send customer to real Stripe Checkout
+      } else {
+        throw new Error(data.error || 'Checkout failed');
+      }
+    } catch (err) {
+      alert('Checkout is not connected yet. See the README for setup steps. (' + err.message + ')');
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  }
+
+  function handleSignup(e) {
+    e.preventDefault();
+    const note = document.getElementById('signupNote');
+    const email = document.getElementById('emailInput').value;
+    note.textContent = 'You\'re on the list: ' + email;
+    document.getElementById('emailInput').value = '';
+    // Placeholder — connect to Mailchimp, Klaviyo, or similar for real signups.
+  }
+
+  renderProducts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed — LA LILLY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f7f3ec; --ink: #14120f; --hot: #ff2f7e; --lime: #c8ff4d;
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper); color: var(--ink); font-family: var(--font-body);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 6vw;
+  }
+  .card {
+    max-width: 480px; text-align: center;
+    border: 3px solid var(--ink); padding: 50px 36px; background: var(--paper);
+  }
+  .badge {
+    display: inline-block; background: var(--lime); border: 2px solid var(--ink);
+    font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.1em; padding: 5px 12px; margin-bottom: 22px; transform: rotate(-2deg);
+  }
+  h1 { font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.05; margin-bottom: 16px; }
+  p { color: rgba(20,18,15,0.7); margin-bottom: 30px; }
+  a.btn {
+    display: inline-block; background: var(--ink); color: var(--paper);
+    font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em;
+    font-size: 0.85rem; padding: 15px 28px; text-decoration: none;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <span class="badge">Confirmed</span>
+    <h1>Your order shipped<br>from the depot.</h1>
+    <p>A receipt is on its way to your inbox from Stripe. Thanks for supporting the drop.</p>
+    <a class="btn" href="/">Back to LA LILLY</a>
+  </div>
+</body>
+</html>
