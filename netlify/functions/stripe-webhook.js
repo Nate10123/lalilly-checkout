@@ -55,6 +55,8 @@ exports.handler = async (event) => {
       };
     });
 
+    console.log('Fulfilling Printful order for Stripe session:', session.id);
+
     const printfulOrder = {
       recipient: {
         name: shipping.name || session.customer_details.name,
@@ -71,7 +73,6 @@ exports.handler = async (event) => {
       // Set to false while testing so orders sit as drafts in Printful
       // for you to review before anything actually goes to print.
       confirm: false,
-      external_id: session.id, // ties the Printful order back to this Stripe payment
     };
 
     const headers = {
