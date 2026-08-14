@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA LILLY — Official Merch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="utility-bar">
+  <span><span class="dot">●</span> Free shipping over $50</span>
+  <span>Contact · Instagram · TikTok</span>
+</div>
+
+<nav>
+  <a href="index.html" class="logo">LA LILLY</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-item">Home</a>
+    <a href="index.html#shop" class="nav-item">Shop</a>
+    <a href="index.html#drops" class="nav-item">Drops</a>
+  </div>
+  <div class="nav-icons">
+    <button class="cart-btn" onclick="toggleCart(true)">
+      Cart <span id="cartCount">0</span> <span id="cartTotal">$0.00</span>
+    </button>
+  </div>
+</nav>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">★ NEW DROP: LILLY VERSE ★</span>
+    <span class="marquee-item">★ RESTOCK: L SNAPBACK ★</span>
+    <span class="marquee-item">★ FREE SHIPPING $50+ ★</span>
+    <span class="marquee-item">★ ONLY 12 LEFT: PUGGLER CAP ★</span>
+    <span class="marquee-item">★ NEW DROP: LILLY VERSE ★</span>
+    <span class="marquee-item">★ RESTOCK: L SNAPBACK ★</span>
+    <span class="marquee-item">★ FREE SHIPPING $50+ ★</span>
+    <span class="marquee-item">★ ONLY 12 LEFT: PUGGLER CAP ★</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div>
+    <span class="hero-eyebrow">Drop 004 — Live Now</span>
+    <h1 class="hero-title">Merch for<br>people who<br><span class="accent">love a pug</span><br>too much.</h1>
+    <p class="hero-copy">Small-batch streetwear built around one very good dog. Limited runs, no restocks promised, all designed in-house.</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn-solid">Shop the Drop</a>
+      <a href="#drops" class="btn-outline">See What's Coming</a>
+    </div>
+  </div>
+  <a href="product.html?id=6" class="trading-card" style="display:block;">
+    <div class="card-art">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 20c-16 0-26 12-26 28 0 6 2 11 5 15-3 2-5 5-5 9 0 7 6 12 13 12h26c7 0 13-5 13-12 0-4-2-7-5-9 3-4 5-9 5-15 0-16-10-28-26-28z" fill="#14120f"/><ellipse cx="38" cy="52" rx="4" ry="5" fill="#f7f3ec"/><ellipse cx="62" cy="52" rx="4" ry="5" fill="#f7f3ec"/><path d="M42 66c2 4 14 4 16 0" stroke="#f7f3ec" stroke-width="2.5" stroke-linecap="round"/><path d="M24 34c-6-4-10-14-6-20 6 2 12 10 12 16M76 34c6-4 10-14 6-20-6 2-12 10-12 16" stroke="#14120f" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div class="card-foot">
+      <span class="name">I ♥ Lilly Pug Tee</span>
+      <span class="price">$22.50</span>
+    </div>
+  </a>
+</header>
+
+<section id="drops">
+  <div class="section-head">
+    <span></span>
+    <div>
+      <span class="section-tag">Collections</span>
+      <h2 class="section-title">Top Categories</h2>
+    </div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <div class="cat-swatch" style="background:var(--lime);">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 20c-16 0-26 12-26 28 0 6 2 11 5 15-3 2-5 5-5 9 0 7 6 12 13 12h26c7 0 13-5 13-12 0-4-2-7-5-9 3-4 5-9 5-15 0-16-10-28-26-28z" fill="#14120f"/></svg>
+      </div>
+      <h3>Lilly Life</h3>
+      <p>Everyday basics, oversized fits</p>
+      <a href="#shop" class="cat-link">View Products →</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-swatch" style="background:var(--hot);">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 20c-16 0-26 12-26 28 0 6 2 11 5 15-3 2-5 5-5 9 0 7 6 12 13 12h26c7 0 13-5 13-12 0-4-2-7-5-9 3-4 5-9 5-15 0-16-10-28-26-28z" fill="#f7f3ec"/></svg>
+      </div>
+      <h3>LillYe West</h3>
+      <p>Bold graphics, statement pieces</p>
+      <a href="#shop" class="cat-link">View Products →</a>
+    </div>
+    <div class="cat-card">
+      <div class="cat-swatch" style="background:var(--lav);">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 20c-16 0-26 12-26 28 0 6 2 11 5 15-3 2-5 5-5 9 0 7 6 12 13 12h26c7 0 13-5 13-12 0-4-2-7-5-9 3-4 5-9 5-15 0-16-10-28-26-28z" fill="#14120f"/></svg>
+      </div>
+      <h3>Lilly Verse</h3>
+      <p>Cosmic prints, holographic finishes</p>
+      <a href="#shop" class="cat-link">View Products →</a>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="section-head">
+    <span></span>
+    <div>
+      <span class="section-tag">Full Catalog</span>
+      <h2 class="section-title">Shop All</h2>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-chip active" data-filter="all">All</button>
+    <button class="filter-chip" data-filter="apparel">Apparel</button>
+    <button class="filter-chip" data-filter="headwear">Headwear</button>
+    <button class="filter-chip" data-filter="accessories">Accessories</button>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<div class="trust-strip">
+  <div class="trust-item">
+    <h4>Secure Checkout</h4>
+    <p>Not getting leaked</p>
+  </div>
+  <div class="trust-item">
+    <h4>Fast Support</h4>
+    <p>Chronically online</p>
+  </div>
+  <div class="trust-item">
+    <h4>Fast Shipping</h4>
+    <p>Lilly moves different</p>
+  </div>
+</div>
+
+<section class="newsletter">
+  <h2>Get first pick on every drop.</h2>
+  <p>No spam, just restock alerts and new designs.</p>
+  <form class="newsletter-form" onsubmit="handleSignup(event)">
+    <input type="email" id="emailInput" placeholder="you@email.com" required aria-label="Email address">
+    <button type="submit">Join</button>
+  </form>
+  <div class="newsletter-note" id="signupNote"></div>
+</section>
+
+<footer>
+  <span>© 2026 LA LILLY — All rights reserved</span>
+  <span>Privacy · Terms · Shipping</span>
+</footer>
+
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="cart-head">
+    <h3>Your Cart</h3>
+    <button class="cart-close" onclick="toggleCart(false)" aria-label="Close cart">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal-row"><span>Subtotal</span><span id="drawerSubtotal">$0.00</span></div>
+    <div class="cart-subtotal-row"><span>Shipping</span><span id="drawerShipping">—</span></div>
+    <div class="cart-total-row"><span>Total</span><span id="drawerTotal">$0.00</span></div>
+    <div class="cart-tax-note">Tax calculated at checkout</div>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+  </div>
+</aside>
+
+<script src="store.js"></script>
+<script>
+  function renderProducts(filter = 'all') {
+    const grid = document.getElementById('productGrid');
+    const list = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === filter);
+    grid.innerHTML = list.map(p => `
+      <div class="product-card">
+        <a class="product-art-link" href="product.html?id=${p.id}">
+          <div class="product-art" style="background:${p.bg}">
+            ${p.tag ? `<span class="product-tag ${p.tag}">${p.tag === 'new' ? 'New' : 'Low Stock'}</span>` : ''}
+            ${pugIcon(p.fill, p.bg)}
+          </div>
+        </a>
+        <div class="product-info">
+          <span class="cat">${p.catLabel}</span>
+          <h4><a href="product.html?id=${p.id}">${p.name}</a></h4>
+          <div class="product-bottom">
+            <span class="price">$${p.price.toFixed(2)}</span>
+            ${p.sizes
+              ? `<a href="product.html?id=${p.id}" class="add-btn" style="display:inline-block;text-decoration:none;">Select Size</a>`
+              : `<button class="add-btn" onclick="addToCart(${p.id}, 1, this)">Add</button>`}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      renderProducts(chip.dataset.filter);
+    });
+  });
+
+  renderProducts();
+</script>
+
+</body>
+</html>
