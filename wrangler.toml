@@ -11,7 +11,7 @@
 # few small Node.js built-ins to exist even when using the fetch-based
 # HTTP client.
 
-name = "lalilly"
+name = "lalilly-checkout"
 pages_build_output_dir = "."
 compatibility_date = "2026-08-01"
 compatibility_flags = ["nodejs_compat"]
