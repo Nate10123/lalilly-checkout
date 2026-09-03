@@ -1,0 +1,17 @@
+# Cloudflare Pages configuration.
+#
+# IMPORTANT: If you deploy via the Cloudflare dashboard (connecting your
+# GitHub repo through the web UI, which is the normal path), this file is
+# often NOT read automatically for compatibility flags — you also need to
+# set "nodejs_compat" manually in the dashboard:
+# Pages project → Settings → Functions → Compatibility flags → add
+# "nodejs_compat" for BOTH Production and Preview.
+#
+# Without that flag, the Stripe SDK will fail to load, since it expects a
+# few small Node.js built-ins to exist even when using the fetch-based
+# HTTP client.
+
+name = "lalilly"
+pages_build_output_dir = "."
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
