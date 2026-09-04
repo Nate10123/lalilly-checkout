@@ -270,7 +270,26 @@ section { padding: 80px 5vw; }
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
 }
-@media (max-width: 780px) { .cat-grid { grid-template-columns: 1fr; } }
+@media (max-width: 780px) {
+  .cat-grid {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding-bottom: 6px;
+    margin: 0 -6vw;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    scrollbar-width: none; /* Firefox */
+  }
+  .cat-grid::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+  .cat-grid .cat-card {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+}
 .cat-card {
   border: 3px solid var(--ink);
   background: var(--paper);
