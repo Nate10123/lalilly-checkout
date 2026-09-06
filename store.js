@@ -60,6 +60,10 @@ const PRODUCTS = [
     id: 6, name: 'I ♥ Lilly Pug T-Shirt', cat: 'apparel', catLabel: 'Apparel',
     price: 22.50, tag: null, fill: '#ff2f7e', bg: '#f7f3ec',
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    colors: [
+      { name: 'Black', hex: '#14120f' },
+      { name: 'White', hex: '#f7f3ec' },
+    ],
     image: 'https://files.cdn.printful.com/files/f61/f613509dbec2a8355bd6395661dd1c17_preview.png',
     description: "The classic. Simple, loud, and to the point. Soft 100% cotton, unisex fit, screen-printed graphic that won't crack or fade."
   },
@@ -131,13 +135,13 @@ function saveCart(cart) {
 
 let cart = loadCart();
 
-function addToCart(id, qty, btn, size) {
+function addToCart(id, qty, btn, size, color) {
   qty = qty || 1;
   const product = PRODUCTS.find(p => p.id === id);
   if (!product) return;
-  const existing = cart.find(c => c.id === id && c.size === size);
+  const existing = cart.find(c => c.id === id && c.size === size && c.color === color);
   if (existing) existing.qty += qty;
-  else cart.push({ id: product.id, qty, size: size || undefined });
+  else cart.push({ id: product.id, qty, size: size || undefined, color: color || undefined });
   saveCart(cart);
   updateCartUI();
   if (btn) {
@@ -148,8 +152,8 @@ function addToCart(id, qty, btn, size) {
   }
 }
 
-function removeFromCart(id, size) {
-  cart = cart.filter(c => !(c.id === id && c.size === size));
+function removeFromCart(id, size, color) {
+  cart = cart.filter(c => !(c.id === id && c.size === size && c.color === color));
   saveCart(cart);
   updateCartUI();
 }
@@ -158,7 +162,7 @@ function cartLinesWithProducts() {
   return cart
     .map(c => {
       const product = PRODUCTS.find(p => p.id === c.id);
-      return product ? { ...product, qty: c.qty, size: c.size } : null;
+      return product ? { ...product, qty: c.qty, size: c.size, color: c.color } : null;
     })
     .filter(Boolean);
 }
@@ -215,16 +219,21 @@ function updateCartUI() {
     itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Go find something fragile.</div>';
     return;
   }
-  itemsEl.innerHTML = lines.map(c => `
+  itemsEl.innerHTML = lines.map(c => {
+    const colorHex = c.color && c.colors ? (c.colors.find(x => x.name === c.color) || {}).hex : null;
+    const colorDot = colorHex ? `<span class="cart-color-dot" style="background:${colorHex}"></span>` : '';
+    const variantLabel = [c.color, c.size].filter(Boolean).join(' / ');
+    return `
     <div class="cart-line">
       <div class="cart-line-art" style="background:${c.bg}">${productMedia(c)}</div>
       <div class="cart-line-info">
-        <h5>${c.name}${c.size ? ` — ${c.size}` : ''}</h5>
+        <h5>${colorDot}${c.name}${variantLabel ? ` — ${variantLabel}` : ''}</h5>
         <span>Qty ${c.qty} · $${(c.qty * getUnitPrice(c, c.size)).toFixed(2)}</span>
       </div>
-      <button class="cart-remove" onclick="removeFromCart(${c.id}, ${c.size ? `'${c.size}'` : 'undefined'})">Remove</button>
+      <button class="cart-remove" onclick="removeFromCart(${c.id}, ${c.size ? `'${c.size}'` : 'undefined'}, ${c.color ? `'${c.color}'` : 'undefined'})">Remove</button>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function toggleCart(open) {
@@ -246,7 +255,7 @@ async function checkout() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        cart: cart.map(c => ({ id: c.id, qty: c.qty, size: c.size })),
+        cart: cart.map(c => ({ id: c.id, qty: c.qty, size: c.size, color: c.color })),
       }),
     });
     const data = await res.json();
