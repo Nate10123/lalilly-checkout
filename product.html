@@ -96,12 +96,37 @@
   }
 
   let selectedSize = null;
+  let selectedColor = null;
+
+  // Figures out what the Add to Cart button should say/allow given what's
+  // still unselected — color takes priority since it's the first choice.
+  function updateAddButtonState(product) {
+    const btn = document.getElementById('addToCartBtn');
+    if (!btn) return;
+    const needsColor = !!product.colors;
+    const needsSize = !!product.sizes;
+    const ready = (!needsColor || selectedColor) && (!needsSize || selectedSize);
+    btn.disabled = !ready;
+    if (needsColor && !selectedColor) btn.textContent = 'Select a Color';
+    else if (needsSize && !selectedSize) btn.textContent = 'Select a Size';
+    else btn.textContent = 'Add to Cart';
+  }
 
   function renderProduct(product) {
     document.title = `LA LILLY — ${product.name}`;
     document.getElementById('breadcrumbName').textContent = product.name;
     document.body.dataset.currentProductId = product.id;
     selectedSize = null;
+    selectedColor = null;
+
+    const colorRow = product.colors ? `
+      <div class="pdp-color-row">
+        <span class="pdp-size-label">Color<span id="selectedColorName"></span></span>
+        <div class="color-options" id="colorOptions">
+          ${product.colors.map(c => `<button type="button" class="color-swatch" style="background:${c.hex}" data-color="${c.name}" title="${c.name}" aria-label="${c.name}" onclick="selectColor('${c.name}', this)"></button>`).join('')}
+        </div>
+      </div>
+    ` : '';
 
     const sizeRow = product.sizes ? `
       <div class="pdp-size-row">
@@ -123,6 +148,7 @@
           <h1>${product.name}</h1>
           <div class="pdp-price" id="pdpPrice">${getDisplayPrice(product)}</div>
           <p class="pdp-desc">${product.description}</p>
+          ${colorRow}
           ${sizeRow}
           <div class="pdp-qty-row">
             <div class="qty-stepper">
@@ -132,8 +158,8 @@
             </div>
           </div>
           <div class="pdp-actions">
-            <button class="btn-solid" id="addToCartBtn" onclick="addProductToCart(${product.id}, this)" ${product.sizes ? 'disabled' : ''}>
-              ${product.sizes ? 'Select a Size' : 'Add to Cart'}
+            <button class="btn-solid" id="addToCartBtn" onclick="addProductToCart(${product.id}, this)" ${(product.sizes || product.colors) ? 'disabled' : ''}>
+              Add to Cart
             </button>
             <a href="shop.html" class="btn-outline">Keep Browsing</a>
           </div>
@@ -145,30 +171,44 @@
         </div>
       </section>
     `;
+
+    updateAddButtonState(product);
   }
 
   function selectSize(size, btn) {
     selectedSize = size;
     document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
     btn.classList.add('active');
-    const addBtn = document.getElementById('addToCartBtn');
-    addBtn.disabled = false;
-    addBtn.textContent = 'Add to Cart';
+
+    const id = parseInt(document.body.dataset.currentProductId, 10);
+    const product = PRODUCTS.find(p => p.id === id);
+    updateAddButtonState(product);
 
     // For products priced per-size (like the poster), reflect the chosen
     // size's exact price instead of the "From $X" placeholder.
-    const id = parseInt(document.body.dataset.currentProductId, 10);
-    const product = PRODUCTS.find(p => p.id === id);
     if (product && product.sizePricing) {
       const priceEl = document.getElementById('pdpPrice');
       if (priceEl) priceEl.textContent = `$${getUnitPrice(product, size).toFixed(2)}`;
     }
   }
 
+  function selectColor(color, btn) {
+    selectedColor = color;
+    document.querySelectorAll('.color-swatch').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const nameEl = document.getElementById('selectedColorName');
+    if (nameEl) nameEl.textContent = ' — ' + color;
+
+    const id = parseInt(document.body.dataset.currentProductId, 10);
+    const product = PRODUCTS.find(p => p.id === id);
+    updateAddButtonState(product);
+  }
+
   function addProductToCart(id, btn) {
     const product = PRODUCTS.find(p => p.id === id);
     if (product.sizes && !selectedSize) return; // guarded by disabled state, but just in case
-    addToCart(id, selectedQty, btn, selectedSize);
+    if (product.colors && !selectedColor) return;
+    addToCart(id, selectedQty, btn, selectedSize, selectedColor);
   }
 
   function renderRelated(currentProduct) {
@@ -190,8 +230,8 @@
           <h4><a href="product.html?id=${p.id}">${p.name}</a></h4>
           <div class="product-bottom">
             <span class="price">${getDisplayPrice(p)}</span>
-            ${p.sizes
-              ? `<a href="product.html?id=${p.id}" class="add-btn" style="display:inline-block;text-decoration:none;">Select Size</a>`
+            ${(p.sizes || p.colors)
+              ? `<a href="product.html?id=${p.id}" class="add-btn" style="display:inline-block;text-decoration:none;">${p.sizes ? 'Select Size' : 'Select Color'}</a>`
               : `<button class="add-btn" onclick="addToCart(${p.id}, 1, this)">Add</button>`}
           </div>
         </div>
