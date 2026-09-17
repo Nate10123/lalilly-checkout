@@ -24,7 +24,7 @@ ENABLE_STRIPE_TAX = "true"
 # Brevo contact list to add newsletter signups to. Not sensitive — the
 # actual API key (BREVO_API_KEY) is a Secret set in the Cloudflare
 # dashboard instead, since that one needs to stay private.
-BREVO_LIST_ID = "REPLACE_WITH_YOUR_LIST_ID"
+BREVO_LIST_ID = "3"
 
 # Order tracking storage. This binding is picked up automatically from
 # this file (see the "Bindings for this project are being managed through
