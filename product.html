@@ -145,7 +145,7 @@
     const ready = (!needsColor || selectedColor) && (!needsSize || selectedSize);
     btn.disabled = !ready;
     if (needsColor && !selectedColor) btn.textContent = 'Select a Color';
-    else if (needsSize && !selectedSize) btn.textContent = 'Select a Size';
+    else if (needsSize && !selectedSize) btn.textContent = product.sizes.length > 8 ? 'Select a Model' : 'Select a Size';
     else btn.textContent = 'Add to Cart';
   }
 

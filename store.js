@@ -266,7 +266,11 @@ const PRODUCTS = [
       'iPhone 11 Pro Max', 'iPhone 11 Pro', 'iPhone 11',
       'iPhone X/XS', 'iPhone XR', 'iPhone SE', 'iPhone 7/8',
     ],
-    image: 'https://files.cdn.printful.com/files/0cb/0cbed247df4b4a34803329cdc831f21e_preview.png',
+    image: 'assets/products/lillybear-case-on-phone.png',
+    images: [
+      'assets/products/lillybear-case-on-phone.png',
+      'assets/products/lillybear-case-with-phone.png',
+    ],
     madeIn: 'China or South Korea',
     description: "Hybrid TPU/polycarbonate case — solid, durable back with flexible, secure sides. Raised bezel front, precisely aligned ports, wireless-charging compatible. Graphic is UV printed with a smooth matte finish."
   },

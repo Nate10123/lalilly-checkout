@@ -457,29 +457,48 @@ section { padding: 80px 5vw; }
 }
 .sort-bar label { color: rgba(20,18,15,0.6); }
 .sort-bar select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   border: 2px solid var(--ink);
-  background: var(--paper);
+  border-radius: 0;
+  background-color: var(--paper);
   color: var(--ink);
-  padding: 8px 12px;
+  padding: 8px 34px 8px 12px;
   cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23141210' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
+.sort-bar select:hover { box-shadow: 3px 3px 0 var(--ink); transform: translate(-1px,-1px); }
+.sort-bar select:focus-visible { outline: 2px solid var(--hot); outline-offset: 2px; }
 
 .pdp-size-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  text-transform: none;
   border: 2px solid var(--ink);
-  background: var(--paper);
+  border-radius: 0;
+  background-color: var(--paper);
   color: var(--ink);
-  padding: 10px 14px;
+  padding: 12px 40px 12px 14px;
   cursor: pointer;
-  min-width: 220px;
+  min-width: 240px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23141210' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
+.pdp-size-select:hover { box-shadow: 3px 3px 0 var(--ink); transform: translate(-1px,-1px); }
 .pdp-size-select:focus-visible { outline: 2px solid var(--hot); outline-offset: 2px; }
+.pdp-size-select option { font-family: var(--font-mono); }
 
 .product-grid {
   display: grid;
