@@ -1100,6 +1100,14 @@ a:focus-visible, button:focus-visible {
 }
 .size-chip:hover { background: rgba(20,18,15,0.08); }
 .size-chip.active { background: var(--ink); color: var(--paper); }
+.size-chip.sold-out {
+  color: rgba(20,18,15,0.35);
+  border-color: rgba(20,18,15,0.25);
+  text-decoration: line-through;
+  cursor: not-allowed;
+  position: relative;
+}
+.size-chip.sold-out:hover { background: transparent; }
 
 /* ---------- COLOR SELECTOR ---------- */
 .pdp-color-row { margin-bottom: 24px; }

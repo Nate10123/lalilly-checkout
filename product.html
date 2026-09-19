@@ -362,6 +362,20 @@
     }
   }
 
+  function updateSizeAvailability(product, color) {
+    const unavailable = (product.unavailableSizes && product.unavailableSizes[color]) || [];
+    document.querySelectorAll('.size-chip').forEach(chip => {
+      const soldOut = unavailable.includes(chip.dataset.size);
+      chip.disabled = soldOut;
+      chip.classList.toggle('sold-out', soldOut);
+      chip.title = soldOut ? 'Currently out of stock in this color' : '';
+      if (soldOut && chip.classList.contains('active')) {
+        chip.classList.remove('active');
+        selectedSize = null;
+      }
+    });
+  }
+
   function selectColor(color, btn) {
     selectedColor = color;
     document.querySelectorAll('.color-swatch').forEach(c => c.classList.remove('active'));
@@ -388,6 +402,8 @@
     }
     updateArrowsVisibility();
 
+    if (product && product.unavailableSizes) updateSizeAvailability(product, color);
+
     updateAddButtonState(product);
   }
 
@@ -396,6 +412,7 @@
     if (product.comingSoon) return;
     if (product.sizes && !selectedSize) return; // guarded by disabled state, but just in case
     if (product.colors && !selectedColor) return;
+    if (product.unavailableSizes && product.unavailableSizes[selectedColor] && product.unavailableSizes[selectedColor].includes(selectedSize)) return;
     addToCart(id, selectedQty, btn, selectedSize, selectedColor);
   }
 

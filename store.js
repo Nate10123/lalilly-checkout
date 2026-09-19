@@ -280,6 +280,13 @@ const PRODUCTS = [
     sizePricing: { S: 32.50, M: 32.50, L: 32.50, XL: 32.50, '2XL': 35.00 },
     tag: 'new', fill: '#14120f', bg: '#ffc4dd',
     sizes: ['S', 'M', 'L', 'XL', '2XL'],
+    // Per Printful (confirmed live on the product page, not just the
+    // initial sync): Classic Rainbow M/L/XL/2XL are marked "Supplier out
+    // of stock" — only S is orderable in that color right now. Sherbet
+    // Rainbow is fully in stock across all sizes.
+    unavailableSizes: {
+      'Classic Rainbow': ['M', 'L', 'XL', '2XL'],
+    },
     colors: [
       {
         name: 'Sherbet Rainbow', hex: '#ffc4dd',
