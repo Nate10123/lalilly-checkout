@@ -180,10 +180,17 @@
 
     const sizeRow = product.sizes ? `
       <div class="pdp-size-row">
-        <span class="pdp-size-label">Size</span>
-        <div class="size-options" id="sizeOptions">
-          ${product.sizes.map(s => `<button type="button" class="size-chip" data-size="${s}" onclick="selectSize('${s}', this)">${s}</button>`).join('')}
-        </div>
+        <span class="pdp-size-label">${product.sizes.length > 8 ? 'Model' : 'Size'}</span>
+        ${product.sizes.length > 8 ? `
+          <select class="pdp-size-select" id="sizeOptions" onchange="selectSize(this.value, null)">
+            <option value="" disabled selected>Choose a model</option>
+            ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+          </select>
+        ` : `
+          <div class="size-options" id="sizeOptions">
+            ${product.sizes.map(s => `<button type="button" class="size-chip" data-size="${s}" onclick="selectSize('${s}', this)">${s}</button>`).join('')}
+          </div>
+        `}
       </div>
     ` : '';
 
@@ -332,7 +339,7 @@
   function selectSize(size, btn) {
     selectedSize = size;
     document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
+    if (btn) btn.classList.add('active');
 
     const id = parseInt(document.body.dataset.currentProductId, 10);
     const product = PRODUCTS.find(p => p.id === id);

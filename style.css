@@ -468,6 +468,19 @@ section { padding: 80px 5vw; }
   cursor: pointer;
 }
 
+.pdp-size-select {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-transform: none;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 10px 14px;
+  cursor: pointer;
+  min-width: 220px;
+}
+.pdp-size-select:focus-visible { outline: 2px solid var(--hot); outline-offset: 2px; }
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
