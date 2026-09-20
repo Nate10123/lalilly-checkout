@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /success.html
+Disallow: /track.html
+
+Sitemap: https://lalilly-checkout.pages.dev/sitemap.xml

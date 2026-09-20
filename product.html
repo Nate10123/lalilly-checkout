@@ -4,23 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#ff2f7e">
-<title>LA LILLY — Product</title>
-<meta name="description" content="Shop LA LILLY merch — streetwear designed in-house.">
-<meta property="og:type" content="website">
+<title id="pageTitle">LA LILLY — Product</title>
+<meta id="metaDescription" name="description" content="Shop LA LILLY merch — streetwear designed in-house.">
+<meta id="metaRobots" name="robots" content="index, follow">
+<link id="canonicalLink" rel="canonical" href="https://lalilly-checkout.pages.dev/product.html">
+<meta id="ogType" property="og:type" content="product">
 <meta property="og:site_name" content="LA LILLY">
-<meta property="og:title" content="LA LILLY — Product">
-<meta property="og:description" content="Shop LA LILLY merch — streetwear designed in-house.">
-<meta property="og:image" content="https://lalilly-checkout.pages.dev/assets/og-image.png?v=2">
-<meta property="og:url" content="https://lalilly-checkout.pages.dev/product.html">
+<meta id="ogTitle" property="og:title" content="LA LILLY — Product">
+<meta id="ogDescription" property="og:description" content="Shop LA LILLY merch — streetwear designed in-house.">
+<meta id="ogImage" property="og:image" content="https://lalilly-checkout.pages.dev/assets/og-image.png?v=2">
+<meta id="ogUrl" property="og:url" content="https://lalilly-checkout.pages.dev/product.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LA LILLY — Product">
-<meta name="twitter:description" content="Shop LA LILLY merch — streetwear designed in-house.">
-<meta name="twitter:image" content="https://lalilly-checkout.pages.dev/assets/og-image.png?v=2">
+<meta id="twitterTitle" name="twitter:title" content="LA LILLY — Product">
+<meta id="twitterDescription" name="twitter:description" content="Shop LA LILLY merch — streetwear designed in-house.">
+<meta id="twitterImage" name="twitter:image" content="https://lalilly-checkout.pages.dev/assets/og-image.png?v=2">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script type="application/ld+json" id="productSchema"></script>
 </head>
 <body>
 <a href="#breadcrumb" class="skip-link">Skip to content</a>
@@ -106,6 +109,7 @@
 
   function renderNotFound() {
     document.title = 'LA LILLY — Product not found';
+    document.getElementById('metaRobots').setAttribute('content', 'noindex, follow');
     document.getElementById('breadcrumbName').textContent = 'Not found';
     document.getElementById('pdpRoot').innerHTML = `
       <section class="pdp" style="grid-template-columns: 1fr;">
@@ -162,8 +166,68 @@
     `;
   }
 
+  // Strips HTML tags so the plain-text product description is safe to drop
+  // into a <meta> attribute or JSON-LD, and trims it to a search-snippet
+  // friendly length without cutting a word in half.
+  function toPlainSnippet(html, maxLen) {
+    const text = html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+    if (text.length <= maxLen) return text;
+    return text.slice(0, maxLen).replace(/\s+\S*$/, '') + '…';
+  }
+
+  // Rewrites the page's <title>, meta description, canonical link, and
+  // Open Graph/Twitter tags for the specific product now on screen, and
+  // injects Product structured data (JSON-LD) so search engines can show
+  // rich results (price, availability, image) instead of generic text.
+  // This page renders client-side, so none of this exists until a product
+  // is picked — updating it here is what makes each product URL distinct
+  // to a crawler rather than all sharing one generic title/description.
+  function updateSeoForProduct(product) {
+    const title = `LA LILLY — ${product.name}`;
+    const snippet = toPlainSnippet(product.description, 155);
+    const canonicalUrl = `https://lalilly-checkout.pages.dev/product.html?id=${product.id}`;
+    const imageUrl = product.image
+      ? `https://lalilly-checkout.pages.dev/${product.image}`
+      : 'https://lalilly-checkout.pages.dev/assets/og-image.png?v=2';
+
+    document.title = title;
+    document.getElementById('metaDescription').setAttribute('content', snippet);
+    document.getElementById('canonicalLink').setAttribute('href', canonicalUrl);
+    document.getElementById('ogTitle').setAttribute('content', title);
+    document.getElementById('ogDescription').setAttribute('content', snippet);
+    document.getElementById('ogImage').setAttribute('content', imageUrl);
+    document.getElementById('ogUrl').setAttribute('content', canonicalUrl);
+    document.getElementById('twitterTitle').setAttribute('content', title);
+    document.getElementById('twitterDescription').setAttribute('content', snippet);
+    document.getElementById('twitterImage').setAttribute('content', imageUrl);
+
+    const price = product.sizePricing
+      ? Math.min(...Object.values(product.sizePricing))
+      : product.price;
+
+    const schema = {
+      '@context': 'https://schema.org/',
+      '@type': 'Product',
+      name: product.name,
+      description: snippet,
+      image: imageUrl,
+      brand: { '@type': 'Brand', name: 'LA LILLY' },
+      ...(product.madeIn ? { countryOfOrigin: product.madeIn } : {}),
+      offers: {
+        '@type': 'Offer',
+        url: canonicalUrl,
+        priceCurrency: 'USD',
+        price: price != null ? price.toFixed(2) : undefined,
+        availability: product.comingSoon
+          ? 'https://schema.org/PreOrder'
+          : 'https://schema.org/InStock',
+      },
+    };
+    document.getElementById('productSchema').textContent = JSON.stringify(schema);
+  }
+
   function renderProduct(product) {
-    document.title = `LA LILLY — ${product.name}`;
+    updateSeoForProduct(product);
     document.getElementById('breadcrumbName').textContent = product.name;
     document.body.dataset.currentProductId = product.id;
     selectedSize = null;
