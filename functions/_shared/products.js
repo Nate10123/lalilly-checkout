@@ -325,20 +325,18 @@ export const PRODUCTS = {
   },
   21: {
     name: 'Lilly Verse Stickers',
-    sizePricingCents: {
-      '3″×3″': 350, '4″×4″': 350, '5.5″×5.5″': 400,
+    colorSizePricingCents: {
+      Standard: { '3″×3″': 350, '4″×4″': 350, '5.5″×5.5″': 400 },
+      Holographic: { '3″×3″': 550, '4″×4″': 600, '5.5″×5.5″': 650 },
     },
-    sizes: {
-      '3″×3″': '5510718023', '4″×4″': '5510718024', '5.5″×5.5″': '5510718025',
-    },
-  },
-  22: {
-    name: 'Lilly Verse Holographic Stickers',
-    sizePricingCents: {
-      '3″×3″': 550, '4″×4″': 600, '5.5″×5.5″': 650,
-    },
-    sizes: {
-      '3″×3″': '5510718082', '4″×4″': '5510718083', '5.5″×5.5″': '5510718084',
+    colors: ['Standard', 'Holographic'],
+    variantsByColor: {
+      Standard: {
+        '3″×3″': '5510718023', '4″×4″': '5510718024', '5.5″×5.5″': '5510718025',
+      },
+      Holographic: {
+        '3″×3″': '5510718082', '4″×4″': '5510718083', '5.5″×5.5″': '5510718084',
+      },
     },
   },
 };
@@ -380,7 +378,14 @@ export function getVariantId(product, size, color) {
 // Handles three cases: flat-priced products, sized products with one flat
 // price regardless of size (e.g. the hoodie), and per-size pricing (the
 // poster, where a bigger print genuinely costs more to produce).
-export function getPriceCents(product, size) {
+export function getPriceCents(product, size, color) {
+  // Products priced per color+size combo (the stickers' Standard vs
+  // Holographic finishes each have their own 3x3/4x4/5.5x5.5 pricing)
+  // need the combo looked up before the older single-dimension cases.
+  if (product.colorSizePricingCents) {
+    const sizeMap = color ? product.colorSizePricingCents[color] : null;
+    return sizeMap && size ? sizeMap[size] : null;
+  }
   if (product.sizePricingCents) {
     return size ? product.sizePricingCents[size] : null;
   }

@@ -205,7 +205,9 @@
     document.getElementById('twitterDescription').setAttribute('content', snippet);
     document.getElementById('twitterImage').setAttribute('content', imageUrl);
 
-    const price = product.sizePricing
+    const price = product.colorSizePricing
+      ? Math.min(...Object.values(product.colorSizePricing).flatMap(m => Object.values(m)))
+      : product.sizePricing
       ? Math.min(...Object.values(product.sizePricing))
       : product.price;
 
@@ -413,16 +415,27 @@
     const product = PRODUCTS.find(p => p.id === id);
     updateAddButtonState(product);
 
-    // For products priced per-size (like the poster), reflect the chosen
-    // size's exact price instead of the "From $X" placeholder.
-    if (product && product.sizePricing) {
-      const priceEl = document.getElementById('pdpPrice');
-      if (priceEl) priceEl.textContent = `$${getUnitPrice(product, size).toFixed(2)}`;
+    // For products priced per-size (like the poster) or per color+size
+    // combo (like the stickers' Standard/Holographic finishes), reflect
+    // the chosen price instead of the "From $X" placeholder. getUnitPrice
+    // returns null when a combo product still needs a color pick too, so
+    // the placeholder stays up until both choices are made.
+    if (product && (product.sizePricing || product.colorSizePricing)) {
+      const price = getUnitPrice(product, size, selectedColor);
+      if (price != null) {
+        const priceEl = document.getElementById('pdpPrice');
+        if (priceEl) priceEl.textContent = `$${price.toFixed(2)}`;
+      }
     }
 
-    // For products with per-size photos (like the pillow), swap the art —
-    // but don't clobber a per-color photo if a color is also selected.
-    if (product && product.sizeImages && !(product.colors && selectedColor)) {
+    // For products with per-size photos (like the pillow) or combo
+    // color+size photos (like the stickers), swap the art. The plain
+    // per-size case still defers to a per-color photo if one's selected
+    // and there's no combo map, matching the original behavior.
+    if (product && product.colorSizeImages) {
+      const artEl = document.getElementById('pdpArtMedia');
+      if (artEl) artEl.innerHTML = productMedia(product, getProductImage(product, selectedColor, size));
+    } else if (product && product.sizeImages && !(product.colors && selectedColor)) {
       const artEl = document.getElementById('pdpArtMedia');
       if (artEl) {
         artEl.innerHTML = productMedia(product, getProductImage(product, selectedColor, size));
@@ -454,9 +467,20 @@
     const id = parseInt(document.body.dataset.currentProductId, 10);
     const product = PRODUCTS.find(p => p.id === id);
 
+    // For color+size combo pricing (the stickers' Standard/Holographic
+    // finishes), reflect the new price as soon as both a size and this
+    // color are chosen — mirrors the same check in selectSize().
+    if (product && product.colorSizePricing) {
+      const price = getUnitPrice(product, selectedSize, color);
+      if (price != null) {
+        const priceEl = document.getElementById('pdpPrice');
+        if (priceEl) priceEl.textContent = `$${price.toFixed(2)}`;
+      }
+    }
+
     const artEl = document.getElementById('pdpArtMedia');
     if (artEl && product) {
-      artEl.innerHTML = productMedia(product, getProductImage(product, color));
+      artEl.innerHTML = productMedia(product, getProductImage(product, color, selectedSize));
     }
 
     // If this color has its own set of angle photos, rebuild the

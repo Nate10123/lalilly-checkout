@@ -30,7 +30,16 @@ function productMedia(product, imageOverride) {
 
 // Returns the photo for a product given a selected color, falling back to
 // the product's default image when that color has none set yet.
+// Checks colorSizeImages first — products where the photo depends on BOTH
+// the color/finish AND the size (e.g. stickers: Standard vs Holographic,
+// each with their own 3x3/4x4/5.5x5.5 shots) need that combo looked up
+// before falling back to the older single-dimension color-only or
+// size-only image maps.
 function getProductImage(product, colorName, sizeName) {
+  if (colorName && sizeName && product.colorSizeImages
+      && product.colorSizeImages[colorName] && product.colorSizeImages[colorName][sizeName]) {
+    return product.colorSizeImages[colorName][sizeName];
+  }
   if (colorName && product.colors) {
     const match = product.colors.find(c => c.name === colorName);
     if (match && match.image) return match.image;
@@ -368,26 +377,46 @@ const PRODUCTS = [
     colors: [
       {
         name: 'Cardinal', hex: '#a02334',
-        image: 'https://files.cdn.printful.com/files/ef8/ef83ea84e22288191c72230d6a092caa_preview.png',
+        image: 'assets/products/emotionsoflilly-cardinal-front.png',
+        images: [
+          'assets/products/emotionsoflilly-cardinal-front.png',
+          'assets/products/emotionsoflilly-cardinal-back.png',
+        ],
       },
       {
         name: 'Irish Green', hex: '#00843d',
-        image: 'https://files.cdn.printful.com/files/060/060ddd90db310eea3a315eaefa8329f4_preview.png',
+        image: 'assets/products/emotionsoflilly-irishgreen-front.png',
+        images: [
+          'assets/products/emotionsoflilly-irishgreen-front.png',
+          'assets/products/emotionsoflilly-irishgreen-back.png',
+        ],
       },
       {
         name: 'Azalea', hex: '#e893b7',
-        image: 'https://files.cdn.printful.com/files/fcc/fcc3ff3d984559e2380c31c4335af9db_preview.png',
+        image: 'assets/products/emotionsoflilly-azalea-front.png',
+        images: [
+          'assets/products/emotionsoflilly-azalea-front.png',
+          'assets/products/emotionsoflilly-azalea-back.png',
+        ],
       },
       {
         name: 'Carolina Blue', hex: '#7ba4db',
-        image: 'https://files.cdn.printful.com/files/f86/f8649b9a6ed77065b31056f031baf942_preview.png',
+        image: 'assets/products/emotionsoflilly-carolinablue-front.png',
+        images: [
+          'assets/products/emotionsoflilly-carolinablue-front.png',
+          'assets/products/emotionsoflilly-carolinablue-back.png',
+        ],
       },
       {
         name: 'White', hex: '#ffffff',
-        image: 'https://files.cdn.printful.com/files/0aa/0aad151f4e78857fc629e26f79a1a626_preview.png',
+        image: 'assets/products/emotionsoflilly-white-front.png',
+        images: [
+          'assets/products/emotionsoflilly-white-front.png',
+          'assets/products/emotionsoflilly-white-back.png',
+        ],
       },
     ],
-    image: 'https://files.cdn.printful.com/files/0aa/0aad151f4e78857fc629e26f79a1a626_preview.png',
+    image: 'assets/products/emotionsoflilly-white-front.png',
     description: "Every mood Lilly's ever thrown our way, front and center. Classic Gildan 5000 unisex tee — pre-shrunk cotton, tear-away label, the same fit that's carried every drop since day one. Five colorways, all equally unbothered."
   },
   {
@@ -405,51 +434,67 @@ const PRODUCTS = [
     colors: [
       {
         name: 'Black', hex: '#1a1a1a',
-        image: 'https://files.cdn.printful.com/files/22c/22c07cd87b37b002cb31deef3dcb5fbf_preview.png',
+        image: 'assets/products/lillyversetee-black-front.png',
+        images: [
+          'assets/products/lillyversetee-black-front.png',
+          'assets/products/lillyversetee-black-back.png',
+        ],
       },
       {
         name: 'Team Purple', hex: '#4b2e83',
-        image: 'https://files.cdn.printful.com/files/309/30936ef757b330cb33e80d6ff8796407_preview.png',
+        image: 'assets/products/lillyversetee-teampurple-front.png',
+        images: [
+          'assets/products/lillyversetee-teampurple-front.png',
+          'assets/products/lillyversetee-teampurple-back.png',
+        ],
       },
       {
         name: 'Navy', hex: '#212e45',
-        image: 'https://files.cdn.printful.com/files/2cd/2cd296447337e3e4e1e0ce8a580d0b5a_preview.png',
+        image: 'assets/products/lillyversetee-navy-front.png',
+        images: [
+          'assets/products/lillyversetee-navy-front.png',
+          'assets/products/lillyversetee-navy-back.png',
+        ],
       },
       {
         name: 'Dark Grey', hex: '#4a4a4a',
-        image: 'https://files.cdn.printful.com/files/e26/e268966f8dc86360ef3327f7cdc742f4_preview.png',
+        image: 'assets/products/lillyversetee-darkgrey-front.png',
+        images: [
+          'assets/products/lillyversetee-darkgrey-front.png',
+          'assets/products/lillyversetee-darkgrey-back.png',
+        ],
       },
     ],
-    image: 'https://files.cdn.printful.com/files/22c/22c07cd87b37b002cb31deef3dcb5fbf_preview.png',
+    image: 'assets/products/lillyversetee-black-front.png',
     description: "The Lilly Verse graphic on Bella + Canvas 3001 softness — retail fit, side-seamed, tear-away label. Runs from XS up to 5XL depending on color, so check the size row before you fall in love with Dark Grey."
   },
   {
     id: 21, name: 'Lilly Verse Stickers', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-verse', dropLabel: 'Lilly Verse',
-    sizePricing: { '3″×3″': 3.50, '4″×4″': 3.50, '5.5″×5.5″': 4.00 },
     tag: 'new', fill: '#14120f', bg: '#d3ecab',
     sizes: ['3″×3″', '4″×4″', '5.5″×5.5″'],
-    sizeImages: {
-      '3″×3″': 'https://files.cdn.printful.com/files/938/938f8ce7aeee1e9be078b41beebfb5ff_preview.png',
-      '4″×4″': 'https://files.cdn.printful.com/files/a52/a52318774144a58a5f4ad621cc936636_preview.png',
-      '5.5″×5.5″': 'https://files.cdn.printful.com/files/0de/0de114a2d0717373ac1a30657afb836e_preview.png',
+    colors: [
+      { name: 'Standard', hex: '#eef0ee' },
+      { name: 'Holographic', hex: '#f6c9ec' },
+    ],
+    colorSizePricing: {
+      Standard: { '3″×3″': 3.50, '4″×4″': 3.50, '5.5″×5.5″': 4.00 },
+      Holographic: { '3″×3″': 5.50, '4″×4″': 6.00, '5.5″×5.5″': 6.50 },
     },
-    image: 'https://files.cdn.printful.com/files/a52/a52318774144a58a5f4ad621cc936636_preview.png',
-    description: "Kiss-cut vinyl stickers straight from the Lilly Verse. Durable, waterproof, dishwasher-safe — stick it on a laptop, a bottle, wherever needs more Lilly."
-  },
-  {
-    id: 22, name: 'Lilly Verse Holographic Stickers', cat: 'accessories', catLabel: 'Accessories',
-    drop: 'lilly-verse', dropLabel: 'Lilly Verse',
-    sizePricing: { '3″×3″': 5.50, '4″×4″': 6.00, '5.5″×5.5″': 6.50 },
-    tag: 'new', fill: '#14120f', bg: '#ffc4dd',
-    sizes: ['3″×3″', '4″×4″', '5.5″×5.5″'],
-    sizeImages: {
-      '3″×3″': 'https://files.cdn.printful.com/files/940/940c83c365b2c56dd742528c4658b17f_preview.png',
-      '4″×4″': 'https://files.cdn.printful.com/files/256/256f9a51f32c956c3dcb9e223888b087_preview.png',
-      '5.5″×5.5″': 'https://files.cdn.printful.com/files/83c/83ccb90682cb73eb82150665f7bf4a36_preview.png',
+    colorSizeImages: {
+      Standard: {
+        '3″×3″': 'assets/products/lillyversesticker-white-3x3.png',
+        '4″×4″': 'assets/products/lillyversesticker-white-4x4.png',
+        '5.5″×5.5″': 'assets/products/lillyversesticker-white-5x5.png',
+      },
+      Holographic: {
+        '3″×3″': 'assets/products/lillyversesticker-holo-3x3.png',
+        '4″×4″': 'assets/products/lillyversesticker-holo-4x4.png',
+        '5.5″×5.5″': 'assets/products/lillyversesticker-holo-5x5.png',
+      },
     },
-    image: 'https://files.cdn.printful.com/files/256/256f9a51f32c956c3dcb9e223888b087_preview.png',
-    description: "Same Lilly Verse art, holographic finish — shifts color as it catches the light. Kiss-cut and waterproof, just like the originals but shinier."
+    image: 'assets/products/lillyversesticker-white-4x4.png',
+    description: "Kiss-cut vinyl stickers straight from the Lilly Verse. Pick Standard for classic matte vinyl, or Holographic for a shimmer finish that shifts color in the light. Durable, waterproof, dishwasher-safe."
   },
 ];
 
@@ -561,7 +606,14 @@ function cartLinesWithProducts() {
 // Returns the unit price for a product, accounting for size-based pricing
 // (like the poster, where a bigger print costs more) — falls back to the
 // product's flat price for everything else.
-function getUnitPrice(product, size) {
+function getUnitPrice(product, size, color) {
+  // Products where price depends on BOTH color/finish and size (stickers:
+  // Standard vs Holographic each have their own 3x3/4x4/5.5x5.5 pricing)
+  // need the combo looked up before the older single-dimension cases.
+  if (product.colorSizePricing) {
+    const sizeMap = color ? product.colorSizePricing[color] : null;
+    return sizeMap && size ? sizeMap[size] : null;
+  }
   if (product.sizePricing) {
     return size ? product.sizePricing[size] : null;
   }
@@ -572,6 +624,10 @@ function getUnitPrice(product, size) {
 // shows the flat price, or "From $X" (the cheapest size) for variable-price
 // products like the poster.
 function getDisplayPrice(product) {
+  if (product.colorSizePricing) {
+    const all = Object.values(product.colorSizePricing).flatMap(sizeMap => Object.values(sizeMap));
+    return `From $${Math.min(...all).toFixed(2)}`;
+  }
   if (product.sizePricing) {
     const min = Math.min(...Object.values(product.sizePricing));
     return `From $${min.toFixed(2)}`;
@@ -610,7 +666,7 @@ const STANDARD_SHIPPING = 4.99;
 function updateCartUI() {
   const lines = cartLinesWithProducts();
   const count = lines.reduce((sum, c) => sum + c.qty, 0);
-  const subtotal = lines.reduce((sum, c) => sum + c.qty * getUnitPrice(c, c.size), 0);
+  const subtotal = lines.reduce((sum, c) => sum + c.qty * getUnitPrice(c, c.size, c.color), 0);
   const shipping = subtotal === 0 ? 0 : (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING);
   const estimatedTotal = subtotal + shipping;
 
@@ -654,7 +710,7 @@ function updateCartUI() {
             <span>${c.qty}</span>
             <button type="button" onclick="updateCartQty(${idArg}, ${sizeArg}, ${colorArg}, 1)" aria-label="Increase quantity">+</button>
           </div>
-          <span class="cart-line-price">$${(c.qty * getUnitPrice(c, c.size)).toFixed(2)}</span>
+          <span class="cart-line-price">$${(c.qty * getUnitPrice(c, c.size, c.color)).toFixed(2)}</span>
         </div>
       </div>
       <button class="cart-remove" onclick="removeFromCart(${idArg}, ${sizeArg}, ${colorArg})" aria-label="Remove item">Remove</button>

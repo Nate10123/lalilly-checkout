@@ -74,7 +74,7 @@ export async function onRequestPost(context) {
 
     const line_items = normalizedCart.map(({ id, qty, size, color }) => {
       const product = PRODUCTS[id];
-      const priceCents = getPriceCents(product, size);
+      const priceCents = getPriceCents(product, size, color);
       if (priceCents == null) {
         throw new Error(`Missing price for "${product.name}"${size ? ` (${size})` : ''}.`);
       }
@@ -92,8 +92,8 @@ export async function onRequestPost(context) {
     });
 
     // Figure out shipping the same way the storefront advertises it.
-    const subtotalCents = normalizedCart.reduce((sum, { id, qty, size }) => {
-      return sum + getPriceCents(PRODUCTS[id], size) * qty;
+    const subtotalCents = normalizedCart.reduce((sum, { id, qty, size, color }) => {
+      return sum + getPriceCents(PRODUCTS[id], size, color) * qty;
     }, 0);
     const qualifiesForFreeShipping = subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS;
 
