@@ -359,6 +359,98 @@ const PRODUCTS = [
     madeIn: 'Guatemala, Nicaragua, Honduras, or the US',
     description: "Tri-blend tee — 50% polyester, 25% combed ring-spun cotton, 25% rayon, 3.4 oz/yd² fabric. Pre-shrunk, regular fit, side-seamed construction. The tri-blend gives the print a soft, slightly vintage look."
   },
+  {
+    id: 19, name: 'Emotions Of Lilly Classic Tee', cat: 'apparel', catLabel: 'Apparel',
+    drop: 'lilly-verse', dropLabel: 'Lilly Verse',
+    sizePricing: { S: 16.50, M: 16.50, L: 16.50, XL: 16.50, '2XL': 18.50, '3XL': 21.00, '4XL': 23.50, '5XL': 26.00 },
+    tag: 'new', fill: '#14120f', bg: '#ffe9a3',
+    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
+    colors: [
+      {
+        name: 'Cardinal', hex: '#a02334',
+        image: 'https://files.cdn.printful.com/files/ef8/ef83ea84e22288191c72230d6a092caa_preview.png',
+      },
+      {
+        name: 'Irish Green', hex: '#00843d',
+        image: 'https://files.cdn.printful.com/files/060/060ddd90db310eea3a315eaefa8329f4_preview.png',
+      },
+      {
+        name: 'Azalea', hex: '#e893b7',
+        image: 'https://files.cdn.printful.com/files/fcc/fcc3ff3d984559e2380c31c4335af9db_preview.png',
+      },
+      {
+        name: 'Carolina Blue', hex: '#7ba4db',
+        image: 'https://files.cdn.printful.com/files/f86/f8649b9a6ed77065b31056f031baf942_preview.png',
+      },
+      {
+        name: 'White', hex: '#ffffff',
+        image: 'https://files.cdn.printful.com/files/0aa/0aad151f4e78857fc629e26f79a1a626_preview.png',
+      },
+    ],
+    image: 'https://files.cdn.printful.com/files/0aa/0aad151f4e78857fc629e26f79a1a626_preview.png',
+    description: "Every mood Lilly's ever thrown our way, front and center. Classic Gildan 5000 unisex tee — pre-shrunk cotton, tear-away label, the same fit that's carried every drop since day one. Five colorways, all equally unbothered."
+  },
+  {
+    id: 20, name: 'Lilly Verse T-shirt', cat: 'apparel', catLabel: 'Apparel',
+    drop: 'lilly-verse', dropLabel: 'Lilly Verse',
+    sizePricing: { XS: 25.00, S: 25.00, M: 25.00, L: 25.00, XL: 25.00, '2XL': 27.50, '3XL': 30.00, '4XL': 32.50, '5XL': 35.00 },
+    tag: 'new', fill: '#14120f', bg: '#cfc5f5',
+    sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
+    // Not every color runs the full size range — Team Purple stops at 4XL,
+    // Dark Grey only goes up to 2XL, per what's actually synced in Printful.
+    unavailableSizes: {
+      'Team Purple': ['5XL'],
+      'Dark Grey': ['3XL', '4XL', '5XL'],
+    },
+    colors: [
+      {
+        name: 'Black', hex: '#1a1a1a',
+        image: 'https://files.cdn.printful.com/files/22c/22c07cd87b37b002cb31deef3dcb5fbf_preview.png',
+      },
+      {
+        name: 'Team Purple', hex: '#4b2e83',
+        image: 'https://files.cdn.printful.com/files/309/30936ef757b330cb33e80d6ff8796407_preview.png',
+      },
+      {
+        name: 'Navy', hex: '#212e45',
+        image: 'https://files.cdn.printful.com/files/2cd/2cd296447337e3e4e1e0ce8a580d0b5a_preview.png',
+      },
+      {
+        name: 'Dark Grey', hex: '#4a4a4a',
+        image: 'https://files.cdn.printful.com/files/e26/e268966f8dc86360ef3327f7cdc742f4_preview.png',
+      },
+    ],
+    image: 'https://files.cdn.printful.com/files/22c/22c07cd87b37b002cb31deef3dcb5fbf_preview.png',
+    description: "The Lilly Verse graphic on Bella + Canvas 3001 softness — retail fit, side-seamed, tear-away label. Runs from XS up to 5XL depending on color, so check the size row before you fall in love with Dark Grey."
+  },
+  {
+    id: 21, name: 'Lilly Verse Stickers', cat: 'accessories', catLabel: 'Accessories',
+    drop: 'lilly-verse', dropLabel: 'Lilly Verse',
+    sizePricing: { '3″×3″': 3.50, '4″×4″': 3.50, '5.5″×5.5″': 4.00 },
+    tag: 'new', fill: '#14120f', bg: '#d3ecab',
+    sizes: ['3″×3″', '4″×4″', '5.5″×5.5″'],
+    sizeImages: {
+      '3″×3″': 'https://files.cdn.printful.com/files/938/938f8ce7aeee1e9be078b41beebfb5ff_preview.png',
+      '4″×4″': 'https://files.cdn.printful.com/files/a52/a52318774144a58a5f4ad621cc936636_preview.png',
+      '5.5″×5.5″': 'https://files.cdn.printful.com/files/0de/0de114a2d0717373ac1a30657afb836e_preview.png',
+    },
+    image: 'https://files.cdn.printful.com/files/a52/a52318774144a58a5f4ad621cc936636_preview.png',
+    description: "Kiss-cut vinyl stickers straight from the Lilly Verse. Durable, waterproof, dishwasher-safe — stick it on a laptop, a bottle, wherever needs more Lilly."
+  },
+  {
+    id: 22, name: 'Lilly Verse Holographic Stickers', cat: 'accessories', catLabel: 'Accessories',
+    drop: 'lilly-verse', dropLabel: 'Lilly Verse',
+    sizePricing: { '3″×3″': 5.50, '4″×4″': 6.00, '5.5″×5.5″': 6.50 },
+    tag: 'new', fill: '#14120f', bg: '#ffc4dd',
+    sizes: ['3″×3″', '4″×4″', '5.5″×5.5″'],
+    sizeImages: {
+      '3″×3″': 'https://files.cdn.printful.com/files/940/940c83c365b2c56dd742528c4658b17f_preview.png',
+      '4″×4″': 'https://files.cdn.printful.com/files/256/256f9a51f32c956c3dcb9e223888b087_preview.png',
+      '5.5″×5.5″': 'https://files.cdn.printful.com/files/83c/83ccb90682cb73eb82150665f7bf4a36_preview.png',
+    },
+    image: 'https://files.cdn.printful.com/files/256/256f9a51f32c956c3dcb9e223888b087_preview.png',
+    description: "Same Lilly Verse art, holographic finish — shifts color as it catches the light. Kiss-cut and waterproof, just like the originals but shinier."
+  },
 ];
 
 const CART_KEY = 'lalilly_cart';

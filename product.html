@@ -186,8 +186,12 @@
     const title = `LA LILLY — ${product.name}`;
     const snippet = toPlainSnippet(product.description, 155);
     const canonicalUrl = `https://lalilly-checkout.pages.dev/product.html?id=${product.id}`;
-    const imageUrl = product.image
-      ? `https://lalilly-checkout.pages.dev/${product.image}`
+    // product.image is either a full external URL (Printful-hosted photos)
+    // or a path relative to the site root (locally-uploaded mockups) —
+    // only the latter needs the domain prepended.
+    const rawImage = product.image;
+    const imageUrl = rawImage
+      ? (/^https?:\/\//.test(rawImage) ? rawImage : `https://lalilly-checkout.pages.dev/${rawImage}`)
       : 'https://lalilly-checkout.pages.dev/assets/og-image.png?v=2';
 
     document.title = title;
