@@ -315,7 +315,7 @@ const PRODUCTS = [
     id: 18, name: 'Ye N Lillye Tri-Blend T-Shirt', cat: 'apparel', catLabel: 'Apparel',
     drop: 'lillye-west', dropLabel: 'LillYe West',
     sizePricing: { XS: 26.50, S: 26.50, M: 26.50, L: 26.50, XL: 26.50, '2XL': 28.50, '3XL': 30.00 },
-    tag: 'new', fill: '#14120f', bg: '#e3e0d8',
+    tag: 'new', fill: '#14120f', bg: '#f3aac2',
     sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'],
     colors: [
       {
