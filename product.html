@@ -272,6 +272,7 @@
           <div class="pdp-art" id="pdpArt" style="background:${product.bg}">
             ${product.tag ? `<span class="product-tag ${product.tag}">${product.tag === 'new' ? 'New' : 'Low Stock'}</span>` : ''}
             <div class="pdp-art-media" id="pdpArtMedia" onclick="openZoom()">${productMedia(product)}</div>
+            <div class="pdp-art-loading" id="pdpArtLoading"><div class="pdp-art-spinner"></div></div>
             <button type="button" class="pdp-arrow pdp-arrow-prev" onclick="cycleImage(-1)" aria-label="Previous image" style="display:${currentGalleryImages.length > 1 ? 'flex' : 'none'}">&#8249;</button>
             <button type="button" class="pdp-arrow pdp-arrow-next" onclick="cycleImage(1)" aria-label="Next image" style="display:${currentGalleryImages.length > 1 ? 'flex' : 'none'}">&#8250;</button>
             <button type="button" class="pdp-zoom-btn" onclick="openZoom()" aria-label="Zoom in on image" style="display:${product.image ? 'flex' : 'none'}">
@@ -321,7 +322,7 @@
     if (btn) btn.classList.add('active');
 
     const mediaEl = document.getElementById('pdpArtMedia');
-    if (mediaEl) mediaEl.innerHTML = productMedia(product, currentGalleryImages[index]);
+    if (mediaEl) swapProductMedia(product, currentGalleryImages[index]);
   }
 
   // Moves the main photo forward/back by one, wrapping around either end.
@@ -406,6 +407,41 @@
     }, { passive: true });
   }
 
+  // Preloads an image before swapping it into the main product photo, with
+  // a brief spinner over the frame while it loads. Prevents a flash of an
+  // empty box when switching to a color/size photo that isn't cached yet;
+  // already-cached images resolve almost instantly so the spinner barely
+  // shows at all in that case. Tracks a request id so that if someone
+  // clicks through colors quickly, a slower-loading older pick can't win
+  // the race and overwrite whatever they clicked most recently.
+  let mediaRequestId = 0;
+  function swapProductMedia(product, image) {
+    const artEl = document.getElementById('pdpArtMedia');
+    const loadingEl = document.getElementById('pdpArtLoading');
+    if (!artEl) return;
+
+    const requestId = ++mediaRequestId;
+
+    if (!image) {
+      // No photo for this combo (falls back to the plain pug icon) —
+      // nothing to preload.
+      artEl.innerHTML = productMedia(product, image);
+      if (loadingEl) loadingEl.classList.remove('active');
+      return;
+    }
+
+    if (loadingEl) loadingEl.classList.add('active');
+    const preload = new Image();
+    const finish = () => {
+      if (requestId !== mediaRequestId) return; // a newer selection already came in
+      artEl.innerHTML = productMedia(product, image);
+      if (loadingEl) loadingEl.classList.remove('active');
+    };
+    preload.onload = finish;
+    preload.onerror = finish; // swap anyway so a broken link doesn't spin forever
+    preload.src = image;
+  }
+
   function selectSize(size, btn) {
     selectedSize = size;
     document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
@@ -433,13 +469,9 @@
     // per-size case still defers to a per-color photo if one's selected
     // and there's no combo map, matching the original behavior.
     if (product && product.colorSizeImages) {
-      const artEl = document.getElementById('pdpArtMedia');
-      if (artEl) artEl.innerHTML = productMedia(product, getProductImage(product, selectedColor, size));
+      swapProductMedia(product, getProductImage(product, selectedColor, size));
     } else if (product && product.sizeImages && !(product.colors && selectedColor)) {
-      const artEl = document.getElementById('pdpArtMedia');
-      if (artEl) {
-        artEl.innerHTML = productMedia(product, getProductImage(product, selectedColor, size));
-      }
+      swapProductMedia(product, getProductImage(product, selectedColor, size));
     }
   }
 
@@ -480,7 +512,7 @@
 
     const artEl = document.getElementById('pdpArtMedia');
     if (artEl && product) {
-      artEl.innerHTML = productMedia(product, getProductImage(product, color, selectedSize));
+      swapProductMedia(product, getProductImage(product, color, selectedSize));
     }
 
     // If this color has its own set of angle photos, rebuild the

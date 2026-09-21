@@ -417,7 +417,8 @@ const PRODUCTS = [
       },
     ],
     image: 'assets/products/emotionsoflilly-white-front.png',
-    description: "Every mood Lilly's ever thrown our way, front and center. Classic Gildan 5000 unisex tee — pre-shrunk cotton, tear-away label, the same fit that's carried every drop since day one. Five colorways, all equally unbothered."
+    madeIn: 'Honduras, Nicaragua, Haiti, Dominican Republic, Bangladesh, or Mexico',
+    description: "Every mood Lilly's ever thrown our way, front and center. A structured, sturdy cotton tee — 100% cotton, 5.0–5.3 oz pre-shrunk jersey knit with taped neck and shoulders, double-stitched seams, and a tear-away label. Five colorways, all equally unbothered."
   },
   {
     id: 20, name: 'Lilly Verse T-shirt', cat: 'apparel', catLabel: 'Apparel',
@@ -466,7 +467,8 @@ const PRODUCTS = [
       },
     ],
     image: 'assets/products/lillyversetee-black-front.png',
-    description: "The Lilly Verse graphic on Bella + Canvas 3001 softness — retail fit, side-seamed, tear-away label. Runs from XS up to 5XL depending on color, so check the size row before you fall in love with Dark Grey."
+    madeIn: 'Nicaragua, Mexico, Honduras, or the US',
+    description: "The Lilly Verse graphic on soft, staple-tee cotton — combed, ring-spun cotton (heather colors run a cotton/poly blend), pre-shrunk, side-seamed, tear-away label. Runs from XS up to 5XL depending on color, so check the size row before you fall in love with Dark Grey."
   },
   {
     id: 21, name: 'Lilly Verse Stickers', cat: 'accessories', catLabel: 'Accessories',
