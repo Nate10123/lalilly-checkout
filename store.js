@@ -263,6 +263,10 @@ const PRODUCTS = [
     id: 16, name: 'Lilly Bear Case for iPhone', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
     price: 17.00, tag: 'new', fill: '#14120f', bg: '#ffe9a3',
+    // "sizes" here are actually phone models, not clothing sizes — this
+    // label is what makes the PDP say "Model" instead of "Size" and shows
+    // "Choose a model" in the dropdown placeholder.
+    sizeLabel: 'Model',
     // Same flat price across every model — just a different case mold per
     // phone. Newest models listed first for easier scrolling.
     sizes: [
@@ -497,6 +501,33 @@ const PRODUCTS = [
     },
     image: 'assets/products/lillyversesticker-white-4x4.png',
     description: "Kiss-cut vinyl stickers straight from the Lilly Verse. Pick Standard for classic matte vinyl, or Holographic for a shimmer finish that shifts color in the light. Durable, waterproof, dishwasher-safe."
+  },
+  {
+    id: 23, name: 'Zero Worries Oversized Faded T-shirt', cat: 'apparel', catLabel: 'Apparel',
+    drop: 'zero-worries', dropLabel: 'Zero Worries',
+    sizePricing: { S: 35.50, M: 35.50, L: 35.50, XL: 35.50, '2XL': 37.50, '3XL': 40.00 },
+    tag: 'new', fill: '#14120f', bg: '#cfc5f5',
+    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    colors: [
+      {
+        name: 'Faded Khaki', hex: '#b8ab86',
+        image: 'https://files.cdn.printful.com/files/48d/48d9fb21db27636a740ffab45de2d82d_preview.png',
+      },
+      {
+        name: 'Faded Eucalyptus', hex: '#8a9a85',
+        image: 'https://files.cdn.printful.com/files/376/376a05a268dc32772368fd85608917bb_preview.png',
+      },
+      {
+        name: 'Faded Bone', hex: '#d8cfc0',
+        image: 'https://files.cdn.printful.com/files/015/0158866216a45d41f06f6df9ecbded02_preview.png',
+      },
+      {
+        name: 'Faded White', hex: '#f2f0eb',
+        image: 'https://files.cdn.printful.com/files/e3e/e3ea1b73f9caa28b5dfb8c8a253bcd4c_preview.png',
+      },
+    ],
+    image: 'https://files.cdn.printful.com/files/376/376a05a268dc32772368fd85608917bb_preview.png',
+    description: "Boxy and oversized with a soft, faded wash — a relaxed drop-shoulder fit built for layering into everything else in the closet. Four muted colorways: Khaki, Eucalyptus, Bone, and White."
   },
 ];
 

@@ -149,7 +149,7 @@
     const ready = (!needsColor || selectedColor) && (!needsSize || selectedSize);
     btn.disabled = !ready;
     if (needsColor && !selectedColor) btn.textContent = 'Select a Color';
-    else if (needsSize && !selectedSize) btn.textContent = product.sizes.length > 8 ? 'Select a Model' : 'Select a Size';
+    else if (needsSize && !selectedSize) btn.textContent = `Select a ${product.sizeLabel || 'Size'}`;
     else btn.textContent = 'Add to Cart';
   }
 
@@ -250,10 +250,10 @@
 
     const sizeRow = product.sizes ? `
       <div class="pdp-size-row">
-        <span class="pdp-size-label">${product.sizes.length > 8 ? 'Model' : 'Size'}</span>
+        <span class="pdp-size-label">${product.sizeLabel || 'Size'}</span>
         ${product.sizes.length > 8 ? `
           <select class="pdp-size-select" id="sizeOptions" onchange="selectSize(this.value, null)">
-            <option value="" disabled selected>Choose a model</option>
+            <option value="" disabled selected>Choose a ${(product.sizeLabel || 'Size').toLowerCase()}</option>
             ${product.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
           </select>
         ` : `
