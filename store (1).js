@@ -286,11 +286,6 @@
           <h1>${product.name}</h1>
           <div class="pdp-price" id="pdpPrice">${getDisplayPrice(product)}</div>
           <p class="pdp-desc">${product.description}</p>
-          ${Array.isArray(product.details) && product.details.length ? `
-            <ul class="pdp-specs">
-              ${product.details.map(d => `<li>${d}</li>`).join('')}
-            </ul>
-          ` : ''}
           ${colorRow}
           ${sizeRow}
           <div class="pdp-qty-row">
