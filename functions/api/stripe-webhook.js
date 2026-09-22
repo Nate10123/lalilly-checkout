@@ -3,7 +3,7 @@
 // order with Printful so it prints and ships automatically.
 
 import Stripe from 'stripe';
-import { PRODUCTS, getVariantId } from '../_shared/products.js';
+import { PRODUCTS, getVariantId, getPriceCents } from '../_shared/products.js';
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -58,10 +58,19 @@ export async function onRequestPost(context) {
           `Printful variant ID set in products.js — fill this in before going live.`
         );
       }
-      return {
+      // Declare our own charged price on the order line — otherwise
+      // Printful falls back to the retail_price stored on the sync
+      // variant, which can drift out of sync with what we actually
+      // charge (see products.js / store.js for the source of truth).
+      const priceCents = getPriceCents(product, size, color);
+      const orderItem = {
         sync_variant_id: variantId,
         quantity: qty,
       };
+      if (priceCents != null) {
+        orderItem.retail_price = (priceCents / 100).toFixed(2);
+      }
+      return orderItem;
     });
 
     const printfulOrder = {
