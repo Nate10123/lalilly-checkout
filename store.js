@@ -54,7 +54,7 @@ const PRODUCTS = [
   {
     id: 1, name: 'L Snapback Hat', cat: 'headwear', catLabel: 'Headwear',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    price: 26.00, tag: 'low', fill: '#14120f', bg: '#d3ecab',
+    price: 26.00, tag: null, fill: '#14120f', bg: '#d3ecab',
     image: 'assets/products/l-snapback-hat.png',
     images: [
       'assets/products/l-snapback-hat.png',
@@ -291,7 +291,7 @@ const PRODUCTS = [
     id: 17, name: "I'm Gay Oversized Tie-Dye T-Shirt", cat: 'apparel', catLabel: 'Apparel',
     drop: 'la-lilly', dropLabel: 'La Lilly',
     sizePricing: { S: 32.50, M: 32.50, L: 32.50, XL: 32.50, '2XL': 35.00 },
-    tag: 'new', fill: '#14120f', bg: '#ffc4dd',
+    tag: 'low', fill: '#14120f', bg: '#ffc4dd',
     sizes: ['S', 'M', 'L', 'XL', '2XL'],
     // Per Printful (confirmed live on the product page, not just the
     // initial sync): Classic Rainbow M/L/XL/2XL are marked "Supplier out
