@@ -511,22 +511,50 @@ const PRODUCTS = [
     colors: [
       {
         name: 'Faded Khaki', hex: '#b8ab86',
-        image: 'https://files.cdn.printful.com/files/48d/48d9fb21db27636a740ffab45de2d82d_preview.png',
+        image: 'assets/products/zeroworries-khaki-front.png',
+        images: [
+          'assets/products/zeroworries-khaki-front.png',
+          'assets/products/zeroworries-khaki-back.png',
+        ],
       },
       {
         name: 'Faded Eucalyptus', hex: '#8a9a85',
-        image: 'https://files.cdn.printful.com/files/376/376a05a268dc32772368fd85608917bb_preview.png',
+        image: 'assets/products/zeroworries-eucalyptus-front.png',
+        images: [
+          'assets/products/zeroworries-eucalyptus-front.png',
+          'assets/products/zeroworries-eucalyptus-back.png',
+        ],
       },
       {
         name: 'Faded Bone', hex: '#d8cfc0',
-        image: 'https://files.cdn.printful.com/files/015/0158866216a45d41f06f6df9ecbded02_preview.png',
+        image: 'assets/products/zeroworries-bone-front.png',
+        images: [
+          'assets/products/zeroworries-bone-front.png',
+          'assets/products/zeroworries-bone-back.png',
+        ],
       },
       {
         name: 'Faded White', hex: '#f2f0eb',
-        image: 'https://files.cdn.printful.com/files/e3e/e3ea1b73f9caa28b5dfb8c8a253bcd4c_preview.png',
+        image: 'assets/products/zeroworries-white-front.png',
+        images: [
+          'assets/products/zeroworries-white-front.png',
+          'assets/products/zeroworries-white-back.png',
+        ],
       },
     ],
-    image: 'https://files.cdn.printful.com/files/376/376a05a268dc32772368fd85608917bb_preview.png',
+    image: 'assets/products/zeroworries-eucalyptus-front.png',
+    // Spec bullets from the AS Colour 5082 blank, rendered under the
+    // description on the product page (see product.html's `.pdp-specs`).
+    details: [
+      '100% carded cotton',
+      'Fabric weight: 7.1 oz/yd² (240 g/m²)',
+      'Garment-dyed, pre-shrunk fabric',
+      'Boxy, oversized fit',
+      'Dropped shoulders',
+      'Wide neck ribbing',
+      'Tear-away label',
+    ],
+    madeIn: 'China',
     description: "Boxy and oversized with a soft, faded wash — a relaxed drop-shoulder fit built for layering into everything else in the closet. Four muted colorways: Khaki, Eucalyptus, Bone, and White."
   },
 ];
