@@ -374,7 +374,7 @@ const PRODUCTS = [
   },
   {
     id: 19, name: 'Emotions Of Lilly Classic Tee', cat: 'apparel', catLabel: 'Apparel',
-    drop: 'lilly-verse', dropLabel: 'Lilly Verse',
+    drop: 'la-lilly', dropLabel: 'La Lilly',
     sizePricing: { S: 16.50, M: 16.50, L: 16.50, XL: 16.50, '2XL': 18.50, '3XL': 21.00, '4XL': 23.50, '5XL': 26.00 },
     tag: 'new', fill: '#14120f', bg: '#ffe9a3',
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
@@ -504,7 +504,7 @@ const PRODUCTS = [
   },
   {
     id: 23, name: 'Zero Worries Oversized Faded T-shirt', cat: 'apparel', catLabel: 'Apparel',
-    drop: 'zero-worries', dropLabel: 'Zero Worries',
+    drop: 'lilly-life', dropLabel: 'Lilly Life',
     sizePricing: { S: 35.50, M: 35.50, L: 35.50, XL: 35.50, '2XL': 37.50, '3XL': 40.00 },
     tag: 'new', fill: '#14120f', bg: '#cfc5f5',
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
@@ -545,6 +545,12 @@ const PRODUCTS = [
     image: 'assets/products/zeroworries-eucalyptus-front.png',
     madeIn: 'China',
     description: "Boxy and oversized with a soft, faded wash — a relaxed drop-shoulder fit built for layering into everything else in the closet. Four muted colorways: Khaki, Eucalyptus, Bone, and White. Garment-dyed, pre-shrunk 100% carded cotton at 7.1 oz/yd² (240 g/m²), with wide neck ribbing and a tear-away label."
+  },
+  {
+    id: 24, name: 'Lilly Chain', cat: 'accessories', catLabel: 'Accessories',
+    drop: 'la-lilly', dropLabel: 'La Lilly',
+    price: 0, tag: null, fill: '#14120f', bg: '#e8c98a', comingSoon: true,
+    description: "A Lilly Chain is on the way."
   },
 ];
 
