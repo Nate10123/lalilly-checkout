@@ -286,6 +286,7 @@
           <h1>${product.name}</h1>
           <div class="pdp-price" id="pdpPrice">${getDisplayPrice(product)}</div>
           <p class="pdp-desc">${product.description}</p>
+          ${product.paperSpecs ? `<ul class="pdp-paperspecs" id="pdpPaperSpecs">${renderPaperSpecs(product, selectedSize)}</ul>` : ''}
           ${colorRow}
           ${sizeRow}
           <div class="pdp-qty-row">
@@ -442,6 +443,15 @@
     preload.src = image;
   }
 
+  function renderPaperSpecs(product, size) {
+    const specs = product.paperSpecs;
+    if (!specs) return '';
+    const lines = [...specs.default];
+    const note = specs.sizeNotes && specs.sizeNotes[size];
+    if (note) lines.push(note);
+    return lines.map(line => `<li>${line}</li>`).join('');
+  }
+
   function selectSize(size, btn) {
     selectedSize = size;
     document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
@@ -462,6 +472,11 @@
         const priceEl = document.getElementById('pdpPrice');
         if (priceEl) priceEl.textContent = `$${price.toFixed(2)}`;
       }
+    }
+
+    if (product && product.paperSpecs) {
+      const specsEl = document.getElementById('pdpPaperSpecs');
+      if (specsEl) specsEl.innerHTML = renderPaperSpecs(product, size);
     }
 
     // For products with per-size photos (like the pillow) or combo

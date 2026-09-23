@@ -1055,6 +1055,25 @@ a:focus-visible, button:focus-visible {
   max-width: 50ch;
   margin-bottom: 28px;
 }
+.pdp-paperspecs {
+  list-style: none;
+  padding: 0;
+  margin: -12px 0 28px;
+  max-width: 50ch;
+  color: rgba(20,18,15,0.72);
+  font-size: 0.92rem;
+}
+.pdp-paperspecs li {
+  position: relative;
+  padding-left: 16px;
+  line-height: 1.6;
+}
+.pdp-paperspecs li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  opacity: 0.5;
+}
 .pdp-tag-row { margin-bottom: 22px; }
 
 .pdp-qty-row {

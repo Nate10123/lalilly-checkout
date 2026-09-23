@@ -231,6 +231,25 @@ const PRODUCTS = [
     // USA-sourced paper instead (different paper stock per Printful's specs)
     // — not shown to customers since the site doesn't ship there yet.
     madeIn: 'Japan',
+    // Standard (non-Brazil) paper specs, shown on the product page and
+    // updated by size — see selectSize() in product.html. The "A4" note
+    // only applies to 21×30 cm. Printful ships Brazil-bound orders on a
+    // different, locally-sourced paper stock (Couche 170g Magno Sappi
+    // Satin for 21×30/30×40/50×70, Koala Paper for 70×100+); the site
+    // can't reflect that here because destination isn't known until
+    // checkout, well after this panel renders.
+    paperSpecs: {
+      default: [
+        'Paper thickness: 0.26 mm (10.3 mil)',
+        'Paper weight: 189 g/m²',
+        'Opacity: 94%',
+        'ISO brightness: 104%',
+        'Paper sourced from Japan',
+      ],
+      sizeNotes: {
+        '21×30 cm': '21 × 30 cm posters are size A4.',
+      },
+    },
     description: "Matte enhanced-paper print of the Lillys artwork. Ships rolled in a protective tube. Pick your size below — bigger prints cost more to produce, so pricing scales with size."
   },
   {
