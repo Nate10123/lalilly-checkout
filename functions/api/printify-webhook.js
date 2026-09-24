@@ -93,6 +93,12 @@ export async function onRequestPost(context) {
 // X-Pfy-Signature header — using Web Crypto since Cloudflare's runtime
 // doesn't have Node's `crypto` module (same reasoning as the Stripe
 // webhook using constructEventAsync instead of the sync version).
+//
+// Per Printify's own docs, the header value is prefixed "sha256=" before
+// the hex digest (e.g. "sha256=abc123..."), not the bare hex alone — an
+// earlier version of this function compared against the raw hex only,
+// which meant every legitimately-signed request (including Printify's
+// validation ping when first registering the webhook) was rejected.
 async function verifyPrintifySignature(bodyText, signatureHeader, secret) {
   if (!secret || !signatureHeader) return false;
 
@@ -107,14 +113,15 @@ async function verifyPrintifySignature(bodyText, signatureHeader, secret) {
   const computedHex = [...new Uint8Array(signatureBytes)]
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('');
+  const expected = `sha256=${computedHex}`;
 
   // Constant-time-ish comparison — fine at this length/throughput; not
   // worth pulling in a dedicated timing-safe-compare for a webhook this
   // low-volume.
-  if (computedHex.length !== signatureHeader.length) return false;
+  if (expected.length !== signatureHeader.length) return false;
   let mismatch = 0;
-  for (let i = 0; i < computedHex.length; i++) {
-    mismatch |= computedHex.charCodeAt(i) ^ signatureHeader.charCodeAt(i);
+  for (let i = 0; i < expected.length; i++) {
+    mismatch |= expected.charCodeAt(i) ^ signatureHeader.charCodeAt(i);
   }
   return mismatch === 0;
 }
