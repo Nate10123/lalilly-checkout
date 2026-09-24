@@ -70,6 +70,9 @@ export async function placePrintifyOrder(env, { items, recipient, externalId }) 
       method: 'POST',
       headers: {
         Authorization: `Bearer ${env.PRINTIFY_API_KEY}`,
+        // Printify's API requires this on every request, not just the
+        // Bearer token — omitted, requests can be rejected outright.
+        'User-Agent': 'LA-LILLY-store (lalilly-checkout.pages.dev)',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(order),

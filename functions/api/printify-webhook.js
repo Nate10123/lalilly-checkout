@@ -23,6 +23,22 @@
 //    Printify signs each request with this secret in the X-Pfy-Signature
 //    header (HMAC-SHA256 hex digest of the raw body) — that's what we
 //    verify below.
+//
+// GET/HEAD handlers below exist only in case Printify's own reachability
+// check (when you first register the webhook) uses a method other than
+// POST — Cloudflare Pages Functions reject any method with no exported
+// handler before this file's code ever runs, so without these, that
+// check could fail for a reason no amount of fixing onRequestPost would
+// touch. They're harmless for real traffic: only onRequestPost, which
+// requires a verified signature to act on anything, does real work.
+export async function onRequestGet() {
+  return new Response('ok', { status: 200 });
+}
+
+export async function onRequestHead() {
+  return new Response(null, { status: 200 });
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -144,7 +160,12 @@ async function fetchPrintifyShipment(env, orderId) {
   try {
     const res = await fetch(
       `https://api.printify.com/v1/shops/${env.PRINTIFY_SHOP_ID}/orders/${orderId}.json`,
-      { headers: { Authorization: `Bearer ${env.PRINTIFY_API_KEY}` } }
+      { headers: {
+          Authorization: `Bearer ${env.PRINTIFY_API_KEY}`,
+          // Required by Printify on every request — see the matching
+          // note in _shared/printify.js.
+          'User-Agent': 'LA-LILLY-store (lalilly-checkout.pages.dev)',
+      } }
     );
     if (!res.ok) {
       console.error('Could not fetch Printify order for tracking details:', orderId);
