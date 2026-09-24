@@ -1,0 +1,140 @@
+// Cloudflare Pages Function — Printify calls this when something happens
+// to an order on their end. We only care about "order:shipment:created"
+// (gives us a tracking number) but Printify will send other event types
+// too (order:created, order:updated, order:sent-to-production,
+// order:shipment:delivered), which we just ignore.
+//
+// SETUP REQUIRED (unlike Printful, Printify webhooks aren't a dashboard
+// field — you register them via Printify's own API):
+// 1. Create a Cloudflare KV namespace called ORDERS and bind it to this
+//    Pages project (both Production and Preview) as "ORDERS" — skip this
+//    if you already did it for Printful, it's shared.
+// 2. Make up a random secret string and set it as PRINTIFY_WEBHOOK_SECRET
+//    in your Cloudflare environment variables.
+// 3. Register the webhook by calling Printify's API once (Postman, curl,
+//    whatever) — this is NOT a dashboard step:
+//      POST https://api.printify.com/v1/shops/{shop_id}/webhooks.json
+//      Authorization: Bearer YOUR_PRINTIFY_TOKEN
+//      Body: {
+//        "topic": "order:shipment:created",
+//        "url": "https://your-site.pages.dev/api/printify-webhook",
+//        "secret": "THE_SAME_RANDOM_STRING_FROM_STEP_2"
+//      }
+//    Printify signs each request with this secret in the X-Pfy-Signature
+//    header (HMAC-SHA256 hex digest of the raw body) — that's what we
+//    verify below.
+export async function onRequestPost(context) {
+  const { request, env } = context;
+
+  const bodyText = await request.text(); // raw body — needed for the signature check
+  const signature = request.headers.get('x-pfy-signature');
+
+  const validSignature = await verifyPrintifySignature(bodyText, signature, env.PRINTIFY_WEBHOOK_SECRET);
+  if (!validSignature) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  if (!env.ORDERS) {
+    console.error('ORDERS KV namespace not bound — cannot record tracking info.');
+    return new Response('ok', { status: 200 });
+  }
+
+  let payload;
+  try {
+    payload = JSON.parse(bodyText);
+  } catch (err) {
+    return new Response('Invalid JSON', { status: 400 });
+  }
+
+  if (payload.type !== 'order:shipment:created') {
+    return new Response('ignored', { status: 200 });
+  }
+
+  try {
+    // Printify's webhook body is a thin reference to the order rather than
+    // the full order — the order id normally shows up at `resource.id`,
+    // but we fall back to a couple of other shapes seen in the wild in
+    // case Printify's exact payload differs from what's documented here.
+    const orderId = String(
+      (payload.resource && payload.resource.id) || payload.id || (payload.data && payload.data.id)
+    );
+    if (!orderId) {
+      console.error('Printify webhook had no order id we could find:', bodyText);
+      return new Response('ok', { status: 200 });
+    }
+
+    const existingRaw = await env.ORDERS.get(`pfyorder:${orderId}`);
+    if (!existingRaw) {
+      console.error('Received tracking for unknown Printify order:', orderId);
+      return new Response('ok', { status: 200 }); // 200 so Printify doesn't retry forever
+    }
+
+    // The webhook body doesn't reliably include the tracking number itself,
+    // so fetch the order straight from Printify's API to get it.
+    const shipment = await fetchPrintifyShipment(env, orderId);
+
+    const order = JSON.parse(existingRaw);
+    order.status = 'shipped';
+    order.trackingNumber = (shipment && shipment.number) || null;
+    order.trackingUrl = (shipment && shipment.url) || null;
+    order.carrier = (shipment && shipment.carrier) || null;
+    order.shippedAt = new Date().toISOString();
+
+    await env.ORDERS.put(`pfyorder:${orderId}`, JSON.stringify(order));
+
+    return new Response('ok', { status: 200 });
+  } catch (err) {
+    console.error('Error processing Printify webhook:', err.message);
+    return new Response('ok', { status: 200 });
+  }
+}
+
+// HMAC-SHA256 of the raw body, hex-encoded, compared against the
+// X-Pfy-Signature header — using Web Crypto since Cloudflare's runtime
+// doesn't have Node's `crypto` module (same reasoning as the Stripe
+// webhook using constructEventAsync instead of the sync version).
+async function verifyPrintifySignature(bodyText, signatureHeader, secret) {
+  if (!secret || !signatureHeader) return false;
+
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const signatureBytes = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(bodyText));
+  const computedHex = [...new Uint8Array(signatureBytes)]
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+
+  // Constant-time-ish comparison — fine at this length/throughput; not
+  // worth pulling in a dedicated timing-safe-compare for a webhook this
+  // low-volume.
+  if (computedHex.length !== signatureHeader.length) return false;
+  let mismatch = 0;
+  for (let i = 0; i < computedHex.length; i++) {
+    mismatch |= computedHex.charCodeAt(i) ^ signatureHeader.charCodeAt(i);
+  }
+  return mismatch === 0;
+}
+
+// Printify's shipment webhook doesn't reliably carry the tracking details
+// itself, so pull the order back from their API to read `shipments[0]`.
+async function fetchPrintifyShipment(env, orderId) {
+  try {
+    const res = await fetch(
+      `https://api.printify.com/v1/shops/${env.PRINTIFY_SHOP_ID}/orders/${orderId}.json`,
+      { headers: { Authorization: `Bearer ${env.PRINTIFY_API_KEY}` } }
+    );
+    if (!res.ok) {
+      console.error('Could not fetch Printify order for tracking details:', orderId);
+      return null;
+    }
+    const data = await res.json();
+    return (data.shipments && data.shipments[0]) || null;
+  } catch (err) {
+    console.error('Error fetching Printify order for tracking:', err.message);
+    return null;
+  }
+}

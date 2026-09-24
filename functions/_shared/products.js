@@ -369,6 +369,24 @@ export const PRODUCTS = {
   },
 };
 
+// Which print-on-demand provider fulfills a product. Defaults to Printful
+// since that's every product before Printify was added — only new products
+// that explicitly set `provider: 'printify'` route the other way. To add a
+// Printify product: set `provider: 'printify'`, `printifyProductId` (the
+// product's own id, from GET /v1/shops/{shop_id}/products.json), and put
+// each variant's numeric `id` from that same response into `sizes` /
+// `variantsByColor` / `printifyVariantId` exactly like a Printful product —
+// getVariantId() below doesn't care which provider a variant ID belongs to.
+export function getProvider(product) {
+  return product.provider === 'printify' ? 'printify' : 'printful';
+}
+
+// Only meaningful for Printify products — Printify variant IDs are only
+// unique *within* a product, so placing an order needs both.
+export function getPrintifyProductId(product) {
+  return product.printifyProductId || null;
+}
+
 // True if the product offers a color choice (I ♥ Lilly Pug Tee, for now).
 export function hasColors(product) {
   return Array.isArray(product.colors) && product.colors.length > 0;
@@ -399,7 +417,8 @@ export function getVariantId(product, size, color) {
   if (product.sizes) {
     return size ? product.sizes[size] : null;
   }
-  return product.printfulVariantId;
+  // Flat (no size/color) product — whichever provider field is set wins.
+  return product.printfulVariantId ?? product.printifyVariantId ?? null;
 }
 
 // Returns the price (in cents) for a given product + size combination.
