@@ -31,7 +31,19 @@ export async function onRequestPost(context) {
 
   const validSignature = await verifyPrintifySignature(bodyText, signature, env.PRINTIFY_WEBHOOK_SECRET);
   if (!validSignature) {
-    return new Response('Unauthorized', { status: 401 });
+    // Respond 200 rather than rejecting outright. Printify's own
+    // reachability check when you first register a webhook (POST
+    // /webhooks.json) sends a test request to this URL and expects a
+    // success response before it will finish creating the webhook — and
+    // that check does not appear to include a valid X-Pfy-Signature,
+    // unlike genuine event deliveries afterward. Returning 401 here made
+    // that initial registration fail with "Webhook validation failed"
+    // every time. Since we never act on the payload below unless the
+    // signature verified, an unsigned or forged request still can't
+    // trigger anything — this only affects what status code we reply
+    // with, not what data we trust.
+    console.error('Printify webhook signature missing or invalid — ignoring payload, replying 200.');
+    return new Response('ok', { status: 200 });
   }
 
   if (!env.ORDERS) {
