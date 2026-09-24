@@ -368,17 +368,19 @@ export const PRODUCTS = {
     },
   },
   24: {
-    name: 'Lilly Chain',
+    name: 'Lilly Pug is calling Chain',
     // First Printify product — fulfilled through Printify instead of
     // Printful. No size dimension (each color is Printify's one fixed
     // "1'' x 1''" jewelry size), so pricing/variants key off color alone.
     provider: 'printify',
     printifyProductId: '6aab7a6f67f598ff9e05933f', // Printify's "Round Border Photo Pendant"
-    // Printify's own suggested retail prices, used as-is.
+    // Printify's own suggested retail prices, used as-is. Re-pulled
+    // 2026-09-24 — Printify's suggested prices had shifted since the
+    // first pull (was 2330/3290/6030).
     colorPricingCents: {
-      'Stainless Steel': 2330,
-      'Gold Plated': 3290,
-      'Sterling Silver': 6030,
+      'Stainless Steel': 2550,
+      'Gold Plated': 3450,
+      'Sterling Silver': 5950,
     },
     colors: ['Stainless Steel', 'Gold Plated', 'Sterling Silver'],
     variantsByColor: {

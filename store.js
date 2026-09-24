@@ -566,34 +566,35 @@ const PRODUCTS = [
     description: "Boxy and oversized with a soft, faded wash — a relaxed drop-shoulder fit built for layering into everything else in the closet. Four muted colorways: Khaki, Eucalyptus, Bone, and White. Garment-dyed, pre-shrunk 100% carded cotton at 7.1 oz/yd² (240 g/m²), with wide neck ribbing and a tear-away label."
   },
   {
-    id: 24, name: 'Lilly Chain', cat: 'accessories', catLabel: 'Accessories',
+    id: 24, name: 'Lilly Pug is calling Chain', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    tag: 'new', fill: '#14120f', bg: '#e8c98a',
+    tag: null, fill: '#14120f', bg: '#e8c98a', comingSoon: true,
     // Fulfilled through Printify, not Printful — see functions/_shared/products.js.
     // One fixed jewelry size (1"×1"), so color is the only choice, and price
-    // varies by metal/finish rather than by size.
+    // varies by metal/finish rather than by size. Re-pulled from Printify's
+    // API on 2026-09-24 — prices had shifted from the first pull.
     colorPricing: {
-      'Stainless Steel': 23.30,
-      'Gold Plated': 32.90,
-      'Sterling Silver': 60.30,
+      'Stainless Steel': 25.50,
+      'Gold Plated': 34.50,
+      'Sterling Silver': 59.50,
     },
     colors: [
       {
         name: 'Stainless Steel', hex: '#d4d5d1',
-        image: 'https://images-api.printify.com/mockup/6aab7a6f67f598ff9e05933f/244819/126624/round-border-photo-pendant.jpg?camera_label=front',
+        image: 'assets/products/lillychain-stainless-steel-front.png',
       },
       {
         name: 'Gold Plated', hex: '#FEE3B4',
-        image: 'https://images-api.printify.com/mockup/6aab7a6f67f598ff9e05933f/253876/126624/round-border-photo-pendant.jpg?camera_label=front',
+        image: 'assets/products/lillychain-gold-plated-front.png',
       },
       {
         name: 'Sterling Silver', hex: '#eeeeee',
-        image: 'https://images-api.printify.com/mockup/6aab7a6f67f598ff9e05933f/253877/126624/round-border-photo-pendant.jpg?camera_label=front',
+        image: 'assets/products/lillychain-sterling-silver-front.png',
       },
     ],
-    image: 'https://images-api.printify.com/mockup/6aab7a6f67f598ff9e05933f/253877/126624/round-border-photo-pendant.jpg?camera_label=front',
+    image: 'assets/products/lillychain-sterling-silver-front.png',
     madeIn: 'Laser-engraved to order',
-    description: "A round pendant that turns your favorite Lilly photo into something you actually wear — laser-engraved for crisp, lasting detail. Comes on an 18\" cable chain in a gift box, ready to give. Choose Stainless Steel, Gold Plated, or Sterling Silver."
+    description: "The \"Lilly Pug is calling\" pendant — a round photo charm that turns Lilly's face into a permanent, laser-engraved incoming-call screen you wear. Comes on an 18\" cable chain in a gift box, ready to give. Choose Stainless Steel, Gold Plated, or Sterling Silver."
   },
 ];
 
