@@ -170,6 +170,8 @@
 
   // Lowest price across flat price or per-size/color pricing, for sorting.
   function getMinPrice(p) {
+    if (p.colorSizePricing) return Math.min(...Object.values(p.colorSizePricing).flatMap(m => Object.values(m)));
+    if (p.colorPricing) return Math.min(...Object.values(p.colorPricing));
     if (p.sizePricing) return Math.min(...Object.values(p.sizePricing));
     return p.price || 0;
   }

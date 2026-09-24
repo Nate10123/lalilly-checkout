@@ -367,6 +367,26 @@ export const PRODUCTS = {
       },
     },
   },
+  24: {
+    name: 'Lilly Chain',
+    // First Printify product — fulfilled through Printify instead of
+    // Printful. No size dimension (each color is Printify's one fixed
+    // "1'' x 1''" jewelry size), so pricing/variants key off color alone.
+    provider: 'printify',
+    printifyProductId: '6aab7a6f67f598ff9e05933f', // Printify's "Round Border Photo Pendant"
+    // Printify's own suggested retail prices, used as-is.
+    colorPricingCents: {
+      'Stainless Steel': 2330,
+      'Gold Plated': 3290,
+      'Sterling Silver': 6030,
+    },
+    colors: ['Stainless Steel', 'Gold Plated', 'Sterling Silver'],
+    variantsByColor: {
+      'Stainless Steel': '244819',
+      'Gold Plated': '253876',
+      'Sterling Silver': '253877',
+    },
+  },
 };
 
 // Which print-on-demand provider fulfills a product. Defaults to Printful
@@ -426,6 +446,11 @@ export function getVariantId(product, size, color) {
 // price regardless of size (e.g. the hoodie), and per-size pricing (the
 // poster, where a bigger print genuinely costs more to produce).
 export function getPriceCents(product, size, color) {
+  // Products priced per color alone, no size (jewelry with one fixed size
+  // per color, like the pendant).
+  if (product.colorPricingCents) {
+    return color ? product.colorPricingCents[color] : null;
+  }
   // Products priced per color+size combo (the stickers' Standard vs
   // Holographic finishes each have their own 3x3/4x4/5.5x5.5 pricing)
   // need the combo looked up before the older single-dimension cases.

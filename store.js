@@ -568,8 +568,32 @@ const PRODUCTS = [
   {
     id: 24, name: 'Lilly Chain', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    price: 0, tag: null, fill: '#14120f', bg: '#e8c98a', comingSoon: true,
-    description: "A Lilly Chain is on the way."
+    tag: 'new', fill: '#14120f', bg: '#e8c98a',
+    // Fulfilled through Printify, not Printful — see functions/_shared/products.js.
+    // One fixed jewelry size (1"×1"), so color is the only choice, and price
+    // varies by metal/finish rather than by size.
+    colorPricing: {
+      'Stainless Steel': 23.30,
+      'Gold Plated': 32.90,
+      'Sterling Silver': 60.30,
+    },
+    colors: [
+      {
+        name: 'Stainless Steel', hex: '#d4d5d1',
+        image: 'https://images-api.printify.com/mockup/6aab7a6f67f598ff9e05933f/244819/126624/round-border-photo-pendant.jpg?camera_label=front',
+      },
+      {
+        name: 'Gold Plated', hex: '#FEE3B4',
+        image: 'https://images-api.printify.com/mockup/6aab7a6f67f598ff9e05933f/253876/126624/round-border-photo-pendant.jpg?camera_label=front',
+      },
+      {
+        name: 'Sterling Silver', hex: '#eeeeee',
+        image: 'https://images-api.printify.com/mockup/6aab7a6f67f598ff9e05933f/253877/126624/round-border-photo-pendant.jpg?camera_label=front',
+      },
+    ],
+    image: 'https://images-api.printify.com/mockup/6aab7a6f67f598ff9e05933f/253877/126624/round-border-photo-pendant.jpg?camera_label=front',
+    madeIn: 'Laser-engraved to order',
+    description: "A round pendant that turns your favorite Lilly photo into something you actually wear — laser-engraved for crisp, lasting detail. Comes on an 18\" cable chain in a gift box, ready to give. Choose Stainless Steel, Gold Plated, or Sterling Silver."
   },
 ];
 
@@ -682,6 +706,11 @@ function cartLinesWithProducts() {
 // (like the poster, where a bigger print costs more) — falls back to the
 // product's flat price for everything else.
 function getUnitPrice(product, size, color) {
+  // Products priced per color alone, no size (the pendant's fixed jewelry
+  // size means color is the only choice that affects price).
+  if (product.colorPricing) {
+    return color ? product.colorPricing[color] : null;
+  }
   // Products where price depends on BOTH color/finish and size (stickers:
   // Standard vs Holographic each have their own 3x3/4x4/5.5x5.5 pricing)
   // need the combo looked up before the older single-dimension cases.
@@ -699,6 +728,10 @@ function getUnitPrice(product, size, color) {
 // shows the flat price, or "From $X" (the cheapest size) for variable-price
 // products like the poster.
 function getDisplayPrice(product) {
+  if (product.colorPricing) {
+    const all = Object.values(product.colorPricing);
+    return `From $${Math.min(...all).toFixed(2)}`;
+  }
   if (product.colorSizePricing) {
     const all = Object.values(product.colorSizePricing).flatMap(sizeMap => Object.values(sizeMap));
     return `From $${Math.min(...all).toFixed(2)}`;

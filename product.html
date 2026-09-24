@@ -207,6 +207,8 @@
 
     const price = product.colorSizePricing
       ? Math.min(...Object.values(product.colorSizePricing).flatMap(m => Object.values(m)))
+      : product.colorPricing
+      ? Math.min(...Object.values(product.colorPricing))
       : product.sizePricing
       ? Math.min(...Object.values(product.sizePricing))
       : product.price;
@@ -516,8 +518,9 @@
 
     // For color+size combo pricing (the stickers' Standard/Holographic
     // finishes), reflect the new price as soon as both a size and this
-    // color are chosen — mirrors the same check in selectSize().
-    if (product && product.colorSizePricing) {
+    // color are chosen — mirrors the same check in selectSize(). Plain
+    // colorPricing (the pendant) only needs the color itself.
+    if (product && (product.colorSizePricing || product.colorPricing)) {
       const price = getUnitPrice(product, selectedSize, color);
       if (price != null) {
         const priceEl = document.getElementById('pdpPrice');
