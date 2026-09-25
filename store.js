@@ -203,7 +203,7 @@ const PRODUCTS = [
       'assets/products/pglr-hoodie-back.png',
     ],
     madeIn: 'Nicaragua',
-    description: "Oversized heavyweight hoodie with the PGLR graphic on the back. Brushed fleece interior, double-layered hood (no drawcord), single front pocket, drop shoulders — built for actual cold weather."
+    description: "Oversized heavyweight hoodie with the PGLR graphic on the back — cut from 10 oz./yd² brushed fleece, 60% Airlume combed and ring-spun cotton, 40% polyester, for a soft, heavyweight feel. Double-layered hood (no drawcord), single front pocket, drop shoulders, unisex oversized fit."
   },
   {
     id: 12, name: 'Lillys Poster', cat: 'accessories', catLabel: 'Accessories',
@@ -568,11 +568,10 @@ const PRODUCTS = [
   {
     id: 24, name: 'Lilly Pug is calling Chain', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    tag: null, fill: '#14120f', bg: '#e8c98a', comingSoon: true,
+    tag: null, fill: '#14120f', bg: '#e8c98a', comingSoon: false,
     // Fulfilled through Printify, not Printful — see functions/_shared/products.js.
     // One fixed jewelry size (1"×1"), so color is the only choice, and price
-    // varies by metal/finish rather than by size. Re-pulled from Printify's
-    // API on 2026-09-24 — prices had shifted from the first pull.
+    // varies by metal/finish rather than by size.
     colorPricing: {
       'Stainless Steel': 25.50,
       'Gold Plated': 34.50,
@@ -776,7 +775,8 @@ function updateCartUI() {
   const lines = cartLinesWithProducts();
   const count = lines.reduce((sum, c) => sum + c.qty, 0);
   const subtotal = lines.reduce((sum, c) => sum + c.qty * getUnitPrice(c, c.size, c.color), 0);
-  const shipping = subtotal === 0 ? 0 : (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING);
+  const qualifiesForFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD || lines.some(c => c.freeShipping);
+  const shipping = subtotal === 0 ? 0 : (qualifiesForFreeShipping ? 0 : STANDARD_SHIPPING);
   const estimatedTotal = subtotal + shipping;
 
   const countEl = document.getElementById('cartCount');
