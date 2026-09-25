@@ -31,13 +31,11 @@
 // check could fail for a reason no amount of fixing onRequestPost would
 // touch. They're harmless for real traffic: only onRequestPost, which
 // requires a verified signature to act on anything, does real work.
-export async function onRequestGet(context) {
-  console.log('Printify webhook GET ping received — headers:', JSON.stringify([...context.request.headers.entries()]));
+export async function onRequestGet() {
   return new Response('ok', { status: 200 });
 }
 
-export async function onRequestHead(context) {
-  console.log('Printify webhook HEAD ping received — headers:', JSON.stringify([...context.request.headers.entries()]));
+export async function onRequestHead() {
   return new Response(null, { status: 200 });
 }
 
@@ -46,15 +44,6 @@ export async function onRequestPost(context) {
 
   const bodyText = await request.text(); // raw body — needed for the signature check
   const signature = request.headers.get('x-pfy-signature');
-
-  // TEMPORARY — for diagnosing the "Webhook validation failed" error at
-  // registration time. Logs exactly what came in, signature valid or not,
-  // so it shows up in Cloudflare's live function logs regardless of the
-  // outcome below. Safe to remove once registration succeeds.
-  console.log('Printify webhook POST received.');
-  console.log('Headers:', JSON.stringify([...request.headers.entries()]));
-  console.log('Body:', bodyText);
-  console.log('Signature header present:', !!signature, '| value:', signature);
 
   const validSignature = await verifyPrintifySignature(bodyText, signature, env.PRINTIFY_WEBHOOK_SECRET);
   if (!validSignature) {
