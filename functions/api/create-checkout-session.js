@@ -95,13 +95,7 @@ export async function onRequestPost(context) {
     const subtotalCents = normalizedCart.reduce((sum, { id, qty, size, color }) => {
       return sum + getPriceCents(PRODUCTS[id], size, color) * qty;
     }, 0);
-    const qualifiesForFreeShipping =
-      subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS ||
-      // Some products (e.g. the Lilly Pug is calling Chain) ship free
-      // regardless of order size — set `freeShipping: true` on a product
-      // in products.js to waive shipping for the whole order whenever
-      // that product is in the cart.
-      normalizedCart.some(({ id }) => PRODUCTS[id].freeShipping);
+    const qualifiesForFreeShipping = subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS;
 
     const shipping_options = [
       {
