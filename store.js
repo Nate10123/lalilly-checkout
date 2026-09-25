@@ -568,15 +568,19 @@ const PRODUCTS = [
   {
     id: 24, name: 'Lilly Pug is calling Chain', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    tag: null, fill: '#14120f', bg: '#e8c98a', comingSoon: true,
+    tag: null, fill: '#14120f', bg: '#e8c98a', comingSoon: false,
     // Fulfilled through Printify, not Printful — see functions/_shared/products.js.
     // One fixed jewelry size (1"×1"), so color is the only choice, and price
-    // varies by metal/finish rather than by size. Re-pulled from Printify's
-    // API on 2026-09-24 — prices had shifted from the first pull.
+    // varies by metal/finish rather than by size.
+    // TEMPORARY TEST PRICING — set to $1 across all colors on 2026-09-25 to
+    // do a real end-to-end checkout test cheaply. Real prices were
+    // Stainless $25.50 / Gold Plated $34.50 / Sterling Silver $59.50 —
+    // restore those (or whatever you want to charge) before real customers
+    // can buy this.
     colorPricing: {
-      'Stainless Steel': 25.50,
-      'Gold Plated': 34.50,
-      'Sterling Silver': 59.50,
+      'Stainless Steel': 1.00,
+      'Gold Plated': 1.00,
+      'Sterling Silver': 1.00,
     },
     colors: [
       {

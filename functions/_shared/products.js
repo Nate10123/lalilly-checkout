@@ -374,13 +374,14 @@ export const PRODUCTS = {
     // "1'' x 1''" jewelry size), so pricing/variants key off color alone.
     provider: 'printify',
     printifyProductId: '6aab7a6f67f598ff9e05933f', // Printify's "Round Border Photo Pendant"
-    // Printify's own suggested retail prices, used as-is. Re-pulled
-    // 2026-09-24 — Printify's suggested prices had shifted since the
-    // first pull (was 2330/3290/6030).
+    // TEMPORARY TEST PRICING — set to $1 (100 cents) across all colors on
+    // 2026-09-25 for a real end-to-end checkout test. Real prices were
+    // Stainless 2550 / Gold Plated 3450 / Sterling Silver 5950 (cents) —
+    // restore those before real customers can buy this.
     colorPricingCents: {
-      'Stainless Steel': 2550,
-      'Gold Plated': 3450,
-      'Sterling Silver': 5950,
+      'Stainless Steel': 100,
+      'Gold Plated': 100,
+      'Sterling Silver': 100,
     },
     colors: ['Stainless Steel', 'Gold Plated', 'Sterling Silver'],
     variantsByColor: {
