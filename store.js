@@ -780,7 +780,8 @@ function updateCartUI() {
   const lines = cartLinesWithProducts();
   const count = lines.reduce((sum, c) => sum + c.qty, 0);
   const subtotal = lines.reduce((sum, c) => sum + c.qty * getUnitPrice(c, c.size, c.color), 0);
-  const shipping = subtotal === 0 ? 0 : (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING);
+  const qualifiesForFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD || lines.some(c => c.freeShipping);
+  const shipping = subtotal === 0 ? 0 : (qualifiesForFreeShipping ? 0 : STANDARD_SHIPPING);
   const estimatedTotal = subtotal + shipping;
 
   const countEl = document.getElementById('cartCount');
