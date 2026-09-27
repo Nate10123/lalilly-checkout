@@ -586,14 +586,11 @@ const PRODUCTS = [
       '2XL': 27.50, '3XL': 30.00, '4XL': 32.50, '5XL': 35.00,
     },
     sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
-    // Not every color runs the full size range — only White goes up to
-    // 5XL, and Heather Carolina Blue stops at 3XL, per what's actually
-    // synced in Printful.
+    // 41 active Printful variants across five colorways.
     unavailableSizes: {
       'Heather Carolina Blue': ['4XL', '5XL'],
       'Heather Prism Mint': ['5XL'],
       'Soft Cream': ['5XL'],
-      'Silver': ['5XL'],
     },
     colors: [
       {
@@ -605,23 +602,22 @@ const PRODUCTS = [
         image: 'https://files.cdn.printful.com/files/c2f/c2f363503b56624cdb2df165f2aa2290_preview.png',
       },
       {
-        name: 'Soft Cream', hex: '#f0e6d2',
-        image: 'https://files.cdn.printful.com/files/a22/a225bfe9dd491aadc825a1ef00ea9da7_preview.png',
+        name: 'Athletic Heather', hex: '#b5b5b5',
+        image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
       },
       {
-        name: 'Silver', hex: '#c0c0c0',
-        image: 'https://files.cdn.printful.com/files/2f5/2f5261d6757fbe119d4626f423e7f7c3_preview.png',
+        name: 'Soft Cream', hex: '#f0e6d2',
+        image: 'https://files.cdn.printful.com/files/a22/a225bfe9dd491aadc825a1ef00ea9da7_preview.png',
       },
       {
         name: 'White', hex: '#ffffff',
         image: 'https://files.cdn.printful.com/files/e54/e546c4f64cb2bf1eae57885e7876aac4_preview.png',
       },
     ],
-    image: 'https://files.cdn.printful.com/files/e54/e546c4f64cb2bf1eae57885e7876aac4_preview.png',
-    description: "Soft, everyday staple tee for the Lilly Life drop. Five colorways, runs from XS up to 5XL depending on color, so check the size row before you commit to a favorite."
+    image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
+    description: "Soft, everyday staple tee for the Lilly Life drop. Five colorways with sizes XS through 5XL depending on color. Prices start at $25 and increase for 2XL through 5XL."
   },
-  {
-    id: 26, name: 'Lilly Life Flip Straw Bottle', cat: 'accessories', catLabel: 'Accessories',
+      id: 26, name: 'Lilly Life Flip Straw Bottle', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-life', dropLabel: 'Lilly Life',
     price: 36.00, tag: 'new', fill: '#14120f', bg: '#eef0ee',
     image: 'https://files.cdn.printful.com/files/3be/3be740ab128a86b095c3af68fd870352_preview.png',
