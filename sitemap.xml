@@ -132,6 +132,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://lalilly-checkout.pages.dev/product.html?id=27</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://lalilly-checkout.pages.dev/privacy.html</loc>
     <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
