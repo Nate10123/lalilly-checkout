@@ -424,6 +424,11 @@ export const PRODUCTS = {
     priceCents: 3600,
     printfulVariantId: '5519644592',
   },
+  27: {
+    name: 'Pink Pup Lilly Flag',
+    priceCents: 3050,
+    printfulVariantId: '5520557441',
+  },
 };
 
 // Which print-on-demand provider fulfills a product. Defaults to Printful
