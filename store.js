@@ -617,7 +617,8 @@ const PRODUCTS = [
     image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
     description: "Soft, everyday staple tee for the Lilly Life drop. Five colorways with sizes XS through 5XL depending on color. Prices start at $25 and increase for 2XL through 5XL."
   },
-      id: 26, name: 'Lilly Life Flip Straw Bottle', cat: 'accessories', catLabel: 'Accessories',
+  {
+    id: 26, name: 'Lilly Life Flip Straw Bottle', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-life', dropLabel: 'Lilly Life',
     price: 36.00, tag: 'new', fill: '#14120f', bg: '#eef0ee',
     image: 'https://files.cdn.printful.com/files/3be/3be740ab128a86b095c3af68fd870352_preview.png',
