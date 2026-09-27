@@ -157,12 +157,6 @@ const PRODUCTS = [
     description: "The classic. Simple, loud, and to the point. 100% combed cotton, pre-shrunk with a regular fit and crew neck, double-needle stitched at the sleeves and hem so the print holds up wash after wash."
   },
   {
-    id: 7, name: 'Lilly Life Steel Water Bottle', cat: 'accessories', catLabel: 'Accessories',
-    drop: 'lilly-life', dropLabel: 'Lilly Life',
-    price: 28.00, tag: null, fill: '#f7f3ec', bg: '#a9d4f5', comingSoon: true,
-    description: "Double-wall insulated stainless steel bottle, keeps drinks cold for 24 hours. Lilly Life logo laser-etched, not printed, so it won't wear off."
-  },
-  {
     id: 9, name: 'MLLGA Snapback Hat', cat: 'headwear', catLabel: 'Headwear',
     drop: 'lillye-west', dropLabel: 'LillYe West',
     price: 27.00, tag: 'new', fill: '#14120f', bg: '#d3ecab',
