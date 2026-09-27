@@ -624,7 +624,6 @@ const PRODUCTS = [
       },
     ],
     image: 'https://files.cdn.printful.com/files/e54/e546c4f64cb2bf1eae57885e7876aac4_preview.png',
-    madeIn: 'Bella + Canvas 3001, sourced internationally',
     description: "Soft, everyday staple tee for the Lilly Life drop. Five colorways, runs from XS up to 5XL depending on color, so check the size row before you commit to a favorite."
   },
   {
