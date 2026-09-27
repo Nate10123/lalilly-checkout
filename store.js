@@ -618,30 +618,12 @@ const PRODUCTS = [
         ],
       },
       {
-<<<<<<< HEAD
         name: 'Soft Cream', hex: '#f0e6d2',
         image: 'assets/products/lilly-life-soft-cream-front.png',
         images: [
           'assets/products/lilly-life-soft-cream-front.png',
           'assets/products/lilly-life-soft-cream-back.png',
         ],
-=======
-        name: 'Athletic Heather', hex: '#b5b5b5',
-        image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
-      },
-      {
-<<<<<<< Updated upstream
-        name: 'Athletic Heather', hex: '#b5b5b5',
-        image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
-      },
-      {
-        name: 'Soft Cream', hex: '#f0e6d2',
-        image: 'https://files.cdn.printful.com/files/a22/a225bfe9dd491aadc825a1ef00ea9da7_preview.png',
-=======
-        name: 'Soft Cream', hex: '#f0e6d2',
-        image: 'https://files.cdn.printful.com/files/a22/a225bfe9dd491aadc825a1ef00ea9da7_preview.png',
->>>>>>> 10f775620c8356718e983ad8a8c26aecaa1758dc
->>>>>>> Stashed changes
       },
       {
         name: 'White', hex: '#ffffff',
@@ -652,15 +634,7 @@ const PRODUCTS = [
         ],
       },
     ],
-<<<<<<< Updated upstream
-    image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
-=======
-<<<<<<< HEAD
-    image: 'assets/products/lilly-life-white-front.png',
-=======
-    image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
->>>>>>> 10f775620c8356718e983ad8a8c26aecaa1758dc
->>>>>>> Stashed changes
+    image: 'assets/products/lilly-life-white-front.png'
     description: "Soft, everyday staple tee for the Lilly Life drop. Five colorways with sizes XS through 5XL depending on color. Prices start at $25 and increase for 2XL through 5XL."
   },
   {
@@ -677,15 +651,7 @@ const PRODUCTS = [
     price: 30.50, tag: 'new', fill: '#14120f', bg: '#f7b6d2',
     sizes: ['One size'],
     image: 'https://files.cdn.printful.com/files/908/908fd84e9bce832837a3ada7022671ed_preview.png',
-<<<<<<< Updated upstream
-    description: "All-over print flag featuring Pink Pup Lilly. One size."
-=======
-<<<<<<< HEAD
     description: "All-over print flag of Pink Pup Lilly, ready to brighten up any wall. 100% polyester knitted fabric that won't crease or shrink, printed on one side with a blank reverse. Double-fold hem, 2 iron grommets for hanging, OEKO-TEX® STANDARD 100 certified."
-=======
-    description: "All-over print flag featuring Pink Pup Lilly. One size."
->>>>>>> 10f775620c8356718e983ad8a8c26aecaa1758dc
->>>>>>> Stashed changes
   },
 ];
 
