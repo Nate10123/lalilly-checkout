@@ -634,7 +634,7 @@ const PRODUCTS = [
         ],
       },
     ],
-    image: 'assets/products/lilly-life-white-front.png'
+    image: 'assets/products/lilly-life-white-front.png',
     description: "Soft, everyday staple tee for the Lilly Life drop. Five colorways with sizes XS through 5XL depending on color. Prices start at $25 and increase for 2XL through 5XL."
   },
   {
