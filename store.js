@@ -651,7 +651,7 @@ const PRODUCTS = [
     price: 30.50, tag: 'new', fill: '#14120f', bg: '#f7b6d2',
     sizes: ['One size'],
     image: 'https://files.cdn.printful.com/files/908/908fd84e9bce832837a3ada7022671ed_preview.png',
-    description: "All-over print flag of Pink Pup Lilly, ready to brighten up any wall. 100% polyester knitted fabric that won't crease or shrink, printed on one side with a blank reverse. Double-fold hem, 2 iron grommets for hanging, OEKO-TEX® STANDARD 100 certified."
+    description: "Pink Pup Lilly flag, ready to brighten up any wall. 100% polyester knitted fabric that won't crease or shrink, printed on one side with a blank reverse. Double-fold hem, 2 iron grommets for hanging, OEKO-TEX® STANDARD 100 certified."
   },
 ];
 
