@@ -595,26 +595,72 @@ const PRODUCTS = [
     colors: [
       {
         name: 'Heather Carolina Blue', hex: '#8ea9c9',
-        image: 'https://files.cdn.printful.com/files/2fa/2fa1d2abac197852beaa5a0d28f33804_preview.png',
+        image: 'assets/products/lilly-life-heather-carolina-blue-front.png',
+        images: [
+          'assets/products/lilly-life-heather-carolina-blue-front.png',
+          'assets/products/lilly-life-heather-carolina-blue-back.png',
+        ],
       },
       {
         name: 'Heather Prism Mint', hex: '#a8d8c9',
-        image: 'https://files.cdn.printful.com/files/c2f/c2f363503b56624cdb2df165f2aa2290_preview.png',
+        image: 'assets/products/lilly-life-heather-prism-mint-front.png',
+        images: [
+          'assets/products/lilly-life-heather-prism-mint-front.png',
+          'assets/products/lilly-life-heather-prism-mint-back.png',
+        ],
       },
       {
+        name: 'Athletic Heather', hex: '#b5b5b5',
+        image: 'assets/products/lilly-life-athletic-heather-front.png',
+        images: [
+          'assets/products/lilly-life-athletic-heather-front.png',
+          'assets/products/lilly-life-athletic-heather-back.png',
+        ],
+      },
+      {
+<<<<<<< HEAD
+        name: 'Soft Cream', hex: '#f0e6d2',
+        image: 'assets/products/lilly-life-soft-cream-front.png',
+        images: [
+          'assets/products/lilly-life-soft-cream-front.png',
+          'assets/products/lilly-life-soft-cream-back.png',
+        ],
+=======
+        name: 'Athletic Heather', hex: '#b5b5b5',
+        image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
+      },
+      {
+<<<<<<< Updated upstream
         name: 'Athletic Heather', hex: '#b5b5b5',
         image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
       },
       {
         name: 'Soft Cream', hex: '#f0e6d2',
         image: 'https://files.cdn.printful.com/files/a22/a225bfe9dd491aadc825a1ef00ea9da7_preview.png',
+=======
+        name: 'Soft Cream', hex: '#f0e6d2',
+        image: 'https://files.cdn.printful.com/files/a22/a225bfe9dd491aadc825a1ef00ea9da7_preview.png',
+>>>>>>> 10f775620c8356718e983ad8a8c26aecaa1758dc
+>>>>>>> Stashed changes
       },
       {
         name: 'White', hex: '#ffffff',
-        image: 'https://files.cdn.printful.com/files/e54/e546c4f64cb2bf1eae57885e7876aac4_preview.png',
+        image: 'assets/products/lilly-life-white-front.png',
+        images: [
+          'assets/products/lilly-life-white-front.png',
+          'assets/products/lilly-life-white-back.png',
+        ],
       },
     ],
+<<<<<<< Updated upstream
     image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
+=======
+<<<<<<< HEAD
+    image: 'assets/products/lilly-life-white-front.png',
+=======
+    image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
+>>>>>>> 10f775620c8356718e983ad8a8c26aecaa1758dc
+>>>>>>> Stashed changes
     description: "Soft, everyday staple tee for the Lilly Life drop. Five colorways with sizes XS through 5XL depending on color. Prices start at $25 and increase for 2XL through 5XL."
   },
   {
@@ -631,7 +677,15 @@ const PRODUCTS = [
     price: 30.50, tag: 'new', fill: '#14120f', bg: '#f7b6d2',
     sizes: ['One size'],
     image: 'https://files.cdn.printful.com/files/908/908fd84e9bce832837a3ada7022671ed_preview.png',
+<<<<<<< Updated upstream
     description: "All-over print flag featuring Pink Pup Lilly. One size."
+=======
+<<<<<<< HEAD
+    description: "All-over print flag of Pink Pup Lilly, ready to brighten up any wall. 100% polyester knitted fabric that won't crease or shrink, printed on one side with a blank reverse. Double-fold hem, 2 iron grommets for hanging, OEKO-TEX® STANDARD 100 certified."
+=======
+    description: "All-over print flag featuring Pink Pup Lilly. One size."
+>>>>>>> 10f775620c8356718e983ad8a8c26aecaa1758dc
+>>>>>>> Stashed changes
   },
 ];
 
