@@ -231,26 +231,14 @@ const PRODUCTS = [
     // USA-sourced paper instead (different paper stock per Printful's specs)
     // — not shown to customers since the site doesn't ship there yet.
     madeIn: 'Japan',
-    // Standard (non-Brazil) paper specs, shown on the product page and
-    // updated by size — see selectSize() in product.html. The "A4" note
-    // only applies to 21×30 cm. Printful ships Brazil-bound orders on a
+    // Standard (non-Brazil) paper specs — now folded directly into the
+    // description below instead of a separate bullet list, including the
+    // "A4" note for 21×30 cm. Printful ships Brazil-bound orders on a
     // different, locally-sourced paper stock (Couche 170g Magno Sappi
     // Satin for 21×30/30×40/50×70, Koala Paper for 70×100+); the site
     // can't reflect that here because destination isn't known until
     // checkout, well after this panel renders.
-    paperSpecs: {
-      default: [
-        'Paper thickness: 0.26 mm (10.3 mil)',
-        'Paper weight: 189 g/m²',
-        'Opacity: 94%',
-        'ISO brightness: 104%',
-        'Paper sourced from Japan',
-      ],
-      sizeNotes: {
-        '21×30 cm': '21 × 30 cm posters are size A4.',
-      },
-    },
-    description: "Matte enhanced-paper print of the Lillys artwork. Ships rolled in a protective tube. Pick your size below — bigger prints cost more to produce, so pricing scales with size."
+    description: "Matte enhanced-paper print of the Lillys artwork on 189 g/m² paper (0.26 mm / 10.3 mil thick) sourced from Japan, with 94% opacity and 104% ISO brightness. Ships rolled in a protective tube. Pick your size below — 21×30 cm is A4 size, and bigger prints cost more to produce, so pricing scales up from there."
   },
   {
     id: 13, name: 'La Lilly Bucket Hat', cat: 'headwear', catLabel: 'Headwear',
@@ -491,7 +479,7 @@ const PRODUCTS = [
     ],
     image: 'assets/products/lillyversetee-black-front.png',
     madeIn: 'Nicaragua, Mexico, Honduras, or the US',
-    description: "The Lilly Verse graphic on soft, staple-tee cotton — combed, ring-spun cotton (heather colors run a cotton/poly blend), pre-shrunk, side-seamed, tear-away label. Runs from XS up to 5XL depending on color, so check the size row before you fall in love with Dark Grey."
+    description: "The Lilly Verse graphic on soft, staple-tee cotton — combed, ring-spun cotton, pre-shrunk, side-seamed, tear-away label. Runs from XS up to 5XL depending on color, so check the size row before you fall in love with Dark Grey."
   },
   {
     id: 21, name: 'Lilly Verse Stickers', cat: 'accessories', catLabel: 'Accessories',
@@ -594,6 +582,58 @@ const PRODUCTS = [
     image: 'assets/products/lillychain-sterling-silver-front.png',
     madeIn: 'Laser-engraved to order',
     description: "The \"Lilly Pug is calling\" pendant — a round photo charm that turns Lilly's face into a permanent, laser-engraved incoming-call screen you wear. Comes on an 18\" cable chain in a gift box, ready to give. Choose Stainless Steel, Gold Plated, or Sterling Silver."
+  },
+  {
+    id: 25, name: 'Lilly Life T-shirt', cat: 'apparel', catLabel: 'Apparel',
+    drop: 'lilly-life', dropLabel: 'Lilly Life',
+    tag: 'new', fill: '#14120f', bg: '#a9d4f5',
+    sizePricing: {
+      XS: 25.00, S: 25.00, M: 25.00, L: 25.00, XL: 25.00,
+      '2XL': 27.50, '3XL': 30.00, '4XL': 32.50, '5XL': 35.00,
+    },
+    sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
+    // Not every color runs the full size range — only White goes up to
+    // 5XL, and Heather Carolina Blue stops at 3XL, per what's actually
+    // synced in Printful.
+    unavailableSizes: {
+      'Heather Carolina Blue': ['4XL', '5XL'],
+      'Heather Prism Mint': ['5XL'],
+      'Soft Cream': ['5XL'],
+      'Silver': ['5XL'],
+    },
+    colors: [
+      {
+        name: 'Heather Carolina Blue', hex: '#8ea9c9',
+        image: 'https://files.cdn.printful.com/files/2fa/2fa1d2abac197852beaa5a0d28f33804_preview.png',
+      },
+      {
+        name: 'Heather Prism Mint', hex: '#a8d8c9',
+        image: 'https://files.cdn.printful.com/files/c2f/c2f363503b56624cdb2df165f2aa2290_preview.png',
+      },
+      {
+        name: 'Soft Cream', hex: '#f0e6d2',
+        image: 'https://files.cdn.printful.com/files/a22/a225bfe9dd491aadc825a1ef00ea9da7_preview.png',
+      },
+      {
+        name: 'Silver', hex: '#c0c0c0',
+        image: 'https://files.cdn.printful.com/files/2f5/2f5261d6757fbe119d4626f423e7f7c3_preview.png',
+      },
+      {
+        name: 'White', hex: '#ffffff',
+        image: 'https://files.cdn.printful.com/files/e54/e546c4f64cb2bf1eae57885e7876aac4_preview.png',
+      },
+    ],
+    image: 'https://files.cdn.printful.com/files/e54/e546c4f64cb2bf1eae57885e7876aac4_preview.png',
+    madeIn: 'Bella + Canvas 3001, sourced internationally',
+    description: "Soft, everyday staple tee for the Lilly Life drop. Five colorways, runs from XS up to 5XL depending on color, so check the size row before you commit to a favorite."
+  },
+  {
+    id: 26, name: 'Lilly Life Flip Straw Bottle', cat: 'accessories', catLabel: 'Accessories',
+    drop: 'lilly-life', dropLabel: 'Lilly Life',
+    price: 36.00, tag: 'new', fill: '#14120f', bg: '#eef0ee',
+    image: 'https://files.cdn.printful.com/files/3be/3be740ab128a86b095c3af68fd870352_preview.png',
+    madeIn: 'CamelBak Thrive, 25 oz',
+    description: "25 oz flip-straw water bottle with the Lilly Life graphic wrapped around it. One-handed flip lid, built-in straw, keeps up with you all day."
   },
 ];
 

@@ -386,6 +386,44 @@ export const PRODUCTS = {
       'Sterling Silver': '253877',
     },
   },
+  25: {
+    name: 'Lilly Life T-shirt',
+    sizePricingCents: {
+      XS: 2500, S: 2500, M: 2500, L: 2500, XL: 2500,
+      '2XL': 2750, '3XL': 3000, '4XL': 3250, '5XL': 3500,
+    },
+    colors: ['Heather Carolina Blue', 'Heather Prism Mint', 'Soft Cream', 'Silver', 'White'],
+    // Not every color runs the full size range — see store.js's
+    // unavailableSizes for which colors stop short of 5XL.
+    variantsByColor: {
+      'Heather Carolina Blue': {
+        XS: '5519647411', S: '5519647412', M: '5519647413', L: '5519647414',
+        XL: '5519647415', '2XL': '5519647416', '3XL': '5519647417',
+      },
+      'Heather Prism Mint': {
+        XS: '5519647418', S: '5519647419', M: '5519647420', L: '5519647421',
+        XL: '5519647422', '2XL': '5519647423', '3XL': '5519647424', '4XL': '5519647425',
+      },
+      'Soft Cream': {
+        XS: '5519647426', S: '5519647427', M: '5519647428', L: '5519647429',
+        XL: '5519647430', '2XL': '5519647431', '3XL': '5519647432', '4XL': '5519647433',
+      },
+      Silver: {
+        XS: '5519647434', S: '5519647435', M: '5519647436', L: '5519647437',
+        XL: '5519647438', '2XL': '5519647439', '3XL': '5519647440', '4XL': '5519647441',
+      },
+      White: {
+        XS: '5519647442', S: '5519647443', M: '5519647444', L: '5519647445',
+        XL: '5519647446', '2XL': '5519647447', '3XL': '5519647448', '4XL': '5519647449',
+        '5XL': '5519647450',
+      },
+    },
+  },
+  26: {
+    name: 'Lilly Life Flip Straw Bottle',
+    priceCents: 3600,
+    printfulVariantId: '5519644592',
+  },
 };
 
 // Which print-on-demand provider fulfills a product. Defaults to Printful
