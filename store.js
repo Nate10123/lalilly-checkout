@@ -624,6 +624,14 @@ const PRODUCTS = [
     madeIn: 'CamelBak Thrive, 25 oz',
     description: "25 oz flip-straw water bottle with the Lilly Life graphic wrapped around it. One-handed flip lid, built-in straw, keeps up with you all day."
   },
+  {
+    id: 27, name: 'Pink Pup Lilly Flag', cat: 'accessories', catLabel: 'Accessories',
+    drop: 'lilly-life', dropLabel: 'Lilly Life',
+    price: 30.50, tag: 'new', fill: '#14120f', bg: '#f7b6d2',
+    sizes: ['One size'],
+    image: 'https://files.cdn.printful.com/files/908/908fd84e9bce832837a3ada7022671ed_preview.png',
+    description: "All-over print flag featuring Pink Pup Lilly. One size."
+  },
 ];
 
 const CART_KEY = 'lalilly_cart';
@@ -665,15 +673,7 @@ function loadCart() {
     const raw = localStorage.getItem(CART_KEY);
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
-    return [  {
-    id: 27, name: 'Pink Pup Lilly Flag', cat: 'accessories', catLabel: 'Accessories',
-    drop: 'lilly-life', dropLabel: 'Lilly Life',
-    price: 30.50, tag: 'new', fill: '#14120f', bg: '#f7b6d2',
-    sizes: ['One size'],
-    image: 'https://files.cdn.printful.com/files/908/908fd84e9bce832837a3ada7022671ed_preview.png',
-    description: "All-over print flag featuring Pink Pup Lilly. One size."
-  },
-];
+    return [];
   }
 }
 
