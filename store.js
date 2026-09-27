@@ -665,7 +665,15 @@ function loadCart() {
     const raw = localStorage.getItem(CART_KEY);
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
-    return [];
+    return [  {
+    id: 27, name: 'Pink Pup Lilly Flag', cat: 'accessories', catLabel: 'Accessories',
+    drop: 'lilly-life', dropLabel: 'Lilly Life',
+    price: 30.50, tag: 'new', fill: '#14120f', bg: '#f7b6d2',
+    sizes: ['One size'],
+    image: 'https://files.cdn.printful.com/files/908/908fd84e9bce832837a3ada7022671ed_preview.png',
+    description: "All-over print flag featuring Pink Pup Lilly. One size."
+  },
+];
   }
 }
 
