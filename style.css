@@ -364,6 +364,26 @@ section { padding: 80px 5vw; }
   grid-template-columns: repeat(5, 1fr);
   gap: 22px;
 }
+/* Desktop category carousel: show three cards and scroll to the rest. */
+@media (min-width: 781px) {
+  .cat-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+  }
+  .cat-grid .cat-card {
+    flex: 0 0 calc((100% - 44px) / 3);
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+  .cat-grid::-webkit-scrollbar { height: 8px; }
+  .cat-grid::-webkit-scrollbar-thumb { background: var(--ink); }
+  .cat-grid::-webkit-scrollbar-track { background: rgba(20,18,15,0.12); }
+}
 @media (max-width: 780px) {
   .cat-grid {
     display: flex;
