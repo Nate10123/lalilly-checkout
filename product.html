@@ -59,6 +59,37 @@
 
 <div id="pdpRoot"></div>
 
+<section class="pdp-detail-section">
+  <div class="section-head">
+    <span></span>
+    <div>
+      <span class="section-tag">Before you order</span>
+      <h2 class="section-title">Product details</h2>
+    </div>
+  </div>
+  <div class="pdp-detail-grid">
+    <div class="pdp-detail-card">
+      <span class="detail-label">Shipping</span>
+      <h3>Made to move</h3>
+      <p>Orders are typically processed in 3–7 business days, then most domestic orders arrive in another 3–7 business days. Orders over $90 ship free.</p>
+    </div>
+    <div class="pdp-detail-card">
+      <span class="detail-label">Checkout</span>
+      <h3>Secure payment</h3>
+      <p>Checkout is handled through Stripe. Your final total includes any applicable tax and the shipping method available for your address.</p>
+    </div>
+    <div class="pdp-detail-card">
+      <span class="detail-label">Need help?</span>
+      <h3>Talk to LA LILLY</h3>
+      <p>Questions about an item or an order? Reach out through <a href="https://www.instagram.com/nate10_08" target="_blank" rel="noopener">Instagram</a> or <a href="https://www.tiktok.com/@nate10_08" target="_blank" rel="noopener">TikTok</a>.</p>
+    </div>
+  </div>
+  <div class="product-detail-summary" id="productDetailSummary">
+    <span class="detail-summary-label">This piece</span>
+    <p>Loading product details…</p>
+  </div>
+</section>
+
 <div class="zoom-overlay" id="zoomOverlay" onclick="if(event.target===this) closeZoom()">
   <button type="button" class="zoom-close" onclick="closeZoom()" aria-label="Close zoomed image">&times;</button>
   <button type="button" class="zoom-arrow zoom-arrow-prev" onclick="cycleZoom(-1)" aria-label="Previous image">&#8249;</button>
@@ -77,8 +108,34 @@
 </section>
 
 <footer>
-  <span>© 2026 LA LILLY — All rights reserved</span>
-  <span><a href="track.html" style="color:inherit;text-decoration:none;">Track Order</a> · <a href="privacy.html" style="color:inherit;text-decoration:none;">Privacy</a> · <a href="terms.html" style="color:inherit;text-decoration:none;">Terms</a> · <a href="shipping.html" style="color:inherit;text-decoration:none;">Shipping</a></span>
+  <div class="footer-brand">
+    <img src="assets/lalilly-logo.png" alt="LA LILLY">
+    <p>Streetwear built around one very good dog.</p>
+  </div>
+  <div class="footer-links">
+    <div>
+      <span class="footer-label">Shop</span>
+      <a href="shop.html">All products</a>
+      <a href="index.html#drops">Collections</a>
+      <a href="shop.html?drop=lilly-life">Lilly Life</a>
+    </div>
+    <div>
+      <span class="footer-label">Help</span>
+      <a href="track.html">Track Order</a>
+      <a href="shipping.html">Shipping</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+    <div>
+      <span class="footer-label">Follow</span>
+      <a href="https://www.instagram.com/nate10_08" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@nate10_08" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 LA LILLY — All rights reserved</span>
+    <span>Made for Lilly.</span>
+  </div>
 </footer>
 
 <div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
@@ -312,6 +369,18 @@
         </div>
       </section>
     `;
+
+    const detailSummary = document.getElementById('productDetailSummary');
+    if (detailSummary) {
+      const optionParts = [];
+      if (product.colors) optionParts.push(`${product.colors.length} color options`);
+      if (product.sizes) optionParts.push(`${product.sizes.length} size options`);
+      if (!product.colors && !product.sizes) optionParts.push('One configuration');
+      detailSummary.innerHTML = `
+        <span class="detail-summary-label">${product.catLabel} · ${product.dropLabel}</span>
+        <p><strong>${product.name}</strong> — ${product.description} ${optionParts.length ? optionParts.join(' · ') + '.' : ''}</p>
+      `;
+    }
 
     updateAddButtonState(product);
   }
