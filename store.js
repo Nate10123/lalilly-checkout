@@ -292,7 +292,7 @@ const PRODUCTS = [
     id: 17, name: "I'm Gay Oversized Tie-Dye T-Shirt", cat: 'apparel', catLabel: 'Apparel',
     drop: 'la-lilly', dropLabel: 'La Lilly',
     sizePricing: { S: 32.50, M: 32.50, L: 32.50, XL: 32.50, '2XL': 35.00 },
-    tag: 'low', fill: '#14120f', bg: '#ffc4dd',
+    tag: 'low', fill: '#14120f', bg: '#f3aac2',
     sizes: ['S', 'M', 'L', 'XL', '2XL'],
     // Per Printful (confirmed live on the product page, not just the
     // initial sync): Classic Rainbow M/L/XL/2XL are marked "Supplier out
@@ -550,7 +550,7 @@ const PRODUCTS = [
   {
     id: 24, name: 'Lilly Pug is calling Chain', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    tag: null, fill: '#14120f', bg: '#e8c98a', comingSoon: false,
+    tag: null, fill: '#14120f', bg: '#ffe9a3', comingSoon: false,
     // Fulfilled through Printify, not Printful — see functions/_shared/products.js.
     // One fixed jewelry size (1"×1"), so color is the only choice, and price
     // varies by metal/finish rather than by size.
@@ -648,7 +648,7 @@ const PRODUCTS = [
   {
     id: 27, name: 'Pink Pup Lilly Flag', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-life', dropLabel: 'Lilly Life',
-    price: 30.50, tag: 'new', fill: '#14120f', bg: '#f7b6d2',
+    price: 30.50, tag: 'new', fill: '#14120f', bg: '#f3aac2',
     image: 'https://files.cdn.printful.com/files/908/908fd84e9bce832837a3ada7022671ed_preview.png',
     description: "Pink Pup Lilly flag, ready to brighten up any wall. 100% polyester knitted fabric that won't crease or shrink, printed on one side with a blank reverse. Double-fold hem, 2 iron grommets for hanging, OEKO-TEX® STANDARD 100 certified."
   },
