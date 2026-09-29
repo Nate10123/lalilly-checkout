@@ -550,7 +550,7 @@ const PRODUCTS = [
   {
     id: 24, name: 'Lilly Pug is calling Chain', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    tag: null, fill: '#14120f', bg: '#ffe9a3', comingSoon: false,
+    tag: null, fill: '#14120f', bg: '#f6c6a8', comingSoon: false,
     // Fulfilled through Printify, not Printful — see functions/_shared/products.js.
     // One fixed jewelry size (1"×1"), so color is the only choice, and price
     // varies by metal/finish rather than by size.
@@ -580,7 +580,7 @@ const PRODUCTS = [
   {
     id: 25, name: 'Lilly Life T-shirt', cat: 'apparel', catLabel: 'Apparel',
     drop: 'lilly-life', dropLabel: 'Lilly Life',
-    tag: 'new', fill: '#14120f', bg: '#a9d4f5',
+    tag: 'new', fill: '#14120f', bg: '#b9e3d1',
     sizePricing: {
       XS: 25.00, S: 25.00, M: 25.00, L: 25.00, XL: 25.00,
       '2XL': 27.50, '3XL': 30.00, '4XL': 32.50, '5XL': 35.00,
