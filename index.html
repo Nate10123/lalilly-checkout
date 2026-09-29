@@ -104,6 +104,10 @@
       <span class="section-tag">Collections</span>
       <h2 class="section-title">Top Categories</h2>
     </div>
+    <div class="cat-arrows" aria-label="Top categories carousel controls">
+      <button type="button" aria-label="Scroll categories left" onclick="document.querySelector('.cat-grid').scrollBy({ left: -document.querySelector('.cat-grid').clientWidth, behavior: 'smooth' })">←</button>
+      <button type="button" aria-label="Scroll categories right" onclick="document.querySelector('.cat-grid').scrollBy({ left: document.querySelector('.cat-grid').clientWidth, behavior: 'smooth' })">→</button>
+    </div>
   </div>
   <div class="cat-grid reveal-stagger reveal">
     <a href="shop.html?drop=la-lilly" class="cat-card">
