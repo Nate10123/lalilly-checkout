@@ -1381,8 +1381,13 @@ h1.hero-title { animation-delay: 0.15s; }
   transform: rotate(1deg);
 }
 .brand-story-mark {
-  width: 64px;
-  height: 64px;
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px;
+  min-height: 64px;
+  max-width: 64px;
+  max-height: 64px;
+  flex: 0 0 64px;
   display: grid;
   place-items: center;
   border: 2px solid var(--paper);
@@ -1390,8 +1395,12 @@ h1.hero-title { animation-delay: 0.15s; }
   background: var(--ink);
 }
 .brand-story-mark img {
-  width: 100%;
-  height: 100%;
+  width: 64px !important;
+  height: 64px !important;
+  min-width: 64px;
+  min-height: 64px;
+  max-width: 64px;
+  max-height: 64px;
   display: block;
   object-fit: cover;
 }
