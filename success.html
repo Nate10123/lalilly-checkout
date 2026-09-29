@@ -103,21 +103,30 @@
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get('session_id');
     if (sessionId) {
-      document.getElementById('orderRef').innerHTML =
-        'Order reference: <strong>' + sessionId + '</strong>' +
-        '<button type="button" class="copy-btn" id="copyRefBtn">Copy</button>' +
-        '<br>Save this to check your order status later.';
-      document.getElementById('trackLink').href = 'track.html?session=' + encodeURIComponent(sessionId);
+      const orderRef = document.getElementById('orderRef');
+      const trackLink = document.getElementById('trackLink');
 
-      document.getElementById('copyRefBtn').addEventListener('click', async () => {
+      const label = document.createTextNode('Order reference: ');
+      const strong = document.createElement('strong');
+      strong.textContent = sessionId;
+      const copyBtn = document.createElement('button');
+      copyBtn.type = 'button';
+      copyBtn.className = 'copy-btn';
+      copyBtn.id = 'copyRefBtn';
+      copyBtn.textContent = 'Copy';
+
+      orderRef.append(label, strong, copyBtn, document.createElement('br'),
+        document.createTextNode('Save this to check your order status later.'));
+      trackLink.href = 'track.html?session=' + encodeURIComponent(sessionId);
+
+      copyBtn.addEventListener('click', async () => {
         try {
           await navigator.clipboard.writeText(sessionId);
-          const btn = document.getElementById('copyRefBtn');
-          const original = btn.textContent;
-          btn.textContent = 'Copied!';
-          setTimeout(() => { btn.textContent = original; }, 1500);
+          const original = copyBtn.textContent;
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => { copyBtn.textContent = original; }, 1500);
         } catch (err) {
-          // Clipboard API unavailable or blocked — the reference text is already visible to select manually.
+          // Clipboard API unavailable or blocked — the reference remains visible to copy manually.
         }
       });
     }
