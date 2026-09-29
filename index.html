@@ -105,8 +105,8 @@
       <h2 class="section-title">Top Categories</h2>
     </div>
     <div class="cat-arrows" aria-label="Top categories carousel controls">
-      <button type="button" aria-label="Scroll categories left" onclick="document.querySelector('.cat-grid').scrollBy({ left: -document.querySelector('.cat-grid').clientWidth, behavior: 'smooth' })">←</button>
-      <button type="button" aria-label="Scroll categories right" onclick="document.querySelector('.cat-grid').scrollBy({ left: document.querySelector('.cat-grid').clientWidth, behavior: 'smooth' })">→</button>
+      <button type="button" aria-label="Scroll categories left" onclick="(()=>{const g=document.querySelector('.cat-grid');const c=g?.querySelector('.cat-card');if(g&&c)g.scrollBy({left:-(c.getBoundingClientRect().width+parseFloat(getComputedStyle(g).columnGap||0)),behavior:'smooth'})})()">←</button>
+      <button type="button" aria-label="Scroll categories right" onclick="(()=>{const g=document.querySelector('.cat-grid');const c=g?.querySelector('.cat-card');if(g&&c)g.scrollBy({left:c.getBoundingClientRect().width+parseFloat(getComputedStyle(g).columnGap||0),behavior:'smooth'})})()">→</button>
     </div>
   </div>
   <div class="cat-grid reveal-stagger reveal">
