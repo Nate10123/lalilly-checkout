@@ -1294,22 +1294,22 @@ a:focus-visible, button:focus-visible {
 /* ---------- SCROLL REVEAL ---------- */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(14px);
+  transition: opacity 0.32s ease-out, transform 0.32s ease-out;
 }
 .reveal.visible { opacity: 1; transform: none; }
-/* Staggered children — add .reveal-stagger to a parent, each direct child fades in slightly later */
+/* Staggered children — quick, subtle entrance without delaying the page */
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
+  transform: translateY(14px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 .reveal-stagger.visible > * { opacity: 1; transform: none; }
 .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
-.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.08s; }
-.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.16s; }
-.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.24s; }
-.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.32s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.04s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.08s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.16s; }
 
 /* ---------- HERO ENTRANCE ---------- */
 @keyframes heroRise {
@@ -1318,11 +1318,11 @@ a:focus-visible, button:focus-visible {
 }
 .hero-eyebrow, h1.hero-title, .hero-copy, .hero-actions {
   opacity: 0;
-  animation: heroRise 0.7s ease forwards;
+  animation: heroRise 0.48s ease-out forwards;
 }
 .hero-eyebrow { animation-delay: 0.05s; }
-h1.hero-title { animation-delay: 0.15s; }
-.hero-copy { animation-delay: 0.3s; }
+h1.hero-title { animation-delay: 0.08s; }
+.hero-copy { animation-delay: 0.14s; }
 .hero-actions { animation-delay: 0.42s; }
 .trading-card {
   opacity: 0;
