@@ -226,7 +226,7 @@
     }
 
     grid.innerHTML = list.map(p => `
-      <div class="product-card">
+      <div class="product-card reveal">
         <a class="product-art-link" href="product.html?id=${p.id}">
           <div class="product-art" style="background:${p.bg}">
             ${p.tag ? `<span class="product-tag ${p.tag}">${p.tag === 'new' ? 'New' : 'Low Stock'}</span>` : ''}
@@ -247,6 +247,7 @@
         </div>
       </div>
     `).join('');
+    if (typeof initScrollReveal === 'function') initScrollReveal();
   }
 
   function resetFilters() {
