@@ -1293,15 +1293,15 @@ a:focus-visible, button:focus-visible {
 
 /* ---------- SCROLL REVEAL ---------- */
 .reveal {
-  opacity: 0;
-  transform: translateY(14px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.32s ease-out, transform 0.32s ease-out;
 }
 .reveal.visible { opacity: 1; transform: none; }
 /* Staggered children — quick, subtle entrance without delaying the page */
 .reveal-stagger > * {
-  opacity: 0;
-  transform: translateY(14px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 .reveal-stagger.visible > * { opacity: 1; transform: none; }
@@ -1316,8 +1316,8 @@ a:focus-visible, button:focus-visible {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: none; }
 }
-.hero-eyebrow, h1.hero-title, .hero-copy, .hero-actions {
-  opacity: 0;
+ .hero-eyebrow, h1.hero-title, .hero-copy, .hero-actions {
+  opacity: 1;
   animation: heroRise 0.48s ease-out forwards;
 }
 .hero-eyebrow { animation-delay: 0.05s; }
@@ -1830,9 +1830,6 @@ footer {
 @keyframes softFloat {
   0%, 100% { transform: rotate(1.5deg) translateY(0); }
   50% { transform: rotate(1.5deg) translateY(-4px); }
-}
-.hero-feature {
-  animation: softFloat 6s ease-in-out 0.7s infinite;
 }
 .hero-feature:hover {
   animation-play-state: paused;
