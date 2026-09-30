@@ -1800,3 +1800,101 @@ footer {
   .footer-links { grid-template-columns: 1fr 1fr; }
   .footer-bottom { flex-direction: column; }
 }
+
+
+/* ---------- SUBTLE INTERACTION POLISH ---------- */
+.logo {
+  transition: transform 0.2s ease;
+}
+.logo:hover {
+  transform: rotate(-4deg) scale(1.04);
+}
+
+.search-icon-link,
+.cart-btn,
+.menu-toggle {
+  transition: transform 0.18s ease, color 0.18s ease, background 0.18s ease;
+}
+.search-icon-link:hover {
+  transform: translateY(-2px);
+}
+.cart-btn:hover {
+  transform: translateY(-2px);
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Give the featured card a tiny amount of life without making it distracting. */
+@keyframes softFloat {
+  0%, 100% { transform: rotate(1.5deg) translateY(0); }
+  50% { transform: rotate(1.5deg) translateY(-4px); }
+}
+.hero-feature {
+  animation: softFloat 6s ease-in-out 0.7s infinite;
+}
+.hero-feature:hover {
+  animation-play-state: paused;
+}
+
+/* Small image movement on collection cards. */
+.cat-swatch img {
+  transition: transform 0.32s ease;
+}
+.cat-card:hover .cat-swatch img {
+  transform: scale(1.055);
+}
+.cat-link {
+  transition: letter-spacing 0.2s ease;
+}
+.cat-card:hover .cat-link {
+  letter-spacing: 0.08em;
+}
+
+/* A very light "shine" sweep on shop product art. */
+.product-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 34%,
+    rgba(247,243,236,0.18) 48%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.45s ease;
+}
+.product-card:hover .product-art::after {
+  transform: translateX(120%);
+}
+
+/* Slightly livelier filter controls, without changing their layout. */
+.filter-chip {
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.filter-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0 rgba(20,18,15,0.16);
+}
+.filter-chip.active:hover {
+  box-shadow: 3px 3px 0 var(--hot);
+}
+
+/* Make the primary actions feel responsive on press. */
+.btn-solid:active,
+.btn-outline:active,
+.add-btn:active,
+.cart-btn:active,
+.filter-chip:active {
+  transform: translate(0, 0) scale(0.98);
+}
+
+/* Respect reduced-motion preferences for the new continuous animation. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-feature {
+    animation: none !important;
+  }
+}
