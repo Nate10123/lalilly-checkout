@@ -352,22 +352,6 @@ h1.hero-title .accent { color: var(--hot); }
   text-transform: uppercase;
   padding: 3px 2px 12px;
 }
-.feature-stamp {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  z-index: 2;
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border: 2px solid var(--ink);
-  background: var(--paper);
-  color: var(--hot);
-  font: 700 0.8rem/1.05 var(--font-mono);
-  text-align: center;
-  transform: rotate(-8deg);
-}
 .trading-card::before {
   content: 'FEATURED';
   position: absolute;
