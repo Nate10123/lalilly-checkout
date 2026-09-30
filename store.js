@@ -1014,8 +1014,11 @@ function initMarquee() {
 document.addEventListener('DOMContentLoaded', initMarquee);
 
 /* ---------- Scroll reveal: fade/rise elements into view as the page scrolls ---------- */
+let scrollRevealObserver = null;
+
 function initScrollReveal() {
-  const targets = document.querySelectorAll('.reveal');
+  if (scrollRevealObserver) scrollRevealObserver.disconnect();
+  const targets = document.querySelectorAll('.reveal:not(.visible)');
   if (!targets.length) return;
 
   if (!('IntersectionObserver' in window)) {
@@ -1023,16 +1026,16 @@ function initScrollReveal() {
     return;
   }
 
-  const observer = new IntersectionObserver((entries) => {
+  scrollRevealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        scrollRevealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
 
-  targets.forEach(el => observer.observe(el));
+  targets.forEach(el => scrollRevealObserver.observe(el));
 }
 
 document.addEventListener('DOMContentLoaded', initScrollReveal);
