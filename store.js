@@ -490,17 +490,17 @@ const PRODUCTS = [
     },
     colorSizeImages: {
       Standard: {
-        '3″×3″': 'assets/products/lillyversesticker-white-3x3.png',
-        '4″×4″': 'assets/products/lillyversesticker-white-4x4.png',
-        '5.5″×5.5″': 'assets/products/lillyversesticker-white-5x5.png',
+        '3″×3″': 'assets/products/lillyversesticker-white-3x3.png?v=20261001',
+        '4″×4″': 'assets/products/lillyversesticker-white-4x4.png?v=20261001',
+        '5.5″×5.5″': 'assets/products/lillyversesticker-white-5x5.png?v=20261001',
       },
       Holographic: {
-        '3″×3″': 'assets/products/lillyversesticker-holo-3x3.png',
-        '4″×4″': 'assets/products/lillyversesticker-holo-4x4.png',
-        '5.5″×5.5″': 'assets/products/lillyversesticker-holo-5x5.png',
+        '3″×3″': 'assets/products/lillyversesticker-holo-3x3.png?v=20261001',
+        '4″×4″': 'assets/products/lillyversesticker-holo-4x4.png?v=20261001',
+        '5.5″×5.5″': 'assets/products/lillyversesticker-holo-5x5.png?v=20261001',
       },
     },
-    image: 'assets/products/lillyversesticker-white-4x4.png',
+    image: 'assets/products/lillyversesticker-white-4x4.png?v=20261001',
     description: "Kiss-cut vinyl stickers straight from the Lilly Verse. Pick Standard for classic matte vinyl, or Holographic for a shimmer finish that shifts color in the light. Durable, waterproof, dishwasher-safe."
   },
   {
