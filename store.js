@@ -440,38 +440,38 @@ const PRODUCTS = [
     colors: [
       {
         name: 'Black', hex: '#1a1a1a',
-        image: 'assets/products/lillyversetee-black-front.png',
+        image: 'assets/products/lv-black-front.webp',
         images: [
-          'assets/products/lillyversetee-black-front.png',
-          'assets/products/lillyversetee-black-back.png',
+          'assets/products/lv-black-front.webp',
+          'assets/products/lv-black-back.webp',
         ],
       },
       {
         name: 'Team Purple', hex: '#4b2e83',
-        image: 'assets/products/lillyversetee-teampurple-front.png',
+        image: 'assets/products/lv-team-purple-front.webp',
         images: [
-          'assets/products/lillyversetee-teampurple-front.png',
-          'assets/products/lillyversetee-teampurple-back.png',
+          'assets/products/lv-team-purple-front.webp',
+          'assets/products/lv-team-purple-back.webp',
         ],
       },
       {
         name: 'Navy', hex: '#212e45',
-        image: 'assets/products/lillyversetee-navy-front.png',
+        image: 'assets/products/lv-navy-front.webp',
         images: [
-          'assets/products/lillyversetee-navy-front.png',
-          'assets/products/lillyversetee-navy-back.png',
+          'assets/products/lv-navy-front.webp',
+          'assets/products/lv-navy-back.webp',
         ],
       },
       {
         name: 'Dark Grey', hex: '#4a4a4a',
-        image: 'assets/products/lillyversetee-darkgrey-front.png',
+        image: 'assets/products/lv-darkgrey-front.webp',
         images: [
-          'assets/products/lillyversetee-darkgrey-front.png',
-          'assets/products/lillyversetee-darkgrey-back.png',
+          'assets/products/lv-darkgrey-front.webp',
+          'assets/products/lv-darkgrey-back.webp',
         ],
       },
     ],
-    image: 'assets/products/lillyversetee-black-front.png',
+    image: 'assets/products/lv-black-front.webp',
     madeIn: 'Nicaragua, Mexico, Honduras, or the US',
     description: "The Lilly Verse graphic on soft, staple-tee cotton — combed, ring-spun cotton, pre-shrunk, side-seamed, tear-away label. Runs from XS up to 5XL depending on color, so check the size row before you fall in love with Dark Grey."
   },
