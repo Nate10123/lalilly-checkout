@@ -54,7 +54,7 @@ const PRODUCTS = [
   {
     id: 1, name: 'L Snapback Hat', cat: 'headwear', catLabel: 'Headwear',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    price: 26.00, tag: null, fill: '#14120f', bg: '#d3ecab',
+    price: 26.00, tag: null, fill: '#14120f', bg: '#F6C6A8',
     image: 'assets/products/l-snapback-hat.png',
     images: [
       'assets/products/l-snapback-hat.png',
@@ -69,7 +69,7 @@ const PRODUCTS = [
     id: 2, name: 'Lilly Pug Pillow Plush', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
     sizePricing: { '10″×10″': 18.50, '16″×16″': 21.50, '22″×22″': 25.00 },
-    tag: null, fill: '#f7f3ec', bg: '#cfc5f5',
+    tag: null, fill: '#f7f3ec', bg: '#CFC5F5',
     sizes: ['10″×10″', '16″×16″', '22″×22″'],
     // Real per-size transparent product photos — swapped in on the PDP
     // as the size is picked (see selectSize in product.html).
@@ -85,7 +85,7 @@ const PRODUCTS = [
   {
     id: 4, name: 'Metal Puggler Vintage Cap', cat: 'headwear', catLabel: 'Headwear',
     drop: 'puggler', dropLabel: 'Puggler',
-    price: 29.50, tag: null, fill: '#f7f3ec', bg: '#a9d4f5',
+    price: 29.50, tag: null, fill: '#f7f3ec', bg: '#A9D4F5',
     image: 'assets/products/puggler-vintage-cap-front.png',
     images: [
       'assets/products/puggler-vintage-cap-front.png',
@@ -104,7 +104,7 @@ const PRODUCTS = [
     id: 5, name: 'FreakYe T-Shirt', cat: 'apparel', catLabel: 'Apparel',
     drop: 'lillye-west', dropLabel: 'LillYe West',
     sizePricing: { S: 29.50, M: 29.50, L: 29.50, XL: 29.50, '2XL': 31.50, '3XL': 34.50 },
-    tag: 'new', fill: '#14120f', bg: '#a9d4f5',
+    tag: 'new', fill: '#14120f', bg: '#D3ECAB',
     // 4XL removed — Printful no longer syncs that size for this product.
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     colors: [
@@ -138,7 +138,7 @@ const PRODUCTS = [
     // $27.50 across every size and both colors — was previously tiered
     // ($22.50 S-XL, up to $27.50 at 3XL), undercharging on all but 3XL.
     price: 27.50,
-    tag: null, fill: '#ff2f7e', bg: '#ffe9a3',
+    tag: null, fill: '#ff2f7e', bg: '#FFE9A3',
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     colors: [
       {
@@ -159,7 +159,7 @@ const PRODUCTS = [
   {
     id: 9, name: 'MLLGA Snapback Hat', cat: 'headwear', catLabel: 'Headwear',
     drop: 'lillye-west', dropLabel: 'LillYe West',
-    price: 27.00, tag: 'new', fill: '#14120f', bg: '#d3ecab',
+    price: 27.00, tag: 'new', fill: '#14120f', bg: '#A9D4F5',
     image: 'assets/products/mllga-snapback-hat.png',
     images: [
       'assets/products/mllga-snapback-hat.png',
@@ -173,7 +173,7 @@ const PRODUCTS = [
   {
     id: 10, name: 'Lillyzus Dad Hat', cat: 'headwear', catLabel: 'Headwear',
     drop: 'lillye-west', dropLabel: 'LillYe West',
-    price: 26.50, tag: null, fill: '#f7f3ec', bg: '#cfc5f5',
+    price: 26.50, tag: null, fill: '#f7f3ec', bg: '#F3AAC2',
     image: 'assets/products/lillyzus-dad-hat-front.png',
     images: [
       'assets/products/lillyzus-dad-hat-front.png',
@@ -189,7 +189,7 @@ const PRODUCTS = [
   {
     id: 11, name: 'PGLR Oversized Heavyweight Hoodie', cat: 'apparel', catLabel: 'Apparel',
     drop: 'puggler', dropLabel: 'Puggler',
-    price: 54.50, tag: 'new', fill: '#f7f3ec', bg: '#f3aac2',
+    price: 54.50, tag: 'new', fill: '#f7f3ec', bg: '#CFC5F5',
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     image: 'assets/products/pglr-hoodie.png',
     images: [
@@ -202,7 +202,7 @@ const PRODUCTS = [
   {
     id: 12, name: 'Lillys Poster', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-verse', dropLabel: 'Lilly Verse',
-    tag: 'new', fill: '#14120f', bg: '#f3aac2',
+    tag: 'new', fill: '#14120f', bg: '#F6C6A8',
     sizes: ['21×30 cm', '30×40 cm', 'A2 (42×59.4 cm)', '50×70 cm', 'A1 (59.4×84.1 cm)', '70×100 cm'],
     sizePricing: {
       '21×30 cm': 12.00,
@@ -237,7 +237,7 @@ const PRODUCTS = [
   {
     id: 13, name: 'La Lilly Bucket Hat', cat: 'headwear', catLabel: 'Headwear',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    price: 24.50, tag: 'new', fill: '#14120f', bg: '#ffe9a3',
+    price: 24.50, tag: 'new', fill: '#14120f', bg: '#D3ECAB',
     image: 'https://files.cdn.printful.com/files/5f4/5f42cb966029647e7f0c520112c24732_preview.png',
     madeIn: 'China and Vietnam',
     description: "Cotton twill bucket hat with the LA LILLY wordmark embroidered up front. Sewn eyelets for breathability, one size fits most, sun's out dog's out."
@@ -245,7 +245,7 @@ const PRODUCTS = [
   {
     id: 14, name: "World's Best Lilly Glossy Mug", cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    price: 8.50, tag: 'new', fill: '#14120f', bg: '#ffe9a3',
+    price: 8.50, tag: 'new', fill: '#14120f', bg: '#A9D4F5',
     image: 'https://files.cdn.printful.com/files/92a/92ad494b45d06d5e52f7b48735c9a00d_preview.png',
     madeIn: 'China',
     description: "11 oz glossy ceramic mug for your morning coffee and Lilly worship. Dishwasher and microwave safe."
@@ -254,7 +254,7 @@ const PRODUCTS = [
     id: 15, name: 'The Puggler Heavyweight Tee', cat: 'apparel', catLabel: 'Apparel',
     drop: 'puggler', dropLabel: 'Puggler',
     sizePricing: { S: 26.50, M: 26.50, L: 26.50, XL: 26.50, '2XL': 27.50, '3XL': 28.50, '4XL': 29.50 },
-    tag: 'new', fill: '#f7f3ec', bg: '#d3ecab',
+    tag: 'new', fill: '#f7f3ec', bg: '#F6C6A8',
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'],
     image: 'assets/products/puggler-tee-black.png',
     madeIn: 'Bangladesh',
@@ -263,7 +263,7 @@ const PRODUCTS = [
   {
     id: 16, name: 'Lilly Bear Case for iPhone', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    price: 17.00, tag: 'new', fill: '#14120f', bg: '#ffe9a3',
+    price: 17.00, tag: 'new', fill: '#14120f', bg: '#CFC5F5',
     // "sizes" here are actually phone models, not clothing sizes — this
     // label is what makes the PDP say "Model" instead of "Size" and shows
     // "Choose a model" in the dropdown placeholder.
@@ -292,7 +292,7 @@ const PRODUCTS = [
     id: 17, name: "I'm Gay Oversized Tie-Dye T-Shirt", cat: 'apparel', catLabel: 'Apparel',
     drop: 'la-lilly', dropLabel: 'La Lilly',
     sizePricing: { S: 32.50, M: 32.50, L: 32.50, XL: 32.50, '2XL': 35.00 },
-    tag: 'low', fill: '#14120f', bg: '#ffc4dd',
+    tag: 'low', fill: '#14120f', bg: '#FFE9A3',
     sizes: ['S', 'M', 'L', 'XL', '2XL'],
     // Per Printful (confirmed live on the product page, not just the
     // initial sync): Classic Rainbow M/L/XL/2XL are marked "Supplier out
@@ -329,7 +329,7 @@ const PRODUCTS = [
     id: 18, name: 'Ye N Lillye Tri-Blend T-Shirt', cat: 'apparel', catLabel: 'Apparel',
     drop: 'lillye-west', dropLabel: 'LillYe West',
     sizePricing: { XS: 26.50, S: 26.50, M: 26.50, L: 26.50, XL: 26.50, '2XL': 28.50, '3XL': 30.00 },
-    tag: 'new', fill: '#14120f', bg: '#f3aac2',
+    tag: 'new', fill: '#14120f', bg: '#B9E3D1',
     sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'],
     colors: [
       {
@@ -377,7 +377,7 @@ const PRODUCTS = [
     id: 19, name: 'Emotions Of Lilly Classic Tee', cat: 'apparel', catLabel: 'Apparel',
     drop: 'la-lilly', dropLabel: 'La Lilly',
     sizePricing: { S: 16.50, M: 16.50, L: 16.50, XL: 16.50, '2XL': 18.50, '3XL': 21.00, '4XL': 23.50, '5XL': 26.00 },
-    tag: 'new', fill: '#14120f', bg: '#ffe9a3',
+    tag: 'new', fill: '#14120f', bg: '#F3AAC2',
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
     colors: [
       {
@@ -429,7 +429,7 @@ const PRODUCTS = [
     id: 20, name: 'Lilly Verse T-shirt', cat: 'apparel', catLabel: 'Apparel',
     drop: 'lilly-verse', dropLabel: 'Lilly Verse',
     sizePricing: { XS: 25.00, S: 25.00, M: 25.00, L: 25.00, XL: 25.00, '2XL': 27.50, '3XL': 30.00, '4XL': 32.50, '5XL': 35.00 },
-    tag: 'new', fill: '#14120f', bg: '#cfc5f5',
+    tag: 'new', fill: '#14120f', bg: '#CFC5F5',
     sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
     // Not every color runs the full size range — Team Purple stops at 4XL,
     // Dark Grey only goes up to 2XL, per what's actually synced in Printful.
@@ -478,7 +478,7 @@ const PRODUCTS = [
   {
     id: 21, name: 'Lilly Verse Stickers', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-verse', dropLabel: 'Lilly Verse',
-    tag: 'new', fill: '#14120f', bg: '#d3ecab',
+    tag: 'new', fill: '#14120f', bg: '#A9D4F5',
     sizes: ['3″×3″', '4″×4″', '5.5″×5.5″'],
     colors: [
       { name: 'Standard', hex: '#eef0ee' },
@@ -507,7 +507,7 @@ const PRODUCTS = [
     id: 23, name: 'Zero Worries Oversized Faded T-shirt', cat: 'apparel', catLabel: 'Apparel',
     drop: 'lilly-life', dropLabel: 'Lilly Life',
     sizePricing: { S: 35.50, M: 35.50, L: 35.50, XL: 35.50, '2XL': 37.50, '3XL': 40.00 },
-    tag: 'new', fill: '#14120f', bg: '#cfc5f5',
+    tag: 'new', fill: '#14120f', bg: '#D3ECAB',
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     colors: [
       {
@@ -550,7 +550,7 @@ const PRODUCTS = [
   {
     id: 24, name: 'Lilly Pug is calling Chain', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    tag: null, fill: '#14120f', bg: '#e8c98a', comingSoon: false,
+    tag: null, fill: '#14120f', bg: '#FFE9A3', comingSoon: false,
     // Fulfilled through Printify, not Printful — see functions/_shared/products.js.
     // One fixed jewelry size (1"×1"), so color is the only choice, and price
     // varies by metal/finish rather than by size.
@@ -580,7 +580,7 @@ const PRODUCTS = [
   {
     id: 25, name: 'Lilly Life T-shirt', cat: 'apparel', catLabel: 'Apparel',
     drop: 'lilly-life', dropLabel: 'Lilly Life',
-    tag: 'new', fill: '#14120f', bg: '#a9d4f5',
+    tag: 'new', fill: '#14120f', bg: '#B9E3D1',
     sizePricing: {
       XS: 25.00, S: 25.00, M: 25.00, L: 25.00, XL: 25.00,
       '2XL': 27.50, '3XL': 30.00, '4XL': 32.50, '5XL': 35.00,
@@ -618,30 +618,12 @@ const PRODUCTS = [
         ],
       },
       {
-<<<<<<< HEAD
         name: 'Soft Cream', hex: '#f0e6d2',
         image: 'assets/products/lilly-life-soft-cream-front.png',
         images: [
           'assets/products/lilly-life-soft-cream-front.png',
           'assets/products/lilly-life-soft-cream-back.png',
         ],
-=======
-        name: 'Athletic Heather', hex: '#b5b5b5',
-        image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
-      },
-      {
-<<<<<<< Updated upstream
-        name: 'Athletic Heather', hex: '#b5b5b5',
-        image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
-      },
-      {
-        name: 'Soft Cream', hex: '#f0e6d2',
-        image: 'https://files.cdn.printful.com/files/a22/a225bfe9dd491aadc825a1ef00ea9da7_preview.png',
-=======
-        name: 'Soft Cream', hex: '#f0e6d2',
-        image: 'https://files.cdn.printful.com/files/a22/a225bfe9dd491aadc825a1ef00ea9da7_preview.png',
->>>>>>> 10f775620c8356718e983ad8a8c26aecaa1758dc
->>>>>>> Stashed changes
       },
       {
         name: 'White', hex: '#ffffff',
@@ -652,40 +634,29 @@ const PRODUCTS = [
         ],
       },
     ],
-<<<<<<< Updated upstream
-    image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
-=======
-<<<<<<< HEAD
     image: 'assets/products/lilly-life-white-front.png',
-=======
-    image: 'https://files.cdn.printful.com/files/257/25791e7db09209da6c9ee0bdfcec8d67_preview.png',
->>>>>>> 10f775620c8356718e983ad8a8c26aecaa1758dc
->>>>>>> Stashed changes
     description: "Soft, everyday staple tee for the Lilly Life drop. Five colorways with sizes XS through 5XL depending on color. Prices start at $25 and increase for 2XL through 5XL."
   },
   {
     id: 26, name: 'Lilly Life Flip Straw Bottle', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-life', dropLabel: 'Lilly Life',
-    price: 36.00, tag: 'new', fill: '#14120f', bg: '#eef0ee',
-    image: 'https://files.cdn.printful.com/files/3be/3be740ab128a86b095c3af68fd870352_preview.png',
+    price: 36.00, tag: 'new', fill: '#14120f', bg: '#A9D4F5',
+    image: 'assets/products/lilly-life-bottle-front.png',
+    images: [
+      'assets/products/lilly-life-bottle-front.png',
+      'assets/products/lilly-life-bottle-back.png',
+      'assets/products/lilly-life-bottle-left.png',
+      'assets/products/lilly-life-bottle-right.png',
+    ],
     madeIn: 'CamelBak Thrive, 25 oz',
     description: "25 oz flip-straw water bottle with the Lilly Life graphic wrapped around it. One-handed flip lid, built-in straw, keeps up with you all day."
   },
   {
     id: 27, name: 'Pink Pup Lilly Flag', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-life', dropLabel: 'Lilly Life',
-    price: 30.50, tag: 'new', fill: '#14120f', bg: '#f7b6d2',
-    sizes: ['One size'],
+    price: 30.50, tag: 'new', fill: '#14120f', bg: '#F3AAC2',
     image: 'https://files.cdn.printful.com/files/908/908fd84e9bce832837a3ada7022671ed_preview.png',
-<<<<<<< Updated upstream
-    description: "All-over print flag featuring Pink Pup Lilly. One size."
-=======
-<<<<<<< HEAD
-    description: "All-over print flag of Pink Pup Lilly, ready to brighten up any wall. 100% polyester knitted fabric that won't crease or shrink, printed on one side with a blank reverse. Double-fold hem, 2 iron grommets for hanging, OEKO-TEX® STANDARD 100 certified."
-=======
-    description: "All-over print flag featuring Pink Pup Lilly. One size."
->>>>>>> 10f775620c8356718e983ad8a8c26aecaa1758dc
->>>>>>> Stashed changes
+    description: "Pink Pup Lilly flag, ready to brighten up any wall. 100% polyester knitted fabric that won't crease or shrink, printed on one side with a blank reverse. Double-fold hem, 2 iron grommets for hanging, OEKO-TEX® STANDARD 100 certified."
   },
 ];
 
@@ -1049,8 +1020,11 @@ function initMarquee() {
 document.addEventListener('DOMContentLoaded', initMarquee);
 
 /* ---------- Scroll reveal: fade/rise elements into view as the page scrolls ---------- */
+let scrollRevealObserver = null;
+
 function initScrollReveal() {
-  const targets = document.querySelectorAll('.reveal');
+  if (scrollRevealObserver) scrollRevealObserver.disconnect();
+  const targets = document.querySelectorAll('.reveal:not(.visible)');
   if (!targets.length) return;
 
   if (!('IntersectionObserver' in window)) {
@@ -1058,16 +1032,16 @@ function initScrollReveal() {
     return;
   }
 
-  const observer = new IntersectionObserver((entries) => {
+  scrollRevealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        scrollRevealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
 
-  targets.forEach(el => observer.observe(el));
+  targets.forEach(el => scrollRevealObserver.observe(el));
 }
 
 document.addEventListener('DOMContentLoaded', initScrollReveal);

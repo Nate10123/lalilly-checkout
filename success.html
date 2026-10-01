@@ -103,11 +103,23 @@
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get('session_id');
     if (sessionId) {
-      document.getElementById('orderRef').innerHTML =
-        'Order reference: <strong>' + sessionId + '</strong>' +
-        '<button type="button" class="copy-btn" id="copyRefBtn">Copy</button>' +
-        '<br>Save this to check your order status later.';
-      document.getElementById('trackLink').href = 'track.html?session=' + encodeURIComponent(sessionId);
+      const orderRef = document.getElementById('orderRef');
+      const trackLink = document.getElementById('trackLink');
+
+      orderRef.append(
+        document.createTextNode('Order reference: '),
+        Object.assign(document.createElement('strong'), { textContent: sessionId }),
+        Object.assign(document.createElement('button'), {
+          type: 'button',
+          className: 'copy-btn',
+          id: 'copyRefBtn',
+          textContent: 'Copy'
+        }),
+        document.createElement('br'),
+        document.createTextNode('Save this to check your order status later.')
+      );
+
+      trackLink.href = 'track.html?session=' + encodeURIComponent(sessionId);
 
       document.getElementById('copyRefBtn').addEventListener('click', async () => {
         try {
@@ -117,9 +129,10 @@
           btn.textContent = 'Copied!';
           setTimeout(() => { btn.textContent = original; }, 1500);
         } catch (err) {
-          // Clipboard API unavailable or blocked — the reference text is already visible to select manually.
+          // Clipboard API unavailable or blocked — the reference remains visible to copy manually.
         }
       });
+
     }
   </script>
 </body>

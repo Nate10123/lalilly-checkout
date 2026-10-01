@@ -47,7 +47,7 @@
 </div>
 
 <nav>
-  <a href="index.html" class="logo"><img src="assets/lalilly-logo.png" alt="LA LILLY"></a>
+  <a href="index.html" class="logo"><img src="assets/lalilly-logo.png" alt="LA LILLY pug logo"></a>
   <div class="nav-links">
     <a href="index.html" class="nav-item">Home</a>
     <a href="shop.html" class="nav-item">Shop</a>
@@ -77,18 +77,19 @@
 </div>
 
 <header class="hero">
-  <div>
-    <span class="hero-eyebrow">Drop 004 — Live Now</span>
-    <h1 class="hero-title">Merch for<br>people who<br><span class="accent">love a pug</span><br>too much.</h1>
-    <p class="hero-copy">Streetwear built around one very good dog, all designed in-house.</p>
+  <div class="hero-content">
+    <span class="hero-eyebrow">La Lilly · Drop 004</span>
+    <h1 class="hero-title">Life’s better with a<br><span class="accent">pug.</span></h1>
+    <p class="hero-copy">Streetwear and everyday pieces inspired by Lilly. Made for the pug obsessed.</p>
     <div class="hero-actions">
-      <a href="shop.html" class="btn-solid">Shop the Drop</a>
-      <a href="#drops" class="btn-outline">See What's Coming</a>
+      <a href="shop.html" class="btn-solid">Shop all</a>
+      <a href="#drops" class="btn-outline">Explore collections</a>
     </div>
   </div>
-  <a href="product.html?id=5" class="trading-card" style="display:block;">
+  <a href="product.html?id=5" class="trading-card hero-feature" aria-label="Shop FreakYe T-Shirt" style="display:block;">
+    <div class="feature-topline"><span>La Lilly selects</span><span>001 / 004</span></div>
     <div class="card-art" style="background:#a9d4f5;">
-      <img src="assets/products/freakye-white-front.png" alt="FreakYe T-Shirt" loading="lazy" style="width:100%;height:100%;object-fit:contain;">
+      <img src="assets/products/freakye-white-front.png" alt="FreakYe T-Shirt" loading="eager" style="width:100%;height:100%;object-fit:contain;">
     </div>
     <div class="card-foot">
       <span class="name">FreakYe T-Shirt</span>
@@ -103,6 +104,10 @@
     <div>
       <span class="section-tag">Collections</span>
       <h2 class="section-title">Top Categories</h2>
+    </div>
+    <div class="cat-arrows" aria-label="Top categories carousel controls">
+      <button type="button" aria-label="Scroll categories left" onclick="(()=>{const g=document.querySelector('.cat-grid');const c=g?.querySelector('.cat-card');if(g&&c)g.scrollBy({left:-(c.getBoundingClientRect().width+parseFloat(getComputedStyle(g).columnGap||0)),behavior:'smooth'})})()">←</button>
+      <button type="button" aria-label="Scroll categories right" onclick="(()=>{const g=document.querySelector('.cat-grid');const c=g?.querySelector('.cat-card');if(g&&c)g.scrollBy({left:c.getBoundingClientRect().width+parseFloat(getComputedStyle(g).columnGap||0),behavior:'smooth'})})()">→</button>
     </div>
   </div>
   <div class="cat-grid reveal-stagger reveal">
@@ -149,6 +154,79 @@
   </div>
 </section>
 
+<section class="latest-section">
+  <div class="section-head reveal">
+    <span></span>
+    <div>
+      <span class="section-tag">Fresh on the site</span>
+      <h2 class="section-title">Latest pieces</h2>
+    </div>
+    <a href="shop.html?sort=newest" class="section-action">View all →</a>
+  </div>
+  <div class="latest-grid reveal-stagger reveal">
+    <a href="product.html?id=27" class="latest-card">
+      <div class="latest-art" style="background:#F3AAC2;">
+        <img src="https://files.cdn.printful.com/files/908/908fd84e9bce832837a3ada7022671ed_preview.png" alt="Pink Pup Lilly Flag" loading="lazy">
+      </div>
+      <div class="latest-meta">
+        <span>NEW · LILLY LIFE</span>
+        <strong>Pink Pup Lilly Flag</strong>
+        <em>$30.50</em>
+      </div>
+    </a>
+    <a href="product.html?id=25" class="latest-card">
+      <div class="latest-art" style="background:#B9E3D1;">
+        <img src="assets/products/lilly-life-white-front.png" alt="Lilly Life T-shirt" loading="lazy">
+      </div>
+      <div class="latest-meta">
+        <span>NEW · LILLY LIFE</span>
+        <strong>Lilly Life T-shirt</strong>
+        <em>From $25.00</em>
+      </div>
+    </a>
+    <a href="product.html?id=26" class="latest-card">
+      <div class="latest-art" style="background:#A9D4F5;">
+        <img src="https://files.cdn.printful.com/files/3be/3be740ab128a86b095c3af68fd870352_preview.png" alt="Lilly Life Flip Straw Bottle" loading="lazy">
+      </div>
+      <div class="latest-meta">
+        <span>LILLY LIFE</span>
+        <strong>Lilly Life Flip Straw Bottle</strong>
+        <em>$36.00</em>
+      </div>
+    </a>
+  </div>
+</section>
+
+
+
+<section class="faq-section reveal">
+  <div class="section-head">
+    <span></span>
+    <div>
+      <span class="section-tag">Need to know</span>
+      <h2 class="section-title">Quick answers</h2>
+    </div>
+  </div>
+  <div class="faq-grid">
+    <details>
+      <summary>How much is shipping?</summary>
+      <p>Shipping is calculated at checkout based on your order and location. Orders over $90 ship free.</p>
+    </details>
+    <details>
+      <summary>How long do orders take?</summary>
+      <p>Orders are typically processed in 3–7 business days, then most domestic orders arrive in another 3–7 business days.</p>
+    </details>
+    <details>
+      <summary>Where can I track my order?</summary>
+      <p>Use the Track Order page with the order reference from your confirmation email.</p>
+    </details>
+    <details>
+      <summary>What happens if something arrives wrong?</summary>
+      <p>Contact LA LILLY within 14 days of delivery if an item is defective, damaged, or incorrect.</p>
+    </details>
+  </div>
+</section>
+
 <div class="trust-strip reveal-stagger reveal">
   <div class="trust-item">
     <h4>Secure Checkout</h4>
@@ -175,8 +253,34 @@
 </section>
 
 <footer>
-  <span>© 2026 LA LILLY — All rights reserved</span>
-  <span><a href="track.html" style="color:inherit;text-decoration:none;">Track Order</a> · <a href="privacy.html" style="color:inherit;text-decoration:none;">Privacy</a> · <a href="terms.html" style="color:inherit;text-decoration:none;">Terms</a> · <a href="shipping.html" style="color:inherit;text-decoration:none;">Shipping</a></span>
+  <div class="footer-brand">
+    <img src="assets/lalilly-logo.png" alt="LA LILLY">
+    <p>Streetwear built around one very good dog.</p>
+  </div>
+  <div class="footer-links">
+    <div>
+      <span class="footer-label">Shop</span>
+      <a href="shop.html">All products</a>
+      <a href="index.html#drops">Collections</a>
+      <a href="shop.html?drop=la-lilly">La Lilly</a>
+    </div>
+    <div>
+      <span class="footer-label">Help</span>
+      <a href="track.html">Track Order</a>
+      <a href="shipping.html">Shipping</a>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+    <div>
+      <span class="footer-label">Follow</span>
+      <a href="https://www.instagram.com/nate10_08" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@nate10_08" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 LA LILLY — All rights reserved</span>
+    <span>Made for Lilly.</span>
+  </div>
 </footer>
 
 <div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
