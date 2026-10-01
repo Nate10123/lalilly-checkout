@@ -427,6 +427,20 @@ export const PRODUCTS = {
     priceCents: 3050,
     printfulVariantId: '5520557441',
   },
+  28: {
+    name: 'The Pugg Stone Wash Heavy Tee',
+    provider: 'printify',
+    printifyProductId: '6abb5dbbe688cdb5400d66ac',
+    sizePricingCents: { M: 3950, L: 3950, XL: 3950, '2XL': 4450, '3XL': 4750 },
+    sizes: { M: '403704', L: '403705', XL: '403706', '2XL': '403707', '3XL': '403708' },
+  },
+  29: {
+    name: 'Custom Cut Keychain',
+    provider: 'printify',
+    printifyProductId: '6abde82d380a36f0f208734c',
+    priceCents: 3278,
+    printifyVariantId: '460116',
+  },
 };
 
 // Which print-on-demand provider fulfills a product. Defaults to Printful
