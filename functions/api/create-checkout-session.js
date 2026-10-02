@@ -39,12 +39,14 @@ export async function onRequestPost(context) {
       const qty = Math.max(1, Math.min(50, parseInt(item.qty, 10) || 1));
 
       // Belt-and-suspenders: block any product that has no fulfillable
-      // Printful variant at all — a size/color choice can still resolve
-      // to null further down (getVariantId), but a flat-priced product
-      // with no printfulVariantId set has nothing to ever fall back to.
-      // Without this, someone could pay for something that can never
-      // actually be fulfilled.
-      if (!hasColors(product) && !hasSizes(product) && !product.printfulVariantId) {
+      // provider variant at all. Flat-priced products can use either a
+      // Printful variant or a Printify variant, so both are valid fallbacks.
+      if (
+        !hasColors(product) &&
+        !hasSizes(product) &&
+        !product.printfulVariantId &&
+        !product.printifyVariantId
+      ) {
         throw new Error(`"${product.name}" isn't available for purchase yet.`);
       }
 
