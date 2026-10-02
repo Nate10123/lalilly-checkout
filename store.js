@@ -684,13 +684,11 @@ const PRODUCTS = [
     colors: [
       {
         name: 'Stainless Steel', hex: '#d4d5d1',
-        image: 'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/la-lilly-cut-keychain.jpg?camera_label=front',
-        images: [
-          'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/la-lilly-cut-keychain.jpg?camera_label=front'
-        ],
       },
     ],
-    image: 'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/la-lilly-cut-keychain.jpg?camera_label=front',
+    // Old Printify mockup removed; uses the brand emblem until updated
+    // keychain photos are provided.
+    image: null,
     description: "A custom-cut keychain made from the outline of your image, turning a favorite design into an everyday keepsake. Made from 100% stainless steel with a 1″ × 1″ pendant and a scratch and water resistant finish."
   },
 ];
