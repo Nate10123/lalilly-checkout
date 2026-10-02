@@ -684,11 +684,10 @@ const PRODUCTS = [
     colors: [
       {
         name: 'Stainless Steel', hex: '#d4d5d1',
+        image: 'assets/products/la-lilly-cut-keychain-stainless-steel.png',
       },
     ],
-    // Old Printify mockup removed; uses the brand emblem until updated
-    // keychain photos are provided.
-    image: null,
+    image: 'assets/products/la-lilly-cut-keychain-stainless-steel.png',
     description: "A custom-cut keychain made from the outline of your image, turning a favorite design into an everyday keepsake. Made from 100% stainless steel with a 1″ × 1″ pendant and a scratch and water resistant finish."
   },
 ];
