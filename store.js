@@ -661,7 +661,7 @@ const PRODUCTS = [
   {
     id: 28, name: 'The Pugg Stone Wash Heavy Tee', cat: 'apparel', catLabel: 'Apparel',
     drop: 'puggler', dropLabel: 'Puggler',
-    sizePricing: { M: 39.50, L: 39.50, XL: 39.50, '2XL': 44.50, '3XL': 47.50 },
+    sizePricing: { M: 49.50, L: 49.50, XL: 49.50, '2XL': 55.00, '3XL': 57.50 },
     tag: 'new', fill: '#14120f', bg: '#FFE9A3',
     sizes: ['M', 'L', 'XL', '2XL', '3XL'],
     colors: [
