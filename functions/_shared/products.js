@@ -431,7 +431,7 @@ export const PRODUCTS = {
     name: 'The Pugg Stone Wash Heavy Tee',
     provider: 'printify',
     printifyProductId: '6abb5dbbe688cdb5400d66ac',
-    sizePricingCents: { M: 3950, L: 3950, XL: 3950, '2XL': 4450, '3XL': 4750 },
+    sizePricingCents: { M: 4950, L: 4950, XL: 4950, '2XL': 5500, '3XL': 5750 },
     sizes: { M: '403704', L: '403705', XL: '403706', '2XL': '403707', '3XL': '403708' },
   },
   29: {
