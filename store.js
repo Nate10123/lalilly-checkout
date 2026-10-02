@@ -690,11 +690,11 @@ const PRODUCTS = [
         name: 'Stainless Steel', hex: '#d4d5d1',
         image: 'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/la-lilly-cut-keychain.jpg?camera_label=front',
         images: [
-          'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/custom-cut-keychain.jpg?camera_label=front'
+          'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/la-lilly-cut-keychain.jpg?camera_label=front'
         ],
       },
     ],
-    image: 'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/custom-cut-keychain.jpg?camera_label=front',
+    image: 'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/la-lilly-cut-keychain.jpg?camera_label=front',
     description: "This custom-cut keychain is shaped from the outline of your image, creating a piece that’s completely unique. Turn a meaningful moment into a keepsake and carry it with you every day. 100% stainless steel with a 1″ × 1″ pendant size and a scratch and water resistant finish."
   },
 ];
