@@ -682,13 +682,13 @@ const PRODUCTS = [
     description: "This stylish garment features dropped shoulders and side neck ribbing accented with twin stitching, offering a relaxed yet refined silhouette. Its stone wash finish delivers a distinct worn look that adds character and depth to the fabric. Carefully constructed with side seams and shoulder-to-shoulder tape, it ensures durability and maintains its shape wear after wear. Double needle hems provide extra strength, while the acid wash effect enhances its vintage appeal. The fabric is preshrunk to minimize shrinkage, keeping the fit consistent over time. Designed with a tear-out AS Colour label for added convenience."
   },
   {
-    id: 29, name: 'Custom Cut Keychain', cat: 'accessories', catLabel: 'Accessories',
+    id: 29, name: 'La Lilly Cut Keychain', cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    price: 32.78, tag: 'new', fill: '#14120f', bg: '#CFC5F5',
+    price: 29.50, tag: 'new', fill: '#14120f', bg: '#CFC5F5',
     colors: [
       {
         name: 'Stainless Steel', hex: '#d4d5d1',
-        image: 'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/custom-cut-keychain.jpg?camera_label=front',
+        image: 'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/la-lilly-cut-keychain.jpg?camera_label=front',
         images: [
           'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/custom-cut-keychain.jpg?camera_label=front'
         ],
