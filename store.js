@@ -670,11 +670,7 @@ const PRODUCTS = [
         image: '/assets/products/pugg-stone-wash-heavy-tee-front.webp',
         images: [
           '/assets/products/pugg-stone-wash-heavy-tee-front.webp',
-          'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146706/the-pugg-stone-wash-heavy-tee.jpg?camera_label=left-chest',
-          '/assets/products/pugg-stone-wash-heavy-tee-back.webp',
-          'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146712/the-pugg-stone-wash-heavy-tee.jpg?camera_label=left-sleeve',
-          'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146715/the-pugg-stone-wash-heavy-tee.jpg?camera_label=right-sleeve',
-          'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146719/the-pugg-stone-wash-heavy-tee.jpg?camera_label=right-chest'
+          '/assets/products/pugg-stone-wash-heavy-tee-back.webp'
         ],
       },
     ],
