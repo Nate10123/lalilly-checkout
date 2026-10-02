@@ -679,7 +679,7 @@ const PRODUCTS = [
       },
     ],
     image: '/assets/products/pugg-stone-wash-heavy-tee-front.webp',
-    description: "This stylish garment features dropped shoulders and side neck ribbing accented with twin stitching, offering a relaxed yet refined silhouette. Its stone wash finish delivers a distinct worn look that adds character and depth to the fabric. Carefully constructed with side seams and shoulder-to-shoulder tape, it ensures durability and maintains its shape wear after wear. Double needle hems provide extra strength, while the acid wash effect enhances its vintage appeal. The fabric is preshrunk to minimize shrinkage, keeping the fit consistent over time. Designed with a tear-out AS Colour label for added convenience."
+    description: "A relaxed heavy tee with dropped shoulders, twin-stitched neck ribbing, and a worn stone wash finish. Side seams, shoulder-to-shoulder tape, double needle hems, and preshrunk fabric add durability while the tear-out label keeps the finish clean."
   },
   {
     id: 29, name: 'La Lilly Cut Keychain', cat: 'accessories', catLabel: 'Accessories',
@@ -695,7 +695,7 @@ const PRODUCTS = [
       },
     ],
     image: 'https://images-api.printify.com/mockup/6abde82d380a36f0f208734c/460116/154140/la-lilly-cut-keychain.jpg?camera_label=front',
-    description: "This custom-cut keychain is shaped from the outline of your image, creating a piece that’s completely unique. Turn a meaningful moment into a keepsake and carry it with you every day. 100% stainless steel with a 1″ × 1″ pendant size and a scratch and water resistant finish."
+    description: "A custom-cut keychain made from the outline of your image, turning a favorite design into an everyday keepsake. Made from 100% stainless steel with a 1″ × 1″ pendant and a scratch and water resistant finish."
   },
 ];
 
