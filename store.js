@@ -667,14 +667,14 @@ const PRODUCTS = [
     colors: [
       {
         name: 'Black Stone', hex: '#312c2b',
-        image: 'assets/products/pugg-stone-wash-heavy-tee-front.webp',
+        image: 'assets/products/pugg-stone-wash-heavy-tee-front.webp?v=20261002',
         images: [
-          'assets/products/pugg-stone-wash-heavy-tee-front.webp',
-          'assets/products/pugg-stone-wash-heavy-tee-back.webp'
+          'assets/products/pugg-stone-wash-heavy-tee-front.webp?v=20261002',
+          'assets/products/pugg-stone-wash-heavy-tee-back.webp?v=20261002'
         ],
       },
     ],
-    image: 'assets/products/pugg-stone-wash-heavy-tee-front.webp',
+    image: 'assets/products/pugg-stone-wash-heavy-tee-front.webp?v=20261002',
     description: "A relaxed heavy tee with dropped shoulders, twin-stitched neck ribbing, and a worn stone wash finish. Side seams, shoulder-to-shoulder tape, double needle hems, and preshrunk fabric add durability while the tear-out label keeps the finish clean."
   },
   {
