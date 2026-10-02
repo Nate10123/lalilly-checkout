@@ -435,10 +435,10 @@ export const PRODUCTS = {
     sizes: { M: '403704', L: '403705', XL: '403706', '2XL': '403707', '3XL': '403708' },
   },
   29: {
-    name: 'Custom Cut Keychain',
+    name: 'La Lilly Cut Keychain',
     provider: 'printify',
     printifyProductId: '6abde82d380a36f0f208734c',
-    priceCents: 3278,
+    priceCents: 2950,
     printifyVariantId: '460116',
   },
 };
