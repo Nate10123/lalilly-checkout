@@ -667,18 +667,18 @@ const PRODUCTS = [
     colors: [
       {
         name: 'Black Stone', hex: '#312c2b',
-        image: 'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146703/the-pugg-stone-wash-heavy-tee.jpg?camera_label=front',
+        image: '/assets/products/pugg-stone-wash-heavy-tee-front.webp',
         images: [
-          'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146703/the-pugg-stone-wash-heavy-tee.jpg?camera_label=front',
+          '/assets/products/pugg-stone-wash-heavy-tee-front.webp',
           'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146706/the-pugg-stone-wash-heavy-tee.jpg?camera_label=left-chest',
-          'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146709/the-pugg-stone-wash-heavy-tee.jpg?camera_label=back',
+          '/assets/products/pugg-stone-wash-heavy-tee-back.webp',
           'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146712/the-pugg-stone-wash-heavy-tee.jpg?camera_label=left-sleeve',
           'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146715/the-pugg-stone-wash-heavy-tee.jpg?camera_label=right-sleeve',
           'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146719/the-pugg-stone-wash-heavy-tee.jpg?camera_label=right-chest'
         ],
       },
     ],
-    image: 'https://images-api.printify.com/mockup/6abb5dbbe688cdb5400d66ac/403705/146703/the-pugg-stone-wash-heavy-tee.jpg?camera_label=front',
+    image: '/assets/products/pugg-stone-wash-heavy-tee-front.webp',
     description: "This stylish garment features dropped shoulders and side neck ribbing accented with twin stitching, offering a relaxed yet refined silhouette. Its stone wash finish delivers a distinct worn look that adds character and depth to the fabric. Carefully constructed with side seams and shoulder-to-shoulder tape, it ensures durability and maintains its shape wear after wear. Double needle hems provide extra strength, while the acid wash effect enhances its vintage appeal. The fabric is preshrunk to minimize shrinkage, keeping the fit consistent over time. Designed with a tear-out AS Colour label for added convenience."
   },
   {
