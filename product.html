@@ -273,9 +273,11 @@
     document.getElementById('breadcrumbName').textContent = product.name;
     document.body.dataset.currentProductId = product.id;
     selectedSize = null;
-    selectedColor = null;
+    // A single-color product has nothing to choose, so auto-select it and
+    // skip the swatch picker (no pointless "Select a Color" gate).
+    selectedColor = (product.colors && product.colors.length === 1) ? product.colors[0].name : null;
 
-    const colorRow = product.colors ? `
+    const colorRow = (product.colors && product.colors.length > 1) ? `
       <div class="pdp-color-row">
         <span class="pdp-size-label">Color<span id="selectedColorName"></span></span>
         <div class="color-options" id="colorOptions">
@@ -350,9 +352,9 @@
     const detailSummary = document.getElementById('productDetailSummary');
     if (detailSummary) {
       const optionParts = [];
-      if (product.colors) optionParts.push(`${product.colors.length} color options`);
+      if (product.colors && product.colors.length > 1) optionParts.push(`${product.colors.length} color options`);
       if (product.sizes) optionParts.push(`${product.sizes.length} size options`);
-      if (!product.colors && !product.sizes) optionParts.push('One configuration');
+      if ((!product.colors || product.colors.length === 1) && !product.sizes) optionParts.push('One configuration');
       detailSummary.innerHTML = `
         <span class="detail-summary-label">${product.catLabel} · ${product.dropLabel}</span>
         <p><strong>${product.name}</strong> — ${product.description} ${optionParts.length ? optionParts.join(' · ') + '.' : ''}</p>

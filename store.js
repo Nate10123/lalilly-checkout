@@ -163,7 +163,9 @@ const PRODUCTS = [
     image: 'assets/products/mllga-snapback-hat.png',
     images: [
       'assets/products/mllga-snapback-hat.png',
+      'assets/products/mllga-snapback-hat-left-front.png',
       'assets/products/mllga-snapback-hat-left-side.png',
+      'assets/products/mllga-snapback-hat-right-front.png',
       'assets/products/mllga-snapback-hat-right-side.png',
       'assets/products/mllga-snapback-hat-back.png',
     ],
@@ -238,7 +240,7 @@ const PRODUCTS = [
     id: 13, name: 'La Lilly Bucket Hat', cat: 'headwear', catLabel: 'Headwear',
     drop: 'la-lilly', dropLabel: 'La Lilly',
     price: 24.50, tag: 'new', fill: '#14120f', bg: '#D3ECAB',
-    image: 'https://files.cdn.printful.com/files/5f4/5f42cb966029647e7f0c520112c24732_preview.png',
+    image: 'assets/products/la-lilly-bucket-hat-white-front.png',
     madeIn: 'China and Vietnam',
     description: "Cotton twill bucket hat with the LA LILLY wordmark embroidered up front. Sewn eyelets for breathability, one size fits most, sun's out dog's out."
   },
