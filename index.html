@@ -22,6 +22,140 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+  /* Homepage consistency pass: shared spacing, borders and card language. */
+  #drops,
+  .latest-section {
+    padding-top: 68px;
+    padding-bottom: 68px;
+  }
+
+  #drops .section-head,
+  .latest-section .section-head {
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom-width: 2px;
+  }
+
+  #drops .section-tag,
+  .latest-section .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  #drops .section-title,
+  .latest-section .section-title {
+    line-height: 1;
+  }
+
+  .cat-card,
+  .latest-card {
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 0;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .cat-card:hover,
+  .latest-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  .cat-swatch,
+  .latest-art {
+    margin: 0;
+    border: 0;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .cat-card h3 {
+    margin: 16px 16px 6px;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .cat-card p {
+    margin: 0 16px 12px;
+    min-height: 2.4em;
+    font-size: 0.72rem;
+  }
+
+  .cat-link {
+    display: inline-block;
+    margin: 0 16px 16px;
+    font-size: 0.7rem;
+  }
+
+  .latest-meta {
+    min-height: 118px;
+    padding: 16px;
+    align-content: start;
+  }
+
+  .latest-meta strong {
+    font-size: 1rem;
+  }
+
+  .latest-meta span,
+  .latest-meta em {
+    font-size: 0.68rem;
+  }
+
+  /* Remove the floating LA LILLY badge so image cards use one label system. */
+  .latest-art::before {
+    content: none;
+    display: none;
+  }
+
+  .section-action {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 2px solid var(--hot);
+  }
+
+  .trust-strip {
+    margin: 0 5vw 68px;
+    border: 2px solid var(--ink);
+  }
+
+  .trust-item {
+    padding: 22px 18px;
+  }
+
+  .newsletter {
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  @media (max-width: 780px) {
+    #drops,
+    .latest-section {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+
+    #drops .section-head,
+    .latest-section .section-head {
+      margin-bottom: 22px;
+    }
+
+    .cat-card p {
+      min-height: 0;
+    }
+
+    .latest-meta {
+      min-height: 0;
+    }
+
+    .trust-strip {
+      margin: 0 6vw 48px;
+    }
+  }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -202,8 +336,6 @@
     </a>
   </div>
 </section>
-
-
 
 <div class="trust-strip reveal-stagger reveal">
   <div class="trust-item">
