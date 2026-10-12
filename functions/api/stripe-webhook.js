@@ -7,7 +7,10 @@
 
 import Stripe from 'stripe';
 import { PRODUCTS, getVariantId, getPriceCents, getProvider, getPrintifyProductId } from '../_shared/products.js';
+import { EXTRA_PRODUCTS } from '../_shared/extra-products.js';
 import { placePrintifyOrder } from '../_shared/printify.js';
+
+Object.assign(PRODUCTS, EXTRA_PRODUCTS);
 
 export async function onRequestPost(context) {
   const { request, env } = context;
