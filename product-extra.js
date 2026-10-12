@@ -37,5 +37,6 @@ PRODUCTS.push({
     'assets/products/los-lillys-pug-hat-right.webp',
     'assets/products/los-lillys-pug-hat-back.webp',
   ],
-  description: 'Structured Flexfit cap with a clean mid-profile shape, curved visor, and silver undervisor. Made from a 63% polyester, 34% cotton, 3% spandex twill blend with a built-in stretch band for a comfortable fit, finished with 6 embroidered eyelets and sized to fit head circumferences from 22″–23⅞″. Blank sourced from Vietnam or Bangladesh.',
+  madeIn: 'Vietnam or Bangladesh',
+  description: 'Structured Flexfit cap with a clean mid-profile shape, curved visor, and silver undervisor. Made from a 63% polyester, 34% cotton, 3% spandex twill blend with a built-in stretch band for a comfortable fit, finished with 6 embroidered eyelets and sized to fit head circumferences from 22″–23⅞″.',
 });
