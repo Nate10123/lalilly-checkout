@@ -22,7 +22,16 @@ export async function onRequest(context) {
   // Older static templates still contain the Pages origin in canonical,
   // Open Graph and JSON-LD URLs. Rewrite those signals at the edge while
   // preserving the rest of the response exactly as served.
-  const html = (await response.text()).split(OLD_ORIGIN).join(PRIMARY_ORIGIN);
+  let html = (await response.text()).split(OLD_ORIGIN).join(PRIMARY_ORIGIN);
+
+  // New launches can live in product-extra.js without rewriting the large
+  // legacy store.js catalog. Inject it immediately after store.js, before
+  // each page's inline renderer runs and reads PRODUCTS.
+  const storeScript = '<script src="store.js"></script>';
+  if (html.includes(storeScript) && !html.includes('product-extra.js')) {
+    html = html.replace(storeScript, `${storeScript}\n<script src="product-extra.js"></script>`);
+  }
+
   const headers = new Headers(response.headers);
   headers.delete('content-length');
 
