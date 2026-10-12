@@ -7,6 +7,9 @@
 
 import Stripe from 'stripe';
 import { PRODUCTS, getPriceCents, hasSizes, hasColors } from '../_shared/products.js';
+import { EXTRA_PRODUCTS } from '../_shared/extra-products.js';
+
+Object.assign(PRODUCTS, EXTRA_PRODUCTS);
 
 // Matches the "Free shipping over $90" banner on the storefront.
 const FREE_SHIPPING_THRESHOLD_CENTS = 9000;
