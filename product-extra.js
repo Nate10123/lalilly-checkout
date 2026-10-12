@@ -21,5 +21,5 @@ PRODUCTS.push({
     },
   ],
   image: 'https://files.cdn.printful.com/files/95e/95e5ee71cd9f66043c141d5907605aa0_preview.png',
-  description: 'Royal blue structured twill cap with embroidered artwork on the front, back, and left side. Available in S/M and L/XL.',
+  description: 'Structured Flexfit cap with a clean mid-profile shape, curved visor, and silver undervisor. Made from a 63% polyester, 34% cotton, 3% spandex twill blend with a built-in stretch band for a comfortable fit, finished with 6 embroidered eyelets and sized to fit head circumferences from 22″–23⅞″. Blank sourced from Vietnam or Bangladesh.',
 });
