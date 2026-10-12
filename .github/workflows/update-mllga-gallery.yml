@@ -1,0 +1,51 @@
+name: Update MLLGA gallery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-mllga-gallery.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Use full MLLGA PNG gallery and bust cache
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('store.js')
+          s = p.read_text()
+          names = [
+              'mllga-snapback-hat.png',
+              'mllga-snapback-hat-left-front.png',
+              'mllga-snapback-hat-left-side.png',
+              'mllga-snapback-hat-right-front.png',
+              'mllga-snapback-hat-right-side.png',
+              'mllga-snapback-hat-back.png',
+          ]
+          for name in names:
+              s = s.replace(f'assets/products/{name}', f'assets/products/{name}?v=20261012-mllga2')
+          p.write_text(s)
+          PY
+          rm -f \
+            assets/products/mllga-snapback-hat.webp \
+            assets/products/mllga-snapback-hat-left-front.webp \
+            assets/products/mllga-snapback-hat-left-side.webp \
+            assets/products/mllga-snapback-hat-right-front.webp \
+            assets/products/mllga-snapback-hat-right-side.webp \
+            assets/products/mllga-snapback-hat-back.webp
+          rm -f .github/workflows/update-mllga-gallery.yml
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Refresh MLLGA Snapback Hat gallery images'
+          git push origin main
