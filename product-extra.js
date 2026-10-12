@@ -17,9 +17,25 @@ PRODUCTS.push({
     {
       name: 'Royal Blue',
       hex: '#244d9b',
-      image: 'https://files.cdn.printful.com/files/95e/95e5ee71cd9f66043c141d5907605aa0_preview.png',
+      image: 'assets/products/los-lillys-pug-hat-front.webp',
+      images: [
+        'assets/products/los-lillys-pug-hat-front.webp',
+        'assets/products/los-lillys-pug-hat-left-front.webp',
+        'assets/products/los-lillys-pug-hat-left.webp',
+        'assets/products/los-lillys-pug-hat-right-front.webp',
+        'assets/products/los-lillys-pug-hat-right.webp',
+        'assets/products/los-lillys-pug-hat-back.webp',
+      ],
     },
   ],
-  image: 'https://files.cdn.printful.com/files/95e/95e5ee71cd9f66043c141d5907605aa0_preview.png',
+  image: 'assets/products/los-lillys-pug-hat-front.webp',
+  images: [
+    'assets/products/los-lillys-pug-hat-front.webp',
+    'assets/products/los-lillys-pug-hat-left-front.webp',
+    'assets/products/los-lillys-pug-hat-left.webp',
+    'assets/products/los-lillys-pug-hat-right-front.webp',
+    'assets/products/los-lillys-pug-hat-right.webp',
+    'assets/products/los-lillys-pug-hat-back.webp',
+  ],
   description: 'Structured Flexfit cap with a clean mid-profile shape, curved visor, and silver undervisor. Made from a 63% polyester, 34% cotton, 3% spandex twill blend with a built-in stretch band for a comfortable fit, finished with 6 embroidered eyelets and sized to fit head circumferences from 22″–23⅞″. Blank sourced from Vietnam or Bangladesh.',
 });
