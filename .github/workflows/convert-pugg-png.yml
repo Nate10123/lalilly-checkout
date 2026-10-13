@@ -1,5 +1,6 @@
 name: Convert Pugg tee images to PNG
 
+# One-time trigger commit for product image conversion.
 on:
   push:
     branches: [main]
