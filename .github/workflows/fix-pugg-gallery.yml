@@ -1,5 +1,6 @@
 name: Fix Pugg tee gallery
 
+# Runs once when this workflow file is updated.
 on:
   push:
     branches: [main]
