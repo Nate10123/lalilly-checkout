@@ -1,6 +1,23 @@
 // Newly launched products that extend the main storefront catalog.
 // Loaded immediately after store.js so shop/product pages can use them normally.
 
+// Product 28 has one color, so product.html never calls selectColor() to switch
+// to that color's image list. Mirror the front/back pair at the product level
+// so the gallery is available immediately when the page renders.
+const puggStoneWashTee = PRODUCTS.find(product => product.id === 28);
+if (puggStoneWashTee) {
+  const puggStoneWashImages = [
+    'assets/products/pugg-stone-wash-heavy-tee-front.png?v=20261016-gallery',
+    'assets/products/pugg-stone-wash-heavy-tee-back.png?v=20261016-gallery',
+  ];
+  puggStoneWashTee.image = puggStoneWashImages[0];
+  puggStoneWashTee.images = puggStoneWashImages;
+  if (puggStoneWashTee.colors && puggStoneWashTee.colors.length === 1) {
+    puggStoneWashTee.colors[0].image = puggStoneWashImages[0];
+    puggStoneWashTee.colors[0].images = puggStoneWashImages;
+  }
+}
+
 PRODUCTS.push({
   id: 30,
   name: 'Los Lillys New Pug Hat',
