@@ -1,0 +1,62 @@
+name: Update MLLGA product images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-mllga-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Replace MLLGA mockups with supplied PNGs
+        run: |
+          set -euo pipefail
+          mkdir -p assets/products
+          curl -fL --retry 3 'https://sdmntprwestus.oaiusercontent.com/files/00000000-4914-8230-96d1-f5d58f8cb795/raw?se=2026-10-18T12%3A31%3A57Z&sp=r&sv=2026-02-06&sr=b&scid=cb471975-32aa-5a3c-a000-345dd3555b52&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-17T19%3A45%3A21Z&ske=2026-10-18T19%3A45%3A21Z&sks=b&skv=2026-02-06&sig=MC6%2BQ1cjCVNTBZOsUaYgYJxMXcfGpe4V75O/xbBNzoM%3D' -o assets/products/mllga-snapback-hat.png
+          curl -fL --retry 3 'https://sdmntprwestus.oaiusercontent.com/files/00000000-f424-8230-97b5-45dd32653aa9/raw?se=2026-10-18T12%3A32%3A05Z&sp=r&sv=2026-02-06&sr=b&scid=44f3376a-43d8-58d7-ada4-48cbb0e41fe9&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-17T19%3A48%3A20Z&ske=2026-10-18T19%3A48%3A20Z&sks=b&skv=2026-02-06&sig=09PTBYWsbw7tadT0xGwpaKSX2Djvx9kok1x79SSwdEk%3D' -o assets/products/mllga-snapback-hat-left-front.png
+          curl -fL --retry 3 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-5d9c-81fd-8203-9208b50b424d/raw?se=2026-10-18T12%3A32%3A10Z&sp=r&sv=2026-02-06&sr=b&scid=77843075-07ce-5c10-85f0-80173613761a&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-17T19%3A50%3A31Z&ske=2026-10-18T19%3A50%3A31Z&sks=b&skv=2026-02-06&sig=MrTlt9OWQEquIo29RM%2B%2BhXFN2A8hJeOwAsU2HiYkb%2BM%3D' -o assets/products/mllga-snapback-hat-left-side.png
+          curl -fL --retry 3 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-4090-81fd-a1ec-0267ca366a4c/raw?se=2026-10-18T12%3A32%3A13Z&sp=r&sv=2026-02-06&sr=b&scid=c0e95e16-0577-5e41-8b52-3092c9299504&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-17T19%3A47%3A52Z&ske=2026-10-18T19%3A47%3A52Z&sks=b&skv=2026-02-06&sig=tmu3BiOz%2BbsneYiaotVB7HKUmc/4eKS5SVlmk%2BfJ5Nw%3D' -o assets/products/mllga-snapback-hat-right-front.png
+          curl -fL --retry 3 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-fb5c-81fd-b3f4-624a11406306/raw?se=2026-10-18T12%3A32%3A17Z&sp=r&sv=2026-02-06&sr=b&scid=25f6455e-dd4a-57a0-9948-5472f74bf8ed&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-17T18%3A16%3A20Z&ske=2026-10-18T18%3A16%3A20Z&sks=b&skv=2026-02-06&sig=av7LEFMGV%2BYB4aMEhannUnAATxDMESIdQrY0ZaI34qA%3D' -o assets/products/mllga-snapback-hat-right-side.png
+          curl -fL --retry 3 'https://sdmntprwestus2.oaiusercontent.com/files/00000000-020c-81f8-a159-be3586a987d4/raw?se=2026-10-18T12%3A32%3A22Z&sp=r&sv=2026-02-06&sr=b&scid=d2dfa64d-0e31-5d6b-8030-88bbe1bfdeef&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-17T19%3A52%3A54Z&ske=2026-10-18T19%3A52%3A54Z&sks=b&skv=2026-02-06&sig=E25/XVC/3BZ86C2GMCOk1c7s37kQ173tErdcCO%2BEo34%3D' -o assets/products/mllga-snapback-hat-back.png
+
+      - name: Validate PNG files and refresh cache key
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          paths = [
+              'assets/products/mllga-snapback-hat.png',
+              'assets/products/mllga-snapback-hat-left-front.png',
+              'assets/products/mllga-snapback-hat-left-side.png',
+              'assets/products/mllga-snapback-hat-right-front.png',
+              'assets/products/mllga-snapback-hat-right-side.png',
+              'assets/products/mllga-snapback-hat-back.png',
+          ]
+          for p in paths:
+              data = Path(p).read_bytes()
+              if data[:8] != b'\x89PNG\r\n\x1a\n':
+                  raise SystemExit(f'Invalid PNG: {p}')
+              if len(data) < 1_000_000:
+                  raise SystemExit(f'Unexpectedly small image: {p} ({len(data)} bytes)')
+          store = Path('store.js')
+          text = store.read_text(encoding='utf-8')
+          text = text.replace('20261012-mllga2', '20261018-mllga3')
+          store.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit updated MLLGA images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/products/mllga-snapback-hat*.png store.js
+          git commit -m "Update MLLGA Snapback Hat images"
+          git push
