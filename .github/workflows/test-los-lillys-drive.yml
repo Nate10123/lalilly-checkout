@@ -1,0 +1,25 @@
+name: Test Los Lillys staged PNG access
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/test-los-lillys-drive.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test staged Drive image
+        run: |
+          set +e
+          id='17og05-gG5w6TG8SJtRZxdqlHjymeV1yu'
+          for u in \
+            "https://drive.usercontent.google.com/download?id=$id&export=download&confirm=t" \
+            "https://drive.google.com/uc?export=download&id=$id"; do
+            code=$(curl -L -sS --max-time 20 -o /tmp/probe -w '%{http_code}' "$u")
+            size=$(wc -c </tmp/probe 2>/dev/null || echo 0)
+            type=$(file -b --mime-type /tmp/probe 2>/dev/null || true)
+            head=$(xxd -p -l 8 /tmp/probe 2>/dev/null || true)
+            echo "$code $size $type $head $u"
+          done
