@@ -20,41 +20,51 @@ jobs:
       - name: Install Pillow
         run: python -m pip install --disable-pip-version-check pillow
 
-      - name: Convert WebPs to PNGs and update product
+      - name: Restore high-quality historical images and convert to PNG
         run: |
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
+          import subprocess
           from PIL import Image
 
-          names = [
-              'front',
-              'left-front',
-              'left',
-              'right-front',
-              'right',
-              'back',
-          ]
+          source_commit = '5e9c7bdefd374e969f45283cf5a74a4bed7e24f6'
+          names = ['front', 'left-front', 'left', 'right-front', 'right', 'back']
 
           for name in names:
-              src = Path(f'assets/products/los-lillys-pug-hat-{name}.webp')
+              repo_path = f'assets/products/los-lillys-pug-hat-{name}.webp'
+              src = Path('/tmp') / f'los-lillys-pug-hat-{name}.webp'
               dst = Path(f'assets/products/los-lillys-pug-hat-{name}.png')
-              if not src.exists():
-                  raise SystemExit(f'Missing source: {src}')
+
+              data = subprocess.check_output(['git', 'show', f'{source_commit}:{repo_path}'])
+              src.write_bytes(data)
+              if len(data) < 300_000:
+                  raise SystemExit(f'Historical source is unexpectedly small: {name} ({len(data)} bytes)')
+
               with Image.open(src) as im:
                   im.load()
+                  if im.size != (2000, 2000):
+                      raise SystemExit(f'Unexpected dimensions for {name}: {im.size}')
                   im.save(dst, 'PNG', optimize=True)
-              data = dst.read_bytes()
-              if data[:8] != b'\x89PNG\r\n\x1a\n':
+
+              out = dst.read_bytes()
+              if out[:8] != b'\x89PNG\r\n\x1a\n':
                   raise SystemExit(f'Invalid PNG generated: {dst}')
-              if len(data) < 100_000:
-                  raise SystemExit(f'Generated image suspiciously small: {dst} ({len(data)} bytes)')
+              if len(out) < 300_000:
+                  raise SystemExit(f'Generated PNG is unexpectedly small: {name} ({len(out)} bytes)')
+              print(f'{name}: historical WebP {len(data)} bytes -> PNG {len(out)} bytes')
 
           product = Path('product-extra.js')
           text = product.read_text(encoding='utf-8')
-          text = text.replace('.webp?v=20261013fix', '.png?v=20261022-png1')
-          text = text.replace('.webp', '.png')
+          for name in names:
+              old = f'assets/products/los-lillys-pug-hat-{name}.webp?v=20261013fix'
+              new = f'assets/products/los-lillys-pug-hat-{name}.png?v=20261022-png1'
+              text = text.replace(old, new)
           product.write_text(text, encoding='utf-8')
+
+          los_lines = [line for line in text.splitlines() if 'los-lillys-pug-hat-' in line]
+          if any('.webp' in line for line in los_lines):
+              raise SystemExit('A Los Lillys WebP reference is still present in product-extra.js')
 
           for name in names:
               Path(f'assets/products/los-lillys-pug-hat-{name}.webp').unlink(missing_ok=True)
