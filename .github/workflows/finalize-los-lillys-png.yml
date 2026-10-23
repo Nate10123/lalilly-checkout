@@ -1,0 +1,89 @@
+name: Finalize Los Lillys PNG repair
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finalize-los-lillys-png.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download exact original PNGs
+        run: |
+          set -euo pipefail
+          mkdir -p assets/products
+          curl -fL --retry 3 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-7e30-81fd-b079-f102a4e843cc/raw?se=2026-10-23T02%3A04%3A36Z&sp=r&sv=2026-02-06&sr=b&scid=c8694fdd-92c4-5719-a63e-6ff53a644264&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-22T07%3A36%3A01Z&ske=2026-10-23T07%3A36%3A01Z&sks=b&skv=2026-02-06&sig=3O6ARMqq9iOa5qing/GW6Mtp6%2BFRrV310TPb7p4Xjcs%3D' -o assets/products/los-lillys-pug-hat-front.png
+          curl -fL --retry 3 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-7470-81fd-8445-ad9b874b8a07/raw?se=2026-10-23T02%3A04%3A41Z&sp=r&sv=2026-02-06&sr=b&scid=a5f3914a-521e-5a66-9990-363196587a6d&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-22T12%3A03%3A55Z&ske=2026-10-23T12%3A03%3A55Z&sks=b&skv=2026-02-06&sig=/lpduzFHMXOJF19eCcEfWcPnANxm/j5p9QUpzydXeRY%3D' -o assets/products/los-lillys-pug-hat-left-front.png
+          curl -fL --retry 3 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-57a8-81fd-875b-879c6adf7eb4/raw?se=2026-10-23T02%3A04%3A45Z&sp=r&sv=2026-02-06&sr=b&scid=0bcbfe82-2507-5a95-88ac-6ba9fb400cd5&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-22T12%3A09%3A01Z&ske=2026-10-23T12%3A09%3A01Z&sks=b&skv=2026-02-06&sig=g9Lktudue1jUqrSr/GrOlvo1uoYP7GPVW8SvF0b0vZg%3D' -o assets/products/los-lillys-pug-hat-left.png
+          curl -fL --retry 3 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-2404-81fd-9f4d-e37eedce9e67/raw?se=2026-10-23T02%3A04%3A49Z&sp=r&sv=2026-02-06&sr=b&scid=e6c770f5-cf6d-5d26-8eb4-4fb38e537a26&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-22T07%3A34%3A22Z&ske=2026-10-23T07%3A34%3A22Z&sks=b&skv=2026-02-06&sig=w/VhLvrx8LUUxN1hLUHmWaPc9O9i6vcpt2ei7ngrhRI%3D' -o assets/products/los-lillys-pug-hat-right-front.png
+          curl -fL --retry 3 'https://sdmntprwestus3.oaiusercontent.com/files/00000000-cb94-81fd-891f-d78f15a7e8a5/raw?se=2026-10-23T02%3A04%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=4e0def9b-6db5-553b-893d-ffd73c094b1f&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-22T07%3A45%3A54Z&ske=2026-10-23T07%3A45%3A54Z&sks=b&skv=2026-02-06&sig=mtSO3QuYr2Cl7848epRKRxXqskm/C%2BZ48prQoRQ8sPs%3D' -o assets/products/los-lillys-pug-hat-right.png
+          curl -fL --retry 3 'https://sdmntpreastus2.oaiusercontent.com/files/00000000-4a68-81f6-ba73-0a65ae788fc2/raw?se=2026-10-23T02%3A05%3A01Z&sp=r&sv=2026-02-06&sr=b&scid=e19af2f2-a09e-5aad-af1d-ce4321c8cb97&skoid=b9a47e8b-72a2-4ed3-8028-a2a98c1a6142&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-22T23%3A46%3A28Z&ske=2026-10-23T23%3A46%3A28Z&sks=b&skv=2026-02-06&sig=yJ2XwYTE%2B4Vzsw3WLp5HorRaJ0V14qL/YOp%2BBw6RSe4%3D' -o assets/products/los-lillys-pug-hat-back.png
+
+      - name: Validate exact originals and update product references
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import struct
+
+          expected = {
+              'front': 4329364,
+              'left-front': 3899620,
+              'left': 3750912,
+              'right-front': 4232226,
+              'right': 3793096,
+              'back': 4535595,
+          }
+          for name, expected_size in expected.items():
+              p = Path(f'assets/products/los-lillys-pug-hat-{name}.png')
+              data = p.read_bytes()
+              if len(data) != expected_size:
+                  raise SystemExit(f'Byte-size mismatch for {name}: {len(data)} != {expected_size}')
+              if data[:8] != b'\x89PNG\r\n\x1a\n':
+                  raise SystemExit(f'Invalid PNG signature: {name}')
+              width, height = struct.unpack('>II', data[16:24])
+              if (width, height) != (2000, 2000):
+                  raise SystemExit(f'Dimension mismatch for {name}: {(width, height)}')
+              print(f'{name}: {len(data)} bytes, {width}x{height}')
+
+          product = Path('product-extra.js')
+          text = product.read_text(encoding='utf-8')
+          for name in expected:
+              old = f'assets/products/los-lillys-pug-hat-{name}.webp?v=20261013fix'
+              new = f'assets/products/los-lillys-pug-hat-{name}.png?v=20261022-png2'
+              text = text.replace(old, new)
+              text = text.replace(f'assets/products/los-lillys-pug-hat-{name}.webp', new)
+          if any('.webp' in line for line in text.splitlines() if 'los-lillys-pug-hat-' in line):
+              raise SystemExit('Los Lillys WebP reference remains in product-extra.js')
+          product.write_text(text, encoding='utf-8')
+          PY
+
+          rm -f assets/products/los-lillys-pug-hat-*.webp
+
+      - name: Clean temporary repair files
+        run: |
+          rm -f \
+            .github/workflows/convert-los-lillys-to-png.yml \
+            .github/workflows/test-los-lillys-cdn.yml \
+            .github/workflows/inspect-los-lillys-printful.yml \
+            .github/workflows/test-los-lillys-drive.yml \
+            .github/workflows/finalize-los-lillys-png.yml \
+            functions/api/printful-sync-product.js
+
+      - name: Commit final Los Lillys PNG repair
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Use original PNG images for Los Lillys New Pug Hat"
+          git push
