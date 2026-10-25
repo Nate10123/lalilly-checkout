@@ -21,7 +21,7 @@ compatibility_flags = ["nodejs_compat"]
 # flags like this that aren't sensitive.
 [vars]
 LALILLY_TEST_STAGE = "true"
-LALILLY_STAGE_RUN = "true"
+LALILLY_STAGE_RUN = "false"
 ENABLE_STRIPE_TAX = "true"
 # Woo routing remains off until real Tapstitch products and unpaid sync tests pass.
 WOOCOMMERCE_ENABLED = "true"
