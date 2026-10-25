@@ -80,6 +80,11 @@ test('Stripe amounts, discounts, tax, shipping, and customer address are reconci
   assert.equal(payload.totalCents, 5549); assert.equal(payload.lines[0].totalCents, 4500); assert.equal(payload.discountCents, 1000);
   assert.equal(payload.lines[0].variationId, 101); assert.equal(payload.shipping.last_name, 'Smith');
   assert.equal(payload.billing.email, 'buyer@example.com'); assert.equal(payload.billing_address.line1, '2 Billing St');
+  assert.equal(Object.hasOwn(payload.shipping, 'phone'), false);
+  const withPhone = session(); withPhone.customer_details.phone = '+12025550123';
+  const phonePayload = buildWooImport(withPhone, snapshot(), stripeLines());
+  assert.equal(phonePayload.shipping.phone, '+12025550123');
+  assert.equal(phonePayload.billing.phone, '+12025550123');
 });
 test('unpaid, wrong currency, changed price, mismatched session, and incomplete lines cannot import', () => {
   for (const s of [{ ...session(), payment_status: 'unpaid' }, { ...session(), currency: 'eur' }, { ...session(), id: 'cs_test_other' }, { ...session(), amount_total: 1 }]) assert.throws(() => buildWooImport(s, snapshot(), stripeLines()));
@@ -105,6 +110,7 @@ test('Woo checkout uses existing UI contract, ignores client price, and saves fr
   assert.equal(stripeBody.get('line_items[0][price_data][unit_amount]'), '2750');
   assert.equal(stripeBody.get('line_items[0][price_data][tax_behavior]'), 'exclusive');
   assert.equal(stripeBody.get('metadata[fulfillment]'), 'woocommerce');
+  assert.equal(stripeBody.get('phone_number_collection[enabled]'), 'true');
   assert.equal(stripeBody.has('shipping_options[0][shipping_rate_data][delivery_estimate][minimum][value]'), false);
   const saved = JSON.parse(await e.ORDERS.get(`woo-checkout:${stripeBody.get('metadata[woo_snapshot]')}`));
   assert.equal(saved.lines[0].woo.variationId, 101); assert.equal(saved.stripeSessionId, 'cs_test_new123456');
@@ -117,6 +123,7 @@ test('legacy checkout continues without Woo secrets or Woo requests', async () =
   assert.deepEqual(JSON.parse(stripeBody.get('metadata[cart]')), [{ id: 28, qty: 1, size: 'M' }]);
   assert.equal(stripeBody.get('shipping_options[0][shipping_rate_data][delivery_estimate][minimum][value]'), '5');
   assert.equal(stripeBody.get('shipping_options[0][shipping_rate_data][delivery_estimate][maximum][value]'), '10');
+  assert.equal(stripeBody.has('phone_number_collection[enabled]'), false);
 });
 
 test('the new Woo-only shirt cannot fall back when routing or mapping is disabled', async () => {
