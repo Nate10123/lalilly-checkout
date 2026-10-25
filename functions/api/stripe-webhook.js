@@ -43,6 +43,10 @@ export async function onRequestPost(context) {
   }
 
   const session = stripeEvent.data.object;
+  // This isolated test endpoint must never process unrelated legacy checkouts.
+  if (env.LALILLY_TEST_STAGE === 'true' && (session.livemode !== false || session.metadata?.fulfillment !== 'woocommerce')) {
+    return new Response('ignored by isolated test checkout', {status: 200});
+  }
 
   if (session.payment_status !== 'paid' && !(session.payment_status === 'no_payment_required' && session.amount_total === 0)) return new Response('unpaid', { status: 200 });
 
