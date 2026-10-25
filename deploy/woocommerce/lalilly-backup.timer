@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily encrypted La Lilly backup
+
+[Timer]
+OnCalendar=*-*-* 04:15:00 UTC
+Persistent=true
+RandomizedDelaySec=300
+Unit=lalilly-backup.service
+
+[Install]
+WantedBy=timers.target

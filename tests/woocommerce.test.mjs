@@ -93,6 +93,7 @@ test('Woo checkout uses existing UI contract, ignores client price, and saves fr
   assert.equal(stripeBody.get('line_items[0][price_data][unit_amount]'), '2750');
   assert.equal(stripeBody.get('line_items[0][price_data][tax_behavior]'), 'exclusive');
   assert.equal(stripeBody.get('metadata[fulfillment]'), 'woocommerce');
+  assert.equal(stripeBody.has('shipping_options[0][shipping_rate_data][delivery_estimate][minimum][value]'), false);
   const saved = JSON.parse(await e.ORDERS.get(`woo-checkout:${stripeBody.get('metadata[woo_snapshot]')}`));
   assert.equal(saved.lines[0].woo.variationId, 101); assert.equal(saved.stripeSessionId, 'cs_test_new123456');
 });
@@ -102,6 +103,8 @@ test('legacy checkout continues without Woo secrets or Woo requests', async () =
   const response = await checkout({ env: { STRIPE_SECRET_KEY: 'sk_test_fake' }, request: new Request('https://lillypug.com/api/create-checkout-session', { method: 'POST', body: JSON.stringify({ cart: [{ id: 28, size: 'M', qty: 1 }] }) }) });
   assert.equal(response.status, 200); assert.equal(stripeBody.get('line_items[0][price_data][unit_amount]'), '4950');
   assert.deepEqual(JSON.parse(stripeBody.get('metadata[cart]')), [{ id: 28, qty: 1, size: 'M' }]);
+  assert.equal(stripeBody.get('shipping_options[0][shipping_rate_data][delivery_estimate][minimum][value]'), '5');
+  assert.equal(stripeBody.get('shipping_options[0][shipping_rate_data][delivery_estimate][maximum][value]'), '10');
 });
 
 test('the new Woo-only shirt cannot fall back when routing or mapping is disabled', async () => {

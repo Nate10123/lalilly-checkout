@@ -121,10 +121,12 @@ export async function onRequestPost(context) {
             currency: 'usd',
           },
           display_name: qualifiesForFreeShipping ? 'Free shipping' : 'Standard shipping',
-          delivery_estimate: {
+          // The Tapstitch shirt ships internationally. Keep its ETA unset until
+          // an actual supplier estimate is verified for the destination.
+          ...(!wooSnapshot ? { delivery_estimate: {
             minimum: { unit: 'business_day', value: 5 },
             maximum: { unit: 'business_day', value: 10 },
-          },
+          } } : {}),
         },
       },
     ];

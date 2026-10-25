@@ -1,0 +1,16 @@
+[Unit]
+Description=Encrypted La Lilly WooCommerce backup
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/lalilly/backup-tools/backup.py
+User=root
+UMask=0077
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/lalilly /run/docker.sock
+NoNewPrivileges=true
+TimeoutStartSec=10min
