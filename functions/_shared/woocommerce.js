@@ -13,7 +13,8 @@ export function wooOrigin(env) {
 export async function wooRequest(env, path, { method = 'GET', body } = {}) {
   if (!env.WOOCOMMERCE_CONSUMER_KEY || !env.WOOCOMMERCE_CONSUMER_SECRET) throw new Error('WooCommerce credentials are missing.');
   const response = await fetch(`${wooOrigin(env)}/wp-json/wc/v3/${path}`, {
-    method, redirect: 'error', signal: AbortSignal.timeout(20000),
+    // Workers supports manual redirects. Never follow one with API credentials.
+    method, redirect: 'manual', signal: AbortSignal.timeout(20000),
     headers: { Authorization: `Basic ${btoa(`${env.WOOCOMMERCE_CONSUMER_KEY}:${env.WOOCOMMERCE_CONSUMER_SECRET}`)}`, 'Content-Type': 'application/json' },
     ...(body ? { body: JSON.stringify(body) } : {}),
   });

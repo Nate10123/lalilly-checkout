@@ -1,7 +1,7 @@
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import Stripe from 'stripe';
-import { wooOrigin, wooSelection, verifyWooVariant, prepareWooCheckout, buildWooImport, fulfillWooCheckout, wooTracking } from '../functions/_shared/woocommerce.js';
+import { wooOrigin, wooRequest, wooSelection, verifyWooVariant, prepareWooCheckout, buildWooImport, fulfillWooCheckout, wooTracking } from '../functions/_shared/woocommerce.js';
 import { onRequestPost as checkout } from '../functions/api/create-checkout-session.js';
 import { onRequestPost as stripeWebhook } from '../functions/api/stripe-webhook.js';
 import { onRequestPost as wooWebhook, verifyWooSignature } from '../functions/api/woocommerce-webhook.js';
@@ -43,6 +43,18 @@ test('disabled bridge preserves legacy providers and all Printify product IDs', 
   assert.equal(wooSelection({ ...env(), WOOCOMMERCE_ENABLED: 'false' }, item), null);
   assert.equal(getProvider(PRODUCTS[24]), 'printify'); assert.equal(getProvider(PRODUCTS[28]), 'printify'); assert.equal(getProvider(PRODUCTS[29]), 'printify');
   assert.equal(PRODUCTS[28].sizes.M, '403704');
+});
+
+test('Woo redirects are refused without forwarding credentials using the Workers-supported fetch mode', async () => {
+  let requests = 0;
+  globalThis.fetch = async (url, options) => {
+    requests++;
+    assert.equal(new URL(url).origin, 'https://store.example.com');
+    assert.equal(options.redirect, 'manual');
+    return new Response(null, {status: 302, headers: {Location: 'https://other.example.com/'}});
+  };
+  await assert.rejects(wooRequest(env(), 'lalilly-bridge'), /302/);
+  assert.equal(requests, 1);
 });
 test('mapping is explicit; unmapped selections and duplicate entries fail closed', () => {
   assert.deepEqual(wooSelection(env(), item), mapping);
@@ -148,7 +160,7 @@ test('Woo import uses only server snapshot; tests stay on hold even in processin
   const e = { ...env(), WOOCOMMERCE_ORDER_MODE: 'processing' }; await e.ORDERS.put('woo-checkout:snapshot-token', JSON.stringify(snapshot()));
   let sent;
   globalThis.fetch = async (url, options) => {
-    assert.ok(String(url).endsWith('/lalilly-orders')); assert.equal(options.redirect, 'error');
+    assert.ok(String(url).endsWith('/lalilly-orders')); assert.equal(options.redirect, 'manual');
     assert.match(options.headers.Authorization, /^Basic /); sent = JSON.parse(options.body);
     return json({ id: 42, status: 'on-hold' });
   };
