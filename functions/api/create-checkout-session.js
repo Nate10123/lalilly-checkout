@@ -8,6 +8,7 @@
 import Stripe from 'stripe';
 import { PRODUCTS, getPriceCents, hasSizes, hasColors } from '../_shared/products.js';
 import { EXTRA_PRODUCTS } from '../_shared/extra-products.js';
+import { prepareWooCheckout } from '../_shared/woocommerce.js';
 
 Object.assign(PRODUCTS, EXTRA_PRODUCTS);
 
@@ -77,7 +78,8 @@ export async function onRequestPost(context) {
       };
     });
 
-    const line_items = normalizedCart.map(({ id, qty, size, color }) => {
+    const wooSnapshot = await prepareWooCheckout(env, normalizedCart, PRODUCTS, getPriceCents);
+    const line_items = normalizedCart.map(({ id, qty, size, color }, index) => {
       const product = PRODUCTS[id];
       const priceCents = getPriceCents(product, size, color);
       if (priceCents == null) {
@@ -89,8 +91,10 @@ export async function onRequestPost(context) {
           currency: 'usd',
           product_data: {
             name: variantLabel ? `${product.name} (${variantLabel})` : product.name,
+            ...(wooSnapshot ? { metadata: { lalilly_line: String(index) } } : {}),
           },
           unit_amount: priceCents,
+          ...(wooSnapshot ? { tax_behavior: 'exclusive' } : {}),
         },
         quantity: qty,
       };
@@ -139,7 +143,7 @@ export async function onRequestPost(context) {
       success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/`,
       metadata: {
-        cart: JSON.stringify(normalizedCart),
+        ...(wooSnapshot ? { fulfillment: 'woocommerce', woo_snapshot: wooSnapshot.token } : { cart: JSON.stringify(normalizedCart) }),
       },
     };
 
@@ -150,6 +154,10 @@ export async function onRequestPost(context) {
     }
 
     const session = await stripe.checkout.sessions.create(sessionConfig);
+    if (wooSnapshot) {
+      // Freeze mapping and prices for this payment, independent of subsequent catalog edits.
+      await env.ORDERS.put(`woo-checkout:${wooSnapshot.token}`, JSON.stringify({ ...wooSnapshot, stripeSessionId: session.id }));
+    }
 
     return new Response(JSON.stringify({ url: session.url }), {
       status: 200,

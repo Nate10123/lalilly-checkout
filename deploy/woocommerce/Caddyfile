@@ -1,0 +1,13 @@
+{
+    email {$ACME_EMAIL}
+}
+
+{$STORE_DOMAIN} {
+    header X-Robots-Tag "noindex, nofollow"
+    header -Server
+    encode zstd gzip
+    @sensitive path /.env /.git/* /wp-config.php /xmlrpc.php
+    respond @sensitive 404
+    # Preserve Authorization and the WC OAuth routes. Do not put basic auth around this site.
+    reverse_proxy wordpress:80
+}

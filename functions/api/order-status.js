@@ -8,6 +8,8 @@
 // refs written by stripe-webhook.js. Sessions created before Printify
 // existed stored a bare Printful order id string instead — still handled
 // below so old orders keep working.
+import { refreshWooRecord } from '../_shared/woocommerce.js';
+
 export async function onRequestGet(context) {
   const { request, env } = context;
   const url = new URL(request.url);
@@ -40,9 +42,16 @@ export async function onRequestGet(context) {
 
     const orders = [];
     for (const ref of refs) {
-      const kvKey = ref.provider === 'printify' ? `pfyorder:${ref.id}` : `pforder:${ref.id}`;
+      const kvKey = ref.provider === 'woocommerce' ? `wooorder:${ref.id}` : ref.provider === 'printify' ? `pfyorder:${ref.id}` : `pforder:${ref.id}`;
       const raw = await env.ORDERS.get(kvKey);
-      if (raw) orders.push(JSON.parse(raw));
+      if (raw) {
+        let record = JSON.parse(raw);
+        if (ref.provider === 'woocommerce') {
+          try { record = await refreshWooRecord(env, ref.id, record); }
+          catch { console.error('WooCommerce status refresh failed.'); }
+        }
+        orders.push(record);
+      }
     }
 
     if (orders.length === 0) {
@@ -68,15 +77,18 @@ export async function onRequestGet(context) {
     };
 
     return new Response(JSON.stringify({
-      status: allShipped ? 'shipped' : 'processing',
+      status: allShipped ? 'shipped' : orders.length === 1 ? orders[0].status : 'processing',
       trackingNumber: join(orders.map((o) => o.trackingNumber)),
-      trackingUrl: join(orders.map((o) => o.trackingUrl)),
+      // A single clickable URL must remain a valid URL, including mixed-provider orders.
+      trackingUrl: orders.find(o => o.trackingUrl)?.trackingUrl || null,
       carrier: join(orders.map((o) => o.carrier)),
       createdAt: orders[0].createdAt,
       shippedAt: allShipped ? join(orders.map((o) => o.shippedAt)) : null,
+      shipments: orders.flatMap(o => o.shipments || []),
+      fulfillmentStatus: orders.length === 1 ? orders[0].wooStatus || orders[0].status : undefined,
     }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
     });
   } catch (err) {
     console.error('Order status lookup error:', err.message);

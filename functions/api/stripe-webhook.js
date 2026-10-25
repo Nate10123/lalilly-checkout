@@ -9,6 +9,7 @@ import Stripe from 'stripe';
 import { PRODUCTS, getVariantId, getPriceCents, getProvider, getPrintifyProductId } from '../_shared/products.js';
 import { EXTRA_PRODUCTS } from '../_shared/extra-products.js';
 import { placePrintifyOrder } from '../_shared/printify.js';
+import { fulfillWooCheckout, wooJson } from '../_shared/woocommerce.js';
 
 Object.assign(PRODUCTS, EXTRA_PRODUCTS);
 
@@ -37,11 +38,24 @@ export async function onRequestPost(context) {
     return new Response(`Webhook Error: ${err.message}`, { status: 400 });
   }
 
-  if (stripeEvent.type !== 'checkout.session.completed') {
+  if (!['checkout.session.completed', 'checkout.session.async_payment_succeeded'].includes(stripeEvent.type)) {
     return new Response('ignored', { status: 200 });
   }
 
   const session = stripeEvent.data.object;
+
+  if (session.payment_status !== 'paid' && !(session.payment_status === 'no_payment_required' && session.amount_total === 0)) return new Response('unpaid', { status: 200 });
+
+  if (session.metadata?.fulfillment === 'woocommerce') {
+    try {
+      const order = await fulfillWooCheckout(env, session, stripe);
+      return wooJson({ ok: true, orderId: order.id });
+    } catch {
+      // Retry only the isolated WooCommerce flow. The plugin prevents duplicate orders.
+      console.error('WooCommerce import failed; Stripe should retry. Session:', session.id);
+      return wooJson({ error: 'WooCommerce import is pending. Retry required.' }, 503);
+    }
+  }
 
   try {
     console.log('Fulfilling order for Stripe session:', session.id);
@@ -75,6 +89,9 @@ export async function onRequestPost(context) {
     for (const { id, qty, size, color } of cart) {
       const product = PRODUCTS[id];
       if (!product) throw new Error('Unknown product in order: ' + id);
+      if (getProvider(product) === 'woocommerce') {
+        throw new Error('Tapstitch orders require a verified WooCommerce checkout snapshot.');
+      }
 
       const variantId = getVariantId(product, size, color);
       if (!variantId) {

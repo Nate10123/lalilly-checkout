@@ -7,6 +7,8 @@
 # some browsers cached store.js longer than intended.
 /store.js
   Cache-Control: no-cache
+/product-extra.js
+  Cache-Control: no-cache
 
 # Same reasoning for the main pages — content and prices shown there can
 # change, so always revalidate rather than serving a stale cached page.

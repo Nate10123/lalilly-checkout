@@ -452,6 +452,7 @@ export const PRODUCTS = {
 // `variantsByColor` / `printifyVariantId` exactly like a Printful product —
 // getVariantId() below doesn't care which provider a variant ID belongs to.
 export function getProvider(product) {
+  if (product.provider === 'woocommerce') return 'woocommerce';
   return product.provider === 'printify' ? 'printify' : 'printful';
 }
 

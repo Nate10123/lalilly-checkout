@@ -1,0 +1,14 @@
+# Cloudflare secrets live in context.env, not browser JavaScript.
+# Copy to .dev.vars ONLY for local development. Use separate test Stripe keys and local KV.
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+WOOCOMMERCE_ENABLED=false
+WOOCOMMERCE_URL=https://store.lillypug.com
+WOOCOMMERCE_CONSUMER_KEY=
+WOOCOMMERCE_CONSUMER_SECRET=
+WOOCOMMERCE_WEBHOOK_SECRET=
+WOOCOMMERCE_VARIANTS_JSON={}
+WOOCOMMERCE_ALLOW_LIVE_CHECKOUT=false
+WOOCOMMERCE_ORDER_MODE=review
+# Set only after confirming Tapstitch's actual metadata shape. See docs/woocommerce.md.
+WOOCOMMERCE_TRACKING_META_KEY=

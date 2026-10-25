@@ -57,3 +57,28 @@ PRODUCTS.push({
   madeIn: 'Vietnam or Bangladesh',
   description: 'Structured Flexfit cap with a clean mid-profile shape, curved visor, and silver undervisor. Made from a 63% polyester, 34% cotton, 3% spandex twill blend with a built-in stretch band for a comfortable fit, finished with 6 embroidered eyelets and sized to fit head circumferences from 22″–23⅞″.',
 });
+
+// The first Tapstitch launch uses the existing product page and cart styling.
+// Keep the listing unavailable until customer checkout and supplier payment are enabled.
+PRODUCTS.push({
+  id: 31,
+  name: 'Unisex Pure Cotton T-Shirt',
+  cat: 'apparel',
+  catLabel: 'Apparel',
+  drop: 'la-lilly',
+  dropLabel: 'La Lilly',
+  price: 27.92,
+  comingSoon: true,
+  deliveryNote: 'Ships internationally after production; delivery time varies by destination.',
+  tag: 'new',
+  fill: '#f7f3ec',
+  bg: '#e9e6df',
+  sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  colors: [
+    { name: 'Black', hex: '#111111', image: 'assets/products/lape-cotton-tee-black-front.jpg', images: ['assets/products/lape-cotton-tee-black-front.jpg', 'assets/products/lape-cotton-tee-black-back.jpg'] },
+    { name: 'White', hex: '#ffffff', image: 'assets/products/lape-cotton-tee-white-front.jpg', images: ['assets/products/lape-cotton-tee-white-front.jpg', 'assets/products/lape-cotton-tee-white-back.jpg'] },
+  ],
+  image: 'assets/products/lape-cotton-tee-black-front.jpg',
+  images: ['assets/products/lape-cotton-tee-black-front.jpg', 'assets/products/lape-cotton-tee-black-back.jpg'],
+  description: 'A loose-fit, drop-shoulder tee in 100% cotton, 230 gsm (6.8 oz), with front and back DTF artwork and the approved sewn-in Lape Label. Made to order through international fulfillment. Machine wash gently at 30°C, tumble dry low, and avoid ironing the print.',
+});

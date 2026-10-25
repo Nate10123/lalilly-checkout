@@ -2,6 +2,11 @@
   "name": "lalilly-storefront",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check:woocommerce": "node --env-file=.dev.vars scripts/woocommerce-check.mjs"
+  },
   "dependencies": {
     "stripe": "^17.0.0"
   }

@@ -1,0 +1,88 @@
+name: lalilly-woocommerce
+
+x-wordpress-env: &wordpress-env
+  WORDPRESS_DB_HOST: database:3306
+  WORDPRESS_DB_NAME: wordpress
+  WORDPRESS_DB_USER: wordpress
+  WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+  STORE_DOMAIN: ${STORE_DOMAIN:?Set STORE_DOMAIN}
+  LALILLY_ALLOW_PAID_ORDERS: ${LALILLY_ALLOW_PAID_ORDERS:-false}
+  WORDPRESS_CONFIG_EXTRA: |
+    define('WP_HOME', 'https://' . getenv('STORE_DOMAIN'));
+    define('WP_SITEURL', 'https://' . getenv('STORE_DOMAIN'));
+    define('FORCE_SSL_ADMIN', true);
+    define('DISALLOW_FILE_EDIT', true);
+    define('DISABLE_WP_CRON', true);
+    if (isset($$_SERVER['HTTP_X_FORWARDED_PROTO']) && $$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') $$_SERVER['HTTPS'] = 'on';
+
+services:
+  database:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  wordpress:
+    image: wordpress:php8.3-apache
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    environment: *wordpress-env
+    volumes:
+      - wordpress:/var/www/html
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins:ro
+    # No host port: only Caddy can reach Apache from outside Docker.
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on: [wordpress]
+    environment:
+      STORE_DOMAIN: ${STORE_DOMAIN:?Set STORE_DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:?Set ACME_EMAIL}
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+  cron:
+    image: wordpress:cli-php8.3
+    user: "33:33"
+    restart: unless-stopped
+    depends_on: [wordpress]
+    environment: *wordpress-env
+    volumes:
+      - wordpress:/var/www/html
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins:ro
+    entrypoint: /bin/sh
+    command: ["-c", "while true; do wp cron event run --due-now --path=/var/www/html; sleep 60; done"]
+
+  cli:
+    image: wordpress:cli-php8.3
+    user: "33:33"
+    profiles: [tools]
+    depends_on:
+      database:
+        condition: service_healthy
+    environment: *wordpress-env
+    volumes:
+      - wordpress:/var/www/html
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins:ro
+
+volumes:
+  database:
+  wordpress:
+  caddy_data:
+  caddy_config:

@@ -4,6 +4,10 @@ const PRIMARY_ORIGIN = `https://${PRIMARY_HOST}`;
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
+  // The Pages static output is the repository root. Keep server deployment material private.
+  if (/^\/(deploy|docs|tests|scripts)(\/|$)/.test(url.pathname) || /^\/\.(env|dev\.vars)(\.|$)/.test(url.pathname)) {
+    return new Response('Not found', { status: 404 });
+  }
 
   // Keep a single, permanent public origin so Google does not split ranking
   // signals between the Cloudflare Pages subdomain and lillypug.com.

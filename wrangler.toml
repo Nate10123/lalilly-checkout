@@ -21,6 +21,12 @@ compatibility_flags = ["nodejs_compat"]
 # flags like this that aren't sensitive.
 [vars]
 ENABLE_STRIPE_TAX = "true"
+# Woo routing remains off until real Tapstitch products and unpaid sync tests pass.
+WOOCOMMERCE_ENABLED = "false"
+WOOCOMMERCE_URL = "https://store.lillypug.com"
+WOOCOMMERCE_ALLOW_LIVE_CHECKOUT = "false"
+WOOCOMMERCE_ORDER_MODE = "review"
+WOOCOMMERCE_VARIANTS_JSON = '{"31":[{"size":"S","color":"White","productId":11,"variationId":16,"sku":"1563915623770349573","attributes":[{"name":"Color","option":"White"},{"name":"Size","option":"S"}]},{"size":"M","color":"White","productId":11,"variationId":17,"sku":"1563915623770349574","attributes":[{"name":"Color","option":"White"},{"name":"Size","option":"M"}]},{"size":"L","color":"White","productId":11,"variationId":18,"sku":"1563915623770349575","attributes":[{"name":"Color","option":"White"},{"name":"Size","option":"L"}]},{"size":"XL","color":"White","productId":11,"variationId":19,"sku":"1563915623770349576","attributes":[{"name":"Color","option":"White"},{"name":"Size","option":"XL"}]},{"size":"XXL","color":"White","productId":11,"variationId":20,"sku":"1563915623770349577","attributes":[{"name":"Color","option":"White"},{"name":"Size","option":"XXL"}]},{"size":"S","color":"Black","productId":11,"variationId":21,"sku":"1563915623770349568","attributes":[{"name":"Color","option":"Black"},{"name":"Size","option":"S"}]},{"size":"M","color":"Black","productId":11,"variationId":22,"sku":"1563915623770349569","attributes":[{"name":"Color","option":"Black"},{"name":"Size","option":"M"}]},{"size":"L","color":"Black","productId":11,"variationId":23,"sku":"1563915623770349570","attributes":[{"name":"Color","option":"Black"},{"name":"Size","option":"L"}]},{"size":"XL","color":"Black","productId":11,"variationId":24,"sku":"1563915623770349571","attributes":[{"name":"Color","option":"Black"},{"name":"Size","option":"XL"}]},{"size":"XXL","color":"Black","productId":11,"variationId":25,"sku":"1563915623770349572","attributes":[{"name":"Color","option":"Black"},{"name":"Size","option":"XXL"}]}]}'
 # Brevo contact list to add newsletter signups to. Not sensitive — the
 # actual API key (BREVO_API_KEY) is a Secret set in the Cloudflare
 # dashboard instead, since that one needs to stay private.

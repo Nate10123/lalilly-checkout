@@ -152,18 +152,24 @@
         if (data.status === 'shipped') {
           dot.className = 'status-dot shipped';
           text.textContent = 'Shipped';
-          if (data.trackingUrl) {
-            trackingBox.innerHTML = 'Carrier: ' + (data.carrier || 'N/A') +
-              '<br>Tracking #: ' + (data.trackingNumber || 'N/A') +
-              '<br><a href="' + data.trackingUrl + '" target="_blank" rel="noopener">Track package →</a>';
-          } else {
-            trackingBox.innerHTML = 'Carrier: ' + (data.carrier || 'N/A') +
-              '<br>Tracking #: ' + (data.trackingNumber || 'N/A');
-          }
+          trackingBox.replaceChildren();
+          trackingBox.append(document.createTextNode('Carrier: ' + (data.carrier || 'N/A')),
+            document.createElement('br'), document.createTextNode('Tracking #: ' + (data.trackingNumber || 'N/A')));
+          try {
+            const url = new URL(data.trackingUrl);
+            if (url.protocol === 'https:') {
+              const link = document.createElement('a');
+              link.href = url.href;
+              link.target = '_blank';
+              link.rel = 'noopener';
+              link.textContent = 'Track package →';
+              trackingBox.append(document.createElement('br'), link);
+            }
+          } catch { /* Tracking may not include a URL. */ }
           trackingBox.style.display = 'block';
         } else {
           dot.className = 'status-dot processing';
-          text.textContent = 'Processing';
+          text.textContent = ({ cancelled: 'Cancelled', refunded: 'Refunded', failed: 'Needs attention' })[data.status] || 'Processing';
           trackingBox.style.display = 'none';
         }
 

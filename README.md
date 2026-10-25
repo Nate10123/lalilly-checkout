@@ -1,5 +1,7 @@
 # LA LILLY — How This Site Works
 
+Optional, disabled-by-default Tapstitch/WooCommerce bridge: see [setup, architecture and rollout](docs/woocommerce.md). The existing storefront and Printful/Printify catalog remain in place.
+
 Static storefront, real Stripe checkout, automatic fulfillment through
 Printful and/or Printify, hosted on **Cloudflare Pages**. Nothing here
 costs a platform fee — Stripe takes its standard cut (2.9% + 30¢) per sale,
