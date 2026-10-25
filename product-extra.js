@@ -68,7 +68,7 @@ PRODUCTS.push({
   drop: 'la-lilly',
   dropLabel: 'La Lilly',
   price: 27.92,
-  comingSoon: true,
+  comingSoon: false,
   deliveryNote: 'Ships internationally after production; delivery time varies by destination.',
   tag: 'new',
   fill: '#f7f3ec',
@@ -82,3 +82,6 @@ PRODUCTS.push({
   images: ['assets/products/lape-cotton-tee-black-front.jpg', 'assets/products/lape-cotton-tee-black-back.jpg'],
   description: 'A loose-fit, drop-shoulder tee in 100% cotton, 230 gsm (6.8 oz), with front and back DTF artwork and the approved sewn-in Lape Label. Made to order through international fulfillment. Machine wash gently at 30°C, tumble dry low, and avoid ironing the print.',
 });
+
+// Isolated test branch only; never merge this catalog override into main.
+PRODUCTS.splice(0, PRODUCTS.length, ...PRODUCTS.filter(product => product.id === 31));

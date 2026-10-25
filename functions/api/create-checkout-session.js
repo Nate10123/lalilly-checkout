@@ -35,6 +35,10 @@ export async function onRequestPost(context) {
       });
     }
 
+    if (env.LALILLY_TEST_STAGE === 'true' && cart.some(item => String(item.id) !== '31')) {
+      return new Response(JSON.stringify({error: 'This test checkout only accepts the selected Tapstitch shirt.'}), {status: 400, headers: {'Content-Type': 'application/json'}});
+    }
+
     // Normalize + validate quantities, colors, and sizes, using OUR price
     // list and OUR product definitions, never the browser's.
     const normalizedCart = cart.map((item) => {

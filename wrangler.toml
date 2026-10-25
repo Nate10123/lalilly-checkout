@@ -11,7 +11,7 @@
 # few small Node.js built-ins to exist even when using the fetch-based
 # HTTP client.
 
-name = "lalilly"
+name = "lalilly-checkout-test"
 pages_build_output_dir = "."
 compatibility_date = "2026-08-01"
 compatibility_flags = ["nodejs_compat"]
@@ -20,9 +20,11 @@ compatibility_flags = ["nodejs_compat"]
 # on the dashboard, these are committed here in plain text — fine for
 # flags like this that aren't sensitive.
 [vars]
+LALILLY_TEST_STAGE = "true"
+LALILLY_STAGE_RUN = "true"
 ENABLE_STRIPE_TAX = "true"
 # Woo routing remains off until real Tapstitch products and unpaid sync tests pass.
-WOOCOMMERCE_ENABLED = "false"
+WOOCOMMERCE_ENABLED = "true"
 WOOCOMMERCE_URL = "https://store.lillypug.com"
 WOOCOMMERCE_ALLOW_LIVE_CHECKOUT = "false"
 WOOCOMMERCE_ORDER_MODE = "review"
@@ -38,4 +40,4 @@ BREVO_LIST_ID = "3"
 # just commit this file with your real namespace ID below.
 [[kv_namespaces]]
 binding = "ORDERS"
-id = "fccd64bcfb7b4261afdc08fcecd54a9a"
+id = "57238fbfef0148d4b231d6d8f78d8995"
