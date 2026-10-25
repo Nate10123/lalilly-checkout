@@ -17,7 +17,7 @@ export const EXTRA_PRODUCTS = {
     },
   },
   31: {
-    name: 'Unisex Pure Cotton T-Shirt',
+    name: 'XYZ Camo Big Pug Head Tee',
     provider: 'woocommerce',
     priceCents: 2792,
     colors: ['Black', 'White'],

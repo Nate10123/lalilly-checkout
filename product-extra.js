@@ -62,7 +62,7 @@ PRODUCTS.push({
 // Keep the listing unavailable until customer checkout and supplier payment are enabled.
 PRODUCTS.push({
   id: 31,
-  name: 'Unisex Pure Cotton T-Shirt',
+  name: 'XYZ Camo Big Pug Head Tee',
   cat: 'apparel',
   catLabel: 'Apparel',
   drop: 'la-lilly',
