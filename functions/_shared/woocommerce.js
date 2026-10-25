@@ -129,6 +129,8 @@ export function buildWooImport(session, snapshot, stripeLines) {
   if (!address?.line1 || !address.city || !address.postal_code || !['US', 'CA'].includes(address.country) || !session.customer_details?.email) throw new Error('Missing supported customer shipping information.');
   const [first_name, ...last] = (recipient.name || session.customer_details.name || 'Customer').trim().split(/\s+/);
   const shippingAddress = { first_name, last_name: last.join(' '), address_1: address.line1, address_2: address.line2 || '', city: address.city, state: address.state || '', postcode: address.postal_code, country: address.country };
+  // Preserve the payload of older paid checkouts when replayed without a phone.
+  if (session.customer_details.phone) shippingAddress.phone = session.customer_details.phone;
   return {
     external_id: session.id, test_mode: !session.livemode, transaction_id: session.payment_intent || session.id,
     currency: 'USD', lines, shipping: shippingAddress,

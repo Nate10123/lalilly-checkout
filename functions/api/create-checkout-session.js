@@ -144,6 +144,7 @@ export async function onRequestPost(context) {
       payment_method_types: ['card'],
       line_items,
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
+      ...(wooSnapshot ? { phone_number_collection: { enabled: true } } : {}),
       shipping_options,
       allow_promotion_codes: true,
       success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
