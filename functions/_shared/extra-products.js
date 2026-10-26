@@ -19,7 +19,7 @@ export const EXTRA_PRODUCTS = {
   31: {
     name: 'XYZ Camo Big Pug Head Tee',
     provider: 'woocommerce',
-    priceCents: 2792,
+    priceCents: 2650,
     colors: ['Black', 'White'],
     // Replacement DTG shirt, Tapstitch design 1563930564392837120, Woo parent 30.
     // Checkout still requires explicit environment mapping and live gates.

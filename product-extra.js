@@ -67,7 +67,7 @@ PRODUCTS.push({
   catLabel: 'Apparel',
   drop: 'la-lilly',
   dropLabel: 'La Lilly',
-  price: 27.92,
+  price: 26.50,
   comingSoon: true,
   deliveryNote: 'Ships internationally after production; delivery time varies by destination.',
   tag: 'new',

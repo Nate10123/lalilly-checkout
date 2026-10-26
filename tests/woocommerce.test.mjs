@@ -151,7 +151,7 @@ test('the approved shirt uses its real SKU mapping and server price', async () =
   };
   const response = await checkout({env: e, request: new Request('https://lillypug.com/api/create-checkout-session', {method: 'POST', body: JSON.stringify({cart: [{id: 31, size: 'S', color: 'White', qty: 1, price: 1, variationId: 25}]})})});
   assert.equal(response.status, 200);
-  assert.equal(stripeBody.get('line_items[0][price_data][unit_amount]'), '2792');
+  assert.equal(stripeBody.get('line_items[0][price_data][unit_amount]'), '2650');
   const saved = JSON.parse(await e.ORDERS.get(`woo-checkout:${stripeBody.get('metadata[woo_snapshot]')}`));
   assert.equal(saved.lines[0].woo.variationId, 35);
   assert.equal(saved.lines[0].woo.sku, '1564302106440105990');
@@ -175,7 +175,7 @@ test('replacement shirt resolves all twelve size/color choices and rejects stale
       const selected = wooSelection(e, {id: 31, color, size, qty: 1});
       assert.equal(selected.productId, 30);
       assert.equal(selected.sku, PRODUCTS[31].variantsByColor[color][size]);
-      assert.equal(getPriceCents(PRODUCTS[31], size, color), 2792);
+      assert.equal(getPriceCents(PRODUCTS[31], size, color), 2650);
       assert.ok(selected.attributes.some(a => a.name === 'Size' && a.option === size));
       assert.ok(selected.attributes.some(a => a.name === 'Color' && a.option === color));
     }
