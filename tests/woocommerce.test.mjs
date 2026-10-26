@@ -153,8 +153,8 @@ test('the approved shirt uses its real SKU mapping and server price', async () =
   assert.equal(response.status, 200);
   assert.equal(stripeBody.get('line_items[0][price_data][unit_amount]'), '2792');
   const saved = JSON.parse(await e.ORDERS.get(`woo-checkout:${stripeBody.get('metadata[woo_snapshot]')}`));
-  assert.equal(saved.lines[0].woo.variationId, 16);
-  assert.equal(saved.lines[0].woo.sku, '1563915623770349573');
+  assert.equal(saved.lines[0].woo.variationId, 35);
+  assert.equal(saved.lines[0].woo.sku, '1564302106440105990');
 });
 
 test('a Woo-only product in a legacy webhook never reaches another supplier', async () => {
@@ -162,6 +162,33 @@ test('a Woo-only product in a legacy webhook never reaches another supplier', as
   const s = {...session(), metadata: {cart: JSON.stringify([{id: 31, color: 'White', size: 'S', qty: 1}])}};
   const response = await stripeWebhook({env: env(), request: await signedStripeRequest(s)});
   assert.match((await response.json()).error, /verified WooCommerce checkout snapshot/);
+});
+
+test('replacement shirt resolves all twelve size/color choices and rejects stale XXL', async () => {
+  const e = {...env(), WOOCOMMERCE_VARIANTS_JSON: JSON.stringify(selectedMappings)};
+  const rows = selectedMappings['31'];
+  assert.equal(rows.length, 12);
+  assert.equal(new Set(rows.map(v => v.variationId)).size, 12);
+  assert.equal(new Set(rows.map(v => v.sku)).size, 12);
+  for (const color of ['Black', 'White']) {
+    for (const size of ['S', 'M', 'L', 'XL', '2XL', '3XL']) {
+      const selected = wooSelection(e, {id: 31, color, size, qty: 1});
+      assert.equal(selected.productId, 30);
+      assert.equal(selected.sku, PRODUCTS[31].variantsByColor[color][size]);
+      assert.equal(getPriceCents(PRODUCTS[31], size, color), 2792);
+      assert.ok(selected.attributes.some(a => a.name === 'Size' && a.option === size));
+      assert.ok(selected.attributes.some(a => a.name === 'Color' && a.option === color));
+    }
+    assert.throws(() => wooSelection(e, {id: 31, color, size: 'XXL', qty: 1}));
+  }
+  const {readFile} = await import('node:fs/promises');
+  const {runInNewContext} = await import('node:vm');
+  const frontendProducts = [];
+  runInNewContext(await readFile(new URL('../product-extra.js', import.meta.url), 'utf8'), {PRODUCTS: frontendProducts});
+  const shirt = frontendProducts.find(p => p.id === 31);
+  assert.deepEqual(Array.from(shirt.sizes), ['S', 'M', 'L', 'XL', '2XL', '3XL']);
+  assert.equal(shirt.comingSoon, true);
+  assert.match(shirt.description, /200 gsm.*DTG/);
 });
 test('Woo import uses only server snapshot; tests stay on hold even in processing mode', async () => {
   const e = { ...env(), WOOCOMMERCE_ORDER_MODE: 'processing' }; await e.ORDERS.put('woo-checkout:snapshot-token', JSON.stringify(snapshot()));
