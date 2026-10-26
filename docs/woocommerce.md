@@ -1,7 +1,7 @@
 # La Lilly → WooCommerce → Tapstitch
 
 Prepared against `Nate10123/lalilly-checkout`; updated onto base commit `a88f08e805fc68207371fdfa5b7ac702040b84d4` on October 24, 2026, preserving the newer hat image changes.
-The free Oracle backend, DNS and HTTPS are deployed. One approved integration account has working authenticated API access. Its website consumer key, consumer secret and webhook secret are saved as encrypted Cloudflare production settings. Tapstitch is connected and all ten shirt variants passed an authorized live $0 sync test, subsequently cancelled in both systems. The frontend candidate keeps Woo checkout disabled and the shirt Coming Soon; check the active Cloudflare commit before launch. No paid resource upgrade, supplier payment or production submission has been performed.
+The free Oracle backend, DNS and HTTPS are deployed. One approved integration account has working authenticated API access. Its website consumer key, consumer secret and webhook secret are saved as encrypted Cloudflare production settings. Tapstitch is connected. The original ten-variant shirt passed an authorized unpaid sync test and a separate real Stripe sandbox checkout/retry/cancellation. On October 26 the owner replaced that deleted product with DTG design 1563930564392837120; its twelve newly published Woo variations were verified read-only. The old order tests are historical and have not been rerun for this replacement. The frontend candidate keeps Woo checkout disabled and the shirt Coming Soon; check the active Cloudflare commit before launch. No paid resource upgrade, supplier payment or production submission has been performed.
 
 ## Architecture found
 
@@ -33,7 +33,7 @@ Existing lillypug.com UI and cart
   → existing Track Your Order page
 ```
 
-The bridge is **off by default**. Existing products keep their providers. New frontend product **31**, the selected Unisex Pure Cotton T-Shirt at the approved **$27.92**, maps to Woo parent **11**, variations **16–25**. Its approved **Lape Label**, 4 × 4 cm at $0.99 per garment, is already attached. The exact size/color/SKU map is in `docs/woocommerce-variants.json` and `wrangler.toml`. The product is initially Coming Soon. With routing disabled or a missing mapping, Woo-only products fail before payment and cannot fall back to another supplier. WooCommerce handles order records, not a replacement public store or a second payment charge.
+The bridge is **off by default**. Existing products keep their providers. Frontend product **31**, **XYZ Camo Big Pug Head Tee** at the existing **$27.92**, now uses Tapstitch design **1563930564392837120**, blank **RU0001**, 200 gsm cotton and front/back DTG. It maps to Woo parent **30**, variations **35–46**: Black/White in S, M, L, XL, **2XL, 3XL**. The design’s selected **My clothing label**, 4 × 4 cm at $0.99 per garment, is Approved and was kept attached. This replaces the deleted parent 11; old paid snapshots and cancelled test orders were not rewritten. The exact size/color/SKU map is in `docs/woocommerce-variants.json` and `wrangler.toml`. The product is initially Coming Soon. With routing disabled or a missing mapping, Woo-only products fail before payment and cannot fall back to another supplier. WooCommerce handles order records, not a replacement public store or a second payment charge.
 
 ## Changed files and behavior
 

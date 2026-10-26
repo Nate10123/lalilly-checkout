@@ -68,19 +68,19 @@ PRODUCTS.push({
   drop: 'la-lilly',
   dropLabel: 'La Lilly',
   price: 27.92,
-  comingSoon: false,
+  comingSoon: true,
   deliveryNote: 'Ships internationally after production; delivery time varies by destination.',
   tag: 'new',
   fill: '#f7f3ec',
   bg: '#e9e6df',
-  sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+  sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
   colors: [
-    { name: 'Black', hex: '#111111', image: 'assets/products/lape-cotton-tee-black-front.jpg', images: ['assets/products/lape-cotton-tee-black-front.jpg', 'assets/products/lape-cotton-tee-black-back.jpg'] },
-    { name: 'White', hex: '#ffffff', image: 'assets/products/lape-cotton-tee-white-front.jpg', images: ['assets/products/lape-cotton-tee-white-front.jpg', 'assets/products/lape-cotton-tee-white-back.jpg'] },
+    { name: 'Black', hex: '#111111', image: 'assets/products/xyz-camo-dtg-black-front.jpg', images: ['assets/products/xyz-camo-dtg-black-front.jpg', 'assets/products/xyz-camo-dtg-black-back.jpg'] },
+    { name: 'White', hex: '#ffffff', image: 'assets/products/xyz-camo-dtg-white-front.jpg', images: ['assets/products/xyz-camo-dtg-white-front.jpg', 'assets/products/xyz-camo-dtg-white-back.jpg'] },
   ],
-  image: 'assets/products/lape-cotton-tee-black-front.jpg',
-  images: ['assets/products/lape-cotton-tee-black-front.jpg', 'assets/products/lape-cotton-tee-black-back.jpg'],
-  description: 'A loose-fit, drop-shoulder tee in 100% cotton, 230 gsm (6.8 oz), with front and back DTF artwork and the approved sewn-in Lape Label. Made to order through international fulfillment. Machine wash gently at 30°C, tumble dry low, and avoid ironing the print.',
+  image: 'assets/products/xyz-camo-dtg-black-front.jpg',
+  images: ['assets/products/xyz-camo-dtg-black-front.jpg', 'assets/products/xyz-camo-dtg-black-back.jpg'],
+  description: "A regular-fit tee in 100% cotton, 200 gsm (5.9 oz), with front and back DTG artwork and the design’s approved sewn-in clothing label. Made to order through international fulfillment. This style runs smaller than standard. Flat chest width (S/M/L/XL/2XL/3XL): 48/50/52/54/56/58 cm. Machine wash gently at 30°C, tumble dry low, and avoid ironing the print.",
 });
 
 // Isolated test branch only; never merge this catalog override into main.

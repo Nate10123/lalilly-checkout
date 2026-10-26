@@ -21,11 +21,11 @@ export const EXTRA_PRODUCTS = {
     provider: 'woocommerce',
     priceCents: 2792,
     colors: ['Black', 'White'],
-    // SKU strings from the real Tapstitch-published Woo product (parent 11).
-    // Checkout still requires the explicit environment mapping and live gates.
+    // Replacement DTG shirt, Tapstitch design 1563930564392837120, Woo parent 30.
+    // Checkout still requires explicit environment mapping and live gates.
     variantsByColor: {
-      Black: { S: '1563915623770349568', M: '1563915623770349569', L: '1563915623770349570', XL: '1563915623770349571', XXL: '1563915623770349572' },
-      White: { S: '1563915623770349573', M: '1563915623770349574', L: '1563915623770349575', XL: '1563915623770349576', XXL: '1563915623770349577' },
+      Black: { "S": '1564302106440105984', "M": '1564302106440105985', "L": '1564302106440105986', "XL": '1564302106440105987', "2XL": '1564302106440105988', "3XL": '1564302106440105989' },
+      White: { "S": '1564302106440105990', "M": '1564302106440105991', "L": '1564302106440105992', "XL": '1564302106440105993', "2XL": '1564302106440105994', "3XL": '1564302106440105995' },
     },
   },
 };
