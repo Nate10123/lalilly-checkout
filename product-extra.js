@@ -75,10 +75,10 @@ PRODUCTS.push({
   bg: '#e9e6df',
   sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
   colors: [
-    { name: 'Black', hex: '#111111', image: 'assets/products/xyz-camo-dtg-black-front.jpg', images: ['assets/products/xyz-camo-dtg-black-front.jpg', 'assets/products/xyz-camo-dtg-black-back.jpg'] },
-    { name: 'White', hex: '#ffffff', image: 'assets/products/xyz-camo-dtg-white-front.jpg', images: ['assets/products/xyz-camo-dtg-white-front.jpg', 'assets/products/xyz-camo-dtg-white-back.jpg'] },
+    { name: 'Black', hex: '#111111', image: 'assets/products/xyz-camo-dtg-black-front.png', images: ['assets/products/xyz-camo-dtg-black-front.png', 'assets/products/xyz-camo-dtg-black-back.png'] },
+    { name: 'White', hex: '#ffffff', image: 'assets/products/xyz-camo-dtg-white-front.png', images: ['assets/products/xyz-camo-dtg-white-front.png', 'assets/products/xyz-camo-dtg-white-back.png'] },
   ],
-  image: 'assets/products/xyz-camo-dtg-black-front.jpg',
-  images: ['assets/products/xyz-camo-dtg-black-front.jpg', 'assets/products/xyz-camo-dtg-black-back.jpg'],
+  image: 'assets/products/xyz-camo-dtg-black-front.png',
+  images: ['assets/products/xyz-camo-dtg-black-front.png', 'assets/products/xyz-camo-dtg-black-back.png'],
   description: "100% cotton tee with the XYZ camo pug head graphic front and back. Regular fit, classic crew neck, 200 gsm fabric, and a sewn-in La Lilly label. Runs smaller than standard.",
 });
