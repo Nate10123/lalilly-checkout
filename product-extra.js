@@ -72,7 +72,7 @@ PRODUCTS.push({
   deliveryNote: 'Delivery time varies by destination.',
   tag: 'new',
   fill: '#f7f3ec',
-  bg: '#e9e6df',
+  bg: '#D3ECAB',
   sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
   colors: [
     { name: 'Black', hex: '#111111', image: 'assets/products/xyz-camo-dtg-black-front.png', images: ['assets/products/xyz-camo-dtg-black-front.png', 'assets/products/xyz-camo-dtg-black-back.png'] },
