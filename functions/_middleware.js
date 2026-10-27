@@ -33,7 +33,7 @@ export async function onRequest(context) {
   // each page's inline renderer runs and reads PRODUCTS.
   const storeScript = '<script src="store.js"></script>';
   if (html.includes(storeScript) && !html.includes('product-extra.js')) {
-    html = html.replace(storeScript, `${storeScript}\n<script src="product-extra.js?v=20261026-price2650"></script>`);
+    html = html.replace(storeScript, `${storeScript}\n<script src="product-extra.js?v=20261026-brand-copy"></script>`);
   }
 
   const headers = new Headers(response.headers);

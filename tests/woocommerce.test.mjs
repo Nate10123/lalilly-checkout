@@ -188,7 +188,7 @@ test('replacement shirt resolves all twelve size/color choices and rejects stale
   const shirt = frontendProducts.find(p => p.id === 31);
   assert.deepEqual(Array.from(shirt.sizes), ['S', 'M', 'L', 'XL', '2XL', '3XL']);
   assert.equal(shirt.comingSoon, true);
-  assert.match(shirt.description, /200 gsm.*DTG/);
+  assert.match(shirt.description, /100% cotton.*200 gsm/);
 });
 test('Woo import uses only server snapshot; tests stay on hold even in processing mode', async () => {
   const e = { ...env(), WOOCOMMERCE_ORDER_MODE: 'processing' }; await e.ORDERS.put('woo-checkout:snapshot-token', JSON.stringify(snapshot()));

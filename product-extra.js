@@ -69,7 +69,7 @@ PRODUCTS.push({
   dropLabel: 'La Lilly',
   price: 26.50,
   comingSoon: true,
-  deliveryNote: 'Ships internationally after production; delivery time varies by destination.',
+  deliveryNote: 'Delivery time varies by destination.',
   tag: 'new',
   fill: '#f7f3ec',
   bg: '#e9e6df',
@@ -80,5 +80,5 @@ PRODUCTS.push({
   ],
   image: 'assets/products/xyz-camo-dtg-black-front.jpg',
   images: ['assets/products/xyz-camo-dtg-black-front.jpg', 'assets/products/xyz-camo-dtg-black-back.jpg'],
-  description: "A regular-fit tee in 100% cotton, 200 gsm (5.9 oz), with front and back DTG artwork and the design’s approved sewn-in clothing label. Made to order through international fulfillment. This style runs smaller than standard. Flat chest width (S/M/L/XL/2XL/3XL): 48/50/52/54/56/58 cm. Machine wash gently at 30°C, tumble dry low, and avoid ironing the print.",
+  description: "100% cotton tee with the XYZ camo pug head graphic front and back. Regular fit, classic crew neck, 200 gsm fabric, and a sewn-in La Lilly label. Runs smaller than standard.",
 });
