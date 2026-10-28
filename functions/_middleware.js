@@ -1,3 +1,5 @@
+import { siteAccess, protectResponse } from './_shared/site-access.js';
+
 const PRIMARY_HOST = 'lillypug.com';
 const OLD_ORIGIN = 'https://lalilly-checkout.pages.dev';
 const PRIMARY_ORIGIN = `https://${PRIMARY_HOST}`;
@@ -16,7 +18,11 @@ export async function onRequest(context) {
     return Response.redirect(destination.toString(), 301);
   }
 
-  const response = await context.next();
+  const gate = await siteAccess(context);
+  if (gate) return gate;
+  const originalResponse = await context.next();
+  const response = context.env?.SITE_PASSWORD_ENABLED === 'true'
+    ? protectResponse(originalResponse) : originalResponse;
   const contentType = response.headers.get('content-type') || '';
 
   if (!contentType.includes('text/html')) {

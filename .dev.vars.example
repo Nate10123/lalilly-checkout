@@ -1,4 +1,9 @@
 # Cloudflare secrets live in context.env, not browser JavaScript.
+# Set these in Cloudflare Production settings; do not put real values in Git.
+# SITE_PASSWORD_ENABLED is intentionally managed in the dashboard, not wrangler.toml.
+SITE_PASSWORD_ENABLED=false
+SITE_PASSWORD=
+SITE_SESSION_SECRET=
 # Copy to .dev.vars ONLY for local development. Use separate test Stripe keys and local KV.
 STRIPE_SECRET_KEY=
 STRIPE_WEBHOOK_SECRET=
