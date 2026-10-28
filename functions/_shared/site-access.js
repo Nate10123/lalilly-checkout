@@ -12,7 +12,8 @@ function privateHeaders(extra = {}) {
     'CDN-Cache-Control': 'no-store',
     'Cloudflare-CDN-Cache-Control': 'no-store',
     'X-Robots-Tag': 'noindex, nofollow, noarchive',
-    'Referrer-Policy': 'no-referrer',
+    // Keep same-origin form Origin headers intact for the login CSRF check.
+    'Referrer-Policy': 'same-origin',
     'X-Content-Type-Options': 'nosniff',
     ...extra,
   };

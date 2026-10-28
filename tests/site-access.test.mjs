@@ -29,6 +29,7 @@ test('pages, deep links, assets, catalog scripts and APIs are protected server-s
     const response = await middleware(context(path));
     assert.equal(response.status, 401, path);
     assert.match(response.headers.get('Cache-Control'), /no-store/);
+    assert.equal(response.headers.get('Referrer-Policy'), 'same-origin');
     const body = await response.text();
     assert.doesNotMatch(body, /private catalog|test-only/);
     assert.match(body, /password/i);
