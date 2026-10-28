@@ -752,6 +752,8 @@ function addToCart(id, qty, btn, size, color) {
   qty = qty || 1;
   const product = PRODUCTS.find(p => p.id === id);
   if (!product || product.comingSoon) return;
+  // A single finish needs no selection step, but must stay attached to the cart line.
+  if (!color && product.colors?.length === 1) color = product.colors[0].name;
   const existing = cart.find(c => c.id === id && c.size === size && c.color === color);
   if (existing) existing.qty += qty;
   else cart.push({ id: product.id, qty, size: size || undefined, color: color || undefined });

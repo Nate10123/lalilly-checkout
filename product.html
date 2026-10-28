@@ -627,7 +627,7 @@
             <span class="price">${getDisplayPrice(p)}</span>
             ${p.comingSoon
               ? `<span class="add-btn add-btn-disabled">Coming Soon</span>`
-              : (p.sizes || p.colors)
+              : (p.sizes || p.colors?.length > 1)
               ? `<a href="product.html?id=${p.id}" class="add-btn" style="display:inline-block;text-decoration:none;">${p.sizes ? 'Select Size' : 'Select Color'}</a>`
               : `<button class="add-btn" onclick="addToCart(${p.id}, 1, this)">Add</button>`}
           </div>
@@ -659,7 +659,7 @@
             <span class="price">${getDisplayPrice(p)}</span>
             ${p.comingSoon
               ? `<span class="add-btn add-btn-disabled">Coming Soon</span>`
-              : (p.sizes || p.colors)
+              : (p.sizes || p.colors?.length > 1)
               ? `<a href="product.html?id=${p.id}" class="add-btn" style="display:inline-block;text-decoration:none;">${p.sizes ? 'Select Size' : 'Select Color'}</a>`
               : `<button class="add-btn" onclick="addToCart(${p.id}, 1, this)">Add</button>`}
           </div>
