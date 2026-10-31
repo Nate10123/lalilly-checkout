@@ -9,6 +9,7 @@ import Stripe from 'stripe';
 import { PRODUCTS, getVariantId, getPriceCents, getProvider, getPrintifyProductId } from '../_shared/products.js';
 import { EXTRA_PRODUCTS } from '../_shared/extra-products.js';
 import { placePrintifyOrder } from '../_shared/printify.js';
+import { fulfillPrintfulOrder, printfulAutoAllowed } from '../_shared/printful.js';
 import { fulfillWooCheckout, wooJson } from '../_shared/woocommerce.js';
 
 Object.assign(PRODUCTS, EXTRA_PRODUCTS);
@@ -57,7 +58,15 @@ export async function onRequestPost(context) {
     }
   }
 
+  // Stripe test payments must not create real supplier orders by default.
+  // A separate, explicitly approved draft-only test requires this opt-in and
+  // Manual approval in Printify; its API has no general sandbox guarantee.
+  if (session.livemode !== true && env.LEGACY_ALLOW_TEST_ORDERS !== 'true') {
+    return new Response('test-payment-ignored', { status: 200 });
+  }
+
   try {
+    if (!env.ORDERS) throw new Error('Order tracking storage is required for fulfillment.');
     console.log('Fulfilling order for Stripe session:', session.id);
 
     const cart = JSON.parse(session.metadata.cart || '[]');
@@ -127,20 +136,29 @@ export async function onRequestPost(context) {
     // Place each provider's order independently — if one provider's API
     // call fails, we still want the other provider's items fulfilled and
     // tracked rather than losing both.
-    const orderRefs = []; // [{ provider, id }] — saved against this session
+    const previousRefs = env.ORDERS ? await env.ORDERS.get(`session:${session.id}`) : null;
+    let orderRefs = []; // [{ provider, id }] — saved against this session
+    if (previousRefs) {
+      try { const parsed = JSON.parse(previousRefs); orderRefs = Array.isArray(parsed) ? parsed : [{ provider: 'printful', id: previousRefs }]; }
+      catch { orderRefs = [{ provider: 'printful', id: previousRefs }]; }
+    }
     const errors = [];
 
-    if (printfulItems.length > 0) {
+    if (printfulItems.length > 0 && !orderRefs.some(ref => ref.provider === 'printful')) {
       try {
-        const pfOrderId = await placePrintfulOrder(env, { items: printfulItems, recipient });
-        orderRefs.push({ provider: 'printful', id: pfOrderId });
+        const result = await fulfillPrintfulOrder(env, {
+          items: printfulItems, recipient, stripeSessionId: session.id,
+          autoConfirm: printfulAutoAllowed(env, session),
+        });
+        orderRefs.push({ provider: 'printful', id: result.id, supplierStatus: result.status });
+        if (env.ORDERS) await env.ORDERS.put(`session:${session.id}`, JSON.stringify(orderRefs));
       } catch (err) {
         console.error('Printful order failed:', err.message);
         errors.push(err.message);
       }
     }
 
-    if (printifyItems.length > 0) {
+    if (printifyItems.length > 0 && !orderRefs.some(ref => ref.provider === 'printify')) {
       try {
         const pfyData = await placePrintifyOrder(env, {
           items: printifyItems,
@@ -148,6 +166,7 @@ export async function onRequestPost(context) {
           externalId: session.id,
         });
         orderRefs.push({ provider: 'printify', id: String(pfyData.id) });
+        if (env.ORDERS) await env.ORDERS.put(`session:${session.id}`, JSON.stringify(orderRefs));
       } catch (err) {
         console.error('Printify order failed:', err.message);
         errors.push(err.message);
@@ -161,6 +180,7 @@ export async function onRequestPost(context) {
     if (env.ORDERS && orderRefs.length > 0) {
       for (const ref of orderRefs) {
         const kvKey = ref.provider === 'printify' ? `pfyorder:${ref.id}` : `pforder:${ref.id}`;
+        const previousRecord = await env.ORDERS.get(kvKey);
         const orderRecord = {
           stripeSessionId: session.id,
           provider: ref.provider,
@@ -169,6 +189,8 @@ export async function onRequestPost(context) {
           status: 'processing',
           items: cart,
           createdAt: new Date().toISOString(),
+          ...(ref.supplierStatus ? { supplierStatus: ref.supplierStatus } : {}),
+          ...(previousRecord ? JSON.parse(previousRecord) : {}),
         };
         await env.ORDERS.put(kvKey, JSON.stringify(orderRecord));
       }
@@ -182,61 +204,16 @@ export async function onRequestPost(context) {
     }
 
     if (errors.length > 0) {
-      // Return 200 so Stripe doesn't hammer-retry a permanently-broken
-      // order — but the error is in your function logs, and any provider
-      // that DID succeed above was still saved and will fulfill normally.
-      return new Response(JSON.stringify({ error: errors.join('; ') }), { status: 200 });
+      // Printful retries are protected by its unique external ID. Existing
+      // Printify creation errors still require review: automatic retry of an
+      // ambiguous create needs stronger supplier-side duplicate guarantees.
+      const safeToRetry = printifyItems.length === 0 || orderRefs.some(ref => ref.provider === 'printify');
+      return new Response(JSON.stringify({ error: 'Supplier fulfillment requires attention.' }), { status: safeToRetry ? 503 : 200 });
     }
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
   } catch (err) {
     console.error('Fulfillment error:', err.message);
-    return new Response(JSON.stringify({ error: err.message }), { status: 200 });
+    return new Response(JSON.stringify({ error: 'Fulfillment requires attention.' }), { status: 503 });
   }
-}
-
-// Places the Printful order and returns its order id. Kept in this file
-// (rather than a _shared/printful.js module, unlike the newer Printify
-// helper) since it was already inline here before Printify existed.
-async function placePrintfulOrder(env, { items, recipient }) {
-  const printfulOrder = {
-    recipient: {
-      name: recipient.name,
-      address1: recipient.address1,
-      address2: recipient.address2,
-      city: recipient.city,
-      state_code: recipient.state_code,
-      country_code: recipient.country_code,
-      zip: recipient.zip,
-      email: recipient.email,
-    },
-    items,
-    // confirm: true places the order for production immediately.
-    // Set to false while testing so orders sit as drafts in Printful
-    // for you to review before anything actually goes to print.
-    confirm: false,
-  };
-
-  const headers = {
-    Authorization: `Bearer ${env.PRINTFUL_API_KEY}`,
-    'Content-Type': 'application/json',
-  };
-  if (env.PRINTFUL_STORE_ID) {
-    headers['X-PF-Store-Id'] = env.PRINTFUL_STORE_ID;
-  }
-
-  const pfRes = await fetch('https://api.printful.com/orders', {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(printfulOrder),
-  });
-
-  const pfData = await pfRes.json();
-
-  if (!pfRes.ok) {
-    throw new Error('Printful order failed: ' + JSON.stringify(pfData));
-  }
-
-  console.log('Printful order created:', pfData.result && pfData.result.id);
-  return String(pfData.result.id);
 }

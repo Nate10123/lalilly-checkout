@@ -160,8 +160,9 @@ test('the approved shirt uses its real SKU mapping and server price', async () =
 test('a Woo-only product in a legacy webhook never reaches another supplier', async () => {
   globalThis.fetch = async () => { assert.fail('Woo-only SKU must never reach Printful or Printify'); };
   const s = {...session(), metadata: {cart: JSON.stringify([{id: 31, color: 'White', size: 'S', qty: 1}])}};
-  const response = await stripeWebhook({env: env(), request: await signedStripeRequest(s)});
-  assert.match((await response.json()).error, /verified WooCommerce checkout snapshot/);
+  const response = await stripeWebhook({env: {...env(), LEGACY_ALLOW_TEST_ORDERS: 'true'}, request: await signedStripeRequest(s)});
+  assert.equal(response.status, 503);
+  assert.match((await response.json()).error, /Fulfillment requires attention/);
 });
 
 test('replacement shirt resolves all twelve size/color choices and rejects stale XXL', async () => {
@@ -221,7 +222,7 @@ test('signed paid event reaches Woo and retriable Woo failure returns 503', asyn
   assert.equal((await stripeWebhook({ env: e, request: await signedStripeRequest(session()) })).status, 503);
 });
 test('signed legacy Printify event retains product and variant fulfillment routing', async () => {
-  const e = { ...env(), PRINTIFY_API_KEY: 'test', PRINTIFY_SHOP_ID: 'shop' }; let sent;
+  const e = { ...env(), LEGACY_ALLOW_TEST_ORDERS: 'true', PRINTIFY_API_KEY: 'test', PRINTIFY_SHOP_ID: 'shop' }; let sent;
   globalThis.fetch = async (url, options) => { assert.ok(String(url).startsWith('https://api.printify.com/')); sent = JSON.parse(options.body); return json({ id: 'printify-order' }); };
   const s = { ...session(), metadata: { cart: JSON.stringify([{ id: 28, size: 'M', qty: 1 }]) } };
   const result = await stripeWebhook({ env: e, request: await signedStripeRequest(s) });

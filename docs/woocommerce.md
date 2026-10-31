@@ -17,7 +17,7 @@ Printify references are in:
 - `functions/api/order-status.js`: legacy and mixed-provider reference lookup.
 - `store.js`, `README.md`: product display and setup documentation.
 
-The existing implementation also uses Printful for most products. Its orders use `confirm: false`; Printify orders are created without a production submission call. Actual live Stripe mode and provider account settings cannot be determined from repository code.
+The existing implementation also uses Printful for most products. Its automatic confirmation is now controlled by a server flag and new paid-checkout intent; it defaults to draft review until activated. Printify orders follow its shop approval setting even without a separate production submission call. See [automatic fulfillment](automatic-fulfillment.md) for the October 31 checks and activation requirements.
 
 ## Resulting flow
 

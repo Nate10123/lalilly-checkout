@@ -112,17 +112,16 @@ only handles collecting signups, not sending campaigns.
 
 ## Going live for real
 
-Fulfillment currently runs in draft mode for both providers — Printful
-orders use `confirm: false` in `stripe-webhook.js`, and Printify orders
-just aren't sent to production automatically (that's Printify's default;
-nothing here needs to change for that). Both land for you to review first.
-Once you trust the Printful pipeline, flip `confirm` to `true`; for
-Printify, you'd call `POST /orders/{id}/send_to_production.json` yourself
-(manually, or by adding that call to `_shared/printify.js`) once you trust it.
-
-Also: this is still on Stripe **test mode**. Going live means a live
-Stripe secret key, a second (live-mode) webhook destination, and updating
-the environment variables above with the live values.
+Printful automatic production requires `PRINTFUL_AUTO_FULFILL=true`, a live
+Stripe key and new server-created checkout intent. It defaults to draft review;
+old drafts and test payments cannot be released by enabling the flag.
+Printify follows the shop's order approval setting, even without a separate
+send-to-production API call. La Lilly's API shop was set to automatic approval
+after 24 hours at the October 31 inspection, but still needed a payment method.
+Read [automatic fulfillment](docs/automatic-fulfillment.md) before activation.
+Stripe customer payments do not directly pay either supplier's production bill.
+Use encrypted server settings for live Stripe/supplier keys; repository source
+cannot establish which keys are currently deployed. Tapstitch remains gated.
 
 ## Deploying changes
 

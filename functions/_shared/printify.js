@@ -4,10 +4,10 @@
 // product — unlike Printful's globally-unique sync_variant_id) that it gets
 // its own small module rather than being inlined next to the Printful call.
 //
-// Like Printful's `confirm: false`, a Printify order created via this
-// endpoint just sits as a draft — Printify only starts production once you
-// separately call POST /orders/{id}/send_to_production.json. We don't call
-// that here, so new orders land for review first, same as Printful.
+// Orders created here follow this Printify shop's approval setting.
+// Automatic approval can charge and start production without any separate
+// send_to_production API call. Only Manual approval guarantees review first.
+// https://developers.printify.com/#orders
 
 // Printify wants first/last name as separate fields; Stripe only gives us
 // one "name" string. Split on the first space and fall back gracefully if

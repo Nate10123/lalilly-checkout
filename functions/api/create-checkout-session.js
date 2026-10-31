@@ -1,3 +1,5 @@
+import { printfulAutoRequested, verifyPrintfulVariants } from '../_shared/printful.js';
+
 // Cloudflare Pages Function — runs on Cloudflare's edge, never in the browser.
 // Your Stripe secret key stays here and is never exposed to customers.
 //
@@ -6,7 +8,7 @@
 // requests/responses use the standard Web Fetch API, not Node's http module.
 
 import Stripe from 'stripe';
-import { PRODUCTS, getPriceCents, hasSizes, hasColors } from '../_shared/products.js';
+import { PRODUCTS, getPriceCents, getProvider, getVariantId, hasSizes, hasColors } from '../_shared/products.js';
 import { EXTRA_PRODUCTS } from '../_shared/extra-products.js';
 import { prepareWooCheckout } from '../_shared/woocommerce.js';
 
@@ -147,6 +149,7 @@ export async function onRequestPost(context) {
       cancel_url: `${siteUrl}/`,
       metadata: {
         ...(wooSnapshot ? { fulfillment: 'woocommerce', woo_snapshot: wooSnapshot.token } : { cart: JSON.stringify(normalizedCart) }),
+        ...(!wooSnapshot && printfulAutoRequested(env) ? { printful_auto_fulfill: 'v1' } : {}),
       },
     };
 
@@ -156,6 +159,10 @@ export async function onRequestPost(context) {
       sessionConfig.automatic_tax = { enabled: true };
     }
 
+    if (!wooSnapshot && printfulAutoRequested(env)) {
+      await verifyPrintfulVariants(env, normalizedCart.filter(item => getProvider(PRODUCTS[item.id]) === 'printful')
+        .map(item => getVariantId(PRODUCTS[item.id], item.size, item.color)));
+    }
     const session = await stripe.checkout.sessions.create(sessionConfig);
     if (wooSnapshot) {
       // Freeze mapping and prices for this payment, independent of subsequent catalog edits.
