@@ -8,7 +8,8 @@ import { printfulAutoRequested, verifyPrintfulVariants } from '../_shared/printf
 // requests/responses use the standard Web Fetch API, not Node's http module.
 
 import Stripe from 'stripe';
-import { PRODUCTS, getPriceCents, getProvider, getVariantId, hasSizes, hasColors } from '../_shared/products.js';
+import { PRODUCTS, getPriceCents, getProvider, getVariantId, getPrintifyProductId, hasSizes, hasColors } from '../_shared/products.js';
+import { verifyPrintifyVariants } from '../_shared/printify.js';
 import { EXTRA_PRODUCTS } from '../_shared/extra-products.js';
 import { prepareWooCheckout } from '../_shared/woocommerce.js';
 
@@ -163,6 +164,12 @@ export async function onRequestPost(context) {
       await verifyPrintfulVariants(env, normalizedCart.filter(item => getProvider(PRODUCTS[item.id]) === 'printful')
         .map(item => getVariantId(PRODUCTS[item.id], item.size, item.color)));
     }
+    if (!wooSnapshot) {
+      await verifyPrintifyVariants(env, normalizedCart.filter(item => getProvider(PRODUCTS[item.id]) === 'printify').map(item => ({
+        productId: getPrintifyProductId(PRODUCTS[item.id]), variantId: getVariantId(PRODUCTS[item.id], item.size, item.color),
+        label: `${PRODUCTS[item.id].name}${item.size ? ` (${item.size})` : ''}`,
+      })));
+    }
     const session = await stripe.checkout.sessions.create(sessionConfig);
     if (wooSnapshot) {
       // Freeze mapping and prices for this payment, independent of subsequent catalog edits.
@@ -176,7 +183,7 @@ export async function onRequestPost(context) {
   } catch (err) {
     console.error(err);
     return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
+      status: err.statusCode === 409 ? 409 : 500,
       headers: { 'Content-Type': 'application/json' },
     });
   }

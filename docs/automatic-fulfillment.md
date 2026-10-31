@@ -3,6 +3,13 @@
 Scope: Printful and Printify. The owner deferred Tapstitch; its checkout and paid
 production gates remain disabled, and product 31 stays Coming Soon.
 
+The owner explicitly approved Printful automatic production and supplier charges
+on October 31. `PRINTFUL_AUTO_FULFILL=true` was saved as an encrypted Cloudflare
+production setting and deployed in d2ac34d0-ad03-40e0-a2a3-0e9f5e97f51b. A new live
+Stripe checkout for the hat passed without payment or supplier-order creation.
+Printify retains 24-hour automatic approval but still needs the owner's payment
+method confirmation; no card has been added by the agent.
+
 ## Printful
 
 `PRINTFUL_AUTO_FULFILL=true` is the server-only production activation switch.
@@ -48,6 +55,11 @@ failures remain a manual reconciliation case instead of being blindly retried;
 no new supplier order should be created to resolve one until its external ID is
 checked in Printify. Thus supplier exceptions still require owner attention.
 
+Printify checkout now fetches the actual mapped products/variants before creating
+a Stripe session. Disabled, missing or out-of-stock variants return 409 and do not
+take payment. The Pugg Stone Wash Heavy Tee currently has S and 3XL out of stock;
+S was already absent from the website, while the new check blocks 3XL dynamically.
+
 ## Account checks and acceptance
 
 - Printful's La Lilly's Store (18595319) contains the matching 24-product catalog.
@@ -60,13 +72,14 @@ checked in Printify. Thus supplier exceptions still require owner attention.
 - Local tests exercise signed events, server-created intent, review/test exclusion,
   uniqueness/concurrent Printful creation, lost responses, retry failures, variant
   readiness and sequential Printify replays. No external order was created in tests.
-- Production activation and a real paid fulfillment have not been performed as
-  part of preparation. A real charge, physical print/label inspection and shipment
+- Printful production was activated with explicit owner approval. A real paid
+  fulfillment has not been performed. A real charge, physical print/label inspection and shipment
   cannot be claimed as tested by mocked supplier requests.
 
-Before activation, verify the encrypted Cloudflare Printful credential still
-authenticates and references this store. A new checkout preflight can check this
-without paying for the Stripe session. Do not submit a test purchase or old draft.
+The live hat checkout preflight verified the encrypted Cloudflare Printful
+credential without paying for the Stripe session. Do not submit a test purchase
+or old draft. The Classic Rainbow tie-dye M/L/XL/2XL variants are also currently
+out of stock; Printful's selected-variant preflight blocks unavailable selections.
 
 Printful charges the saved billing method for production, supplier shipping and
 applicable supplier taxes. Printify does the same when its approval timer submits

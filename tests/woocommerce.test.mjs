@@ -117,8 +117,11 @@ test('Woo checkout uses existing UI contract, ignores client price, and saves fr
 });
 test('legacy checkout continues without Woo secrets or Woo requests', async () => {
   let stripeBody;
-  globalThis.fetch = async (url, options) => { assert.equal(new URL(url).host, 'api.stripe.com'); stripeBody = new URLSearchParams(options.body); return json({ id: 'cs_test_legacy', url: 'https://checkout.stripe.com/legacy' }); };
-  const response = await checkout({ env: { STRIPE_SECRET_KEY: 'sk_test_fake' }, request: new Request('https://lillypug.com/api/create-checkout-session', { method: 'POST', body: JSON.stringify({ cart: [{ id: 28, size: 'M', qty: 1 }] }) }) });
+  globalThis.fetch = async (url, options) => {
+    if (new URL(url).host === 'api.printify.com') return json({id: '6abb5dbbe688cdb5400d66ac', variants: [{id:403704,is_enabled:true,is_available:true}]});
+    assert.equal(new URL(url).host, 'api.stripe.com'); stripeBody = new URLSearchParams(options.body); return json({ id: 'cs_test_legacy', url: 'https://checkout.stripe.com/legacy' });
+  };
+  const response = await checkout({ env: { STRIPE_SECRET_KEY: 'sk_test_fake', PRINTIFY_API_KEY:'test', PRINTIFY_SHOP_ID:'shop' }, request: new Request('https://lillypug.com/api/create-checkout-session', { method: 'POST', body: JSON.stringify({ cart: [{ id: 28, size: 'M', qty: 1 }] }) }) });
   assert.equal(response.status, 200); assert.equal(stripeBody.get('line_items[0][price_data][unit_amount]'), '4950');
   assert.deepEqual(JSON.parse(stripeBody.get('metadata[cart]')), [{ id: 28, qty: 1, size: 'M' }]);
   assert.equal(stripeBody.get('shipping_options[0][shipping_rate_data][delivery_estimate][minimum][value]'), '5');

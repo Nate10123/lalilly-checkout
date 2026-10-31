@@ -9,6 +9,30 @@
 // send_to_production API call. Only Manual approval guarantees review first.
 // https://developers.printify.com/#orders
 
+export async function verifyPrintifyVariants(env, items) {
+  if (!items.length) return;
+  if (!env.PRINTIFY_API_KEY || !env.PRINTIFY_SHOP_ID) throw new Error('Printify is not configured.');
+  const products = new Map();
+  for (const item of items) {
+    if (!products.has(item.productId)) {
+      const response = await fetch(`https://api.printify.com/v1/shops/${encodeURIComponent(env.PRINTIFY_SHOP_ID)}/products/${encodeURIComponent(item.productId)}.json`, {
+        headers: { Authorization: `Bearer ${env.PRINTIFY_API_KEY}`, 'User-Agent': 'LA-LILLY-store (lillypug.com)' },
+        redirect: 'manual',
+      });
+      if (!response.ok) throw new Error('Product availability could not be verified. Please try again later.');
+      const product = await response.json();
+      if (product.id !== item.productId || !Array.isArray(product.variants)) throw new Error('Product availability could not be verified.');
+      products.set(item.productId, product);
+    }
+    const variant = products.get(item.productId).variants.find(row => String(row.id) === String(item.variantId));
+    if (!variant || variant.is_enabled !== true || variant.is_available !== true) {
+      const error = new Error(`${item.label} is currently unavailable. Please choose another option.`);
+      error.statusCode = 409;
+      throw error;
+    }
+  }
+}
+
 // Printify wants first/last name as separate fields; Stripe only gives us
 // one "name" string. Split on the first space and fall back gracefully if
 // there isn't one, so an order never gets rejected for a missing last name.
