@@ -1,3 +1,5 @@
+import { siteLogo } from './site-logo.js';
+
 const COOKIE = '__Host-lalilly_access';
 const SESSION_SECONDS = 60 * 60 * 24;
 const encoder = new TextEncoder();
@@ -35,9 +37,9 @@ function gate(path, error = '', status = 401) {
 <title>LA LILLY — Out of Business*</title><style>
 :root{color-scheme:light}*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;background:#f7f3ed;color:#14120f;font-family:Arial,sans-serif;padding:24px}
 main{position:relative;width:100%;max-width:520px;border:2px solid #14120f;padding:44px 32px 30px;background:#f7f3ed;box-shadow:8px 8px 0 #CFC5F5}
-.brand{font-size:42px;font-weight:900;letter-spacing:-2px;color:#ff4fa3;margin:0 0 30px}.notice{display:inline-block;border:3px solid #a21b32;color:#a21b32;padding:8px 12px;transform:rotate(-5deg);font:700 14px/1.2 'Courier New',monospace;letter-spacing:3px;margin-bottom:26px}h1{font-size:clamp(42px,10vw,64px);line-height:.98;letter-spacing:-3px;text-transform:uppercase;margin:0 0 22px}p{font-size:15px;line-height:1.6;margin:0 0 24px}.receipt{border-top:1px dashed #827c73;border-bottom:1px dashed #827c73;padding:16px 0;margin:26px 0;font:13px/1.8 'Courier New',monospace}.receipt div{display:flex;justify-content:space-between;gap:16px}.footnote{font:12px/1.5 'Courier New',monospace;color:#625d56;margin:24px 0 0}@media(max-width:380px){main{padding:32px 22px}.brand{font-size:36px}}
+.brand{display:block;width:240px;max-width:100%;height:auto;margin:0 0 36px}.notice{display:inline-block;border:3px solid #a21b32;color:#a21b32;padding:8px 12px;transform:rotate(-5deg);font:700 14px/1.2 'Courier New',monospace;letter-spacing:3px;margin-bottom:26px}h1{font-size:clamp(42px,10vw,64px);line-height:.98;letter-spacing:-3px;text-transform:uppercase;margin:0 0 22px}p{font-size:15px;line-height:1.6;margin:0 0 24px}.receipt{border-top:1px dashed #827c73;border-bottom:1px dashed #827c73;padding:16px 0;margin:26px 0;font:13px/1.8 'Courier New',monospace}.receipt div{display:flex;justify-content:space-between;gap:16px}.footnote{font:12px/1.5 'Courier New',monospace;color:#625d56;margin:24px 0 0}@media(max-width:380px){main{padding:32px 22px}.brand{width:210px}}
 label{display:block;font-size:13px;font-weight:700;margin-bottom:10px}input,button{width:100%;font:inherit;border:2px solid #14120f;padding:14px;border-radius:0}input{background:#fff;color:#14120f}button{margin-top:16px;background:#14120f;color:#fff;font-weight:700;cursor:pointer}button:hover{background:#333}input:focus-visible,button:focus-visible{outline:3px solid #ff4fa3;outline-offset:3px}.error{color:#a21b32;margin-top:16px;margin-bottom:0}
-</style></head><body><main><p class="brand">LA LILLY</p><div class="notice">OUT OF BUSINESS*</div><h1>Lilly went<br>bankrupt.</h1>
+</style></head><body><main><img class="brand" src="${siteLogo}" alt="LA LILLY"><div class="notice">OUT OF BUSINESS*</div><h1>Lilly went<br>bankrupt.</h1>
 <p>Spent it all on looking good.</p><div class="receipt" aria-label="The damage"><div><span>BAD DECISIONS</span><span>PRICELESS</span></div><div><span>STYLE REMAINING</span><span>UNLIMITED</span></div></div><p>Got the password? There’s still a way in.</p><form method="post" action="/_site/unlock">
 <input type="hidden" name="returnTo" value="${escapeHtml(returnPath(path))}">
 <label for="password">Website password</label><input id="password" name="password" type="password" autocomplete="current-password" maxlength="256" required>
@@ -45,7 +47,7 @@ label{display:block;font-size:13px;font-weight:700;margin-bottom:10px}input,butt
 </form><p class="footnote">*A little drama. We’re just keeping the doors private for now.</p></main></body></html>`;
   return new Response(html, { status, headers: privateHeaders({
     'Content-Type': 'text/html; charset=utf-8',
-    'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+    'Content-Security-Policy': "default-src 'none'; img-src data:; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
   }) });
 }
 
