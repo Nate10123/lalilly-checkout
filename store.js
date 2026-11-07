@@ -159,7 +159,7 @@ const PRODUCTS = [
   {
     id: 9, name: 'MLLGA Snapback Hat', cat: 'headwear', catLabel: 'Headwear',
     drop: 'lillye-west', dropLabel: 'LillYe West',
-    price: 27.00, tag: 'new', fill: '#14120f', bg: '#A9D4F5',
+    price: 27.00, tag: null, fill: '#14120f', bg: '#A9D4F5',
     image: 'assets/products/mllga-snapback-hat.png?v=20261018-mllga3',
     images: [
       'assets/products/mllga-snapback-hat.png?v=20261018-mllga3',
@@ -204,7 +204,7 @@ const PRODUCTS = [
   {
     id: 12, name: 'Lillys Poster', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-verse', dropLabel: 'Lilly Verse',
-    tag: 'new', fill: '#14120f', bg: '#F6C6A8',
+    tag: null, fill: '#14120f', bg: '#F6C6A8',
     sizes: ['21×30 cm', '30×40 cm', 'A2 (42×59.4 cm)', '50×70 cm', 'A1 (59.4×84.1 cm)', '70×100 cm'],
     sizePricing: {
       '21×30 cm': 12.00,
@@ -247,7 +247,7 @@ const PRODUCTS = [
   {
     id: 14, name: "World's Best Lilly Glossy Mug", cat: 'accessories', catLabel: 'Accessories',
     drop: 'la-lilly', dropLabel: 'La Lilly',
-    price: 8.50, tag: 'new', fill: '#14120f', bg: '#A9D4F5',
+    price: 8.50, tag: null, fill: '#14120f', bg: '#A9D4F5',
     image: 'https://files.cdn.printful.com/files/92a/92ad494b45d06d5e52f7b48735c9a00d_preview.png',
     madeIn: 'China',
     description: "11 oz glossy ceramic mug for your morning coffee and Lilly worship. Dishwasher and microwave safe."
@@ -431,7 +431,7 @@ const PRODUCTS = [
     id: 20, name: 'Lilly Verse T-shirt', cat: 'apparel', catLabel: 'Apparel',
     drop: 'lilly-verse', dropLabel: 'Lilly Verse',
     sizePricing: { XS: 25.00, S: 25.00, M: 25.00, L: 25.00, XL: 25.00, '2XL': 27.50, '3XL': 30.00, '4XL': 32.50, '5XL': 35.00 },
-    tag: 'new', fill: '#14120f', bg: '#CFC5F5',
+    tag: null, fill: '#14120f', bg: '#CFC5F5',
     sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
     // Not every color runs the full size range — Team Purple stops at 4XL,
     // Dark Grey only goes up to 2XL, per what's actually synced in Printful.
@@ -480,7 +480,7 @@ const PRODUCTS = [
   {
     id: 21, name: 'Lilly Verse Stickers', cat: 'accessories', catLabel: 'Accessories',
     drop: 'lilly-verse', dropLabel: 'Lilly Verse',
-    tag: 'new', fill: '#14120f', bg: '#A9D4F5',
+    tag: null, fill: '#14120f', bg: '#A9D4F5',
     sizes: ['3″×3″', '4″×4″', '5.5″×5.5″'],
     colors: [
       { name: 'Standard', hex: '#eef0ee' },
@@ -582,7 +582,7 @@ const PRODUCTS = [
   {
     id: 25, name: 'Lilly Life T-shirt', cat: 'apparel', catLabel: 'Apparel',
     drop: 'lilly-life', dropLabel: 'Lilly Life',
-    tag: 'new', fill: '#14120f', bg: '#B9E3D1',
+    tag: null, fill: '#14120f', bg: '#B9E3D1',
     sizePricing: {
       XS: 25.00, S: 25.00, M: 25.00, L: 25.00, XL: 25.00,
       '2XL': 27.50, '3XL': 30.00, '4XL': 32.50, '5XL': 35.00,
