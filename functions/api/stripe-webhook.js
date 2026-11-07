@@ -45,6 +45,11 @@ export async function onRequestPost(context) {
 
   const session = stripeEvent.data.object;
 
+  // Contributions are recorded by Stripe and never enter merchandise fulfillment.
+  if (session.metadata?.purpose === 'lalilly_donation') {
+    return new Response('donation-received', { status: 200 });
+  }
+
   if (session.payment_status !== 'paid' && !(session.payment_status === 'no_payment_required' && session.amount_total === 0)) return new Response('unpaid', { status: 200 });
 
   if (session.metadata?.fulfillment === 'woocommerce') {

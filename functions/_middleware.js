@@ -44,6 +44,10 @@ export async function onRequest(context) {
 
   const headers = new Headers(response.headers);
   headers.delete('content-length');
+  if (/^\/donations(?:\.html)?\/?$/.test(url.pathname)) {
+    headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+    headers.set('Cache-Control', 'private, no-store');
+  }
 
   return new Response(html, {
     status: response.status,
